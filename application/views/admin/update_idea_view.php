@@ -1,9 +1,9 @@
 <div class="container">
     <div>
-        <a href="/index.php/admin/view/ideas/">Список идей</a> > <span>Редактирование идеи</span>
+        <a href="/admin/view/ideas/">Список идей</a> > <span>Редактирование идеи</span>
     </div>
     <hr/>
-    <form enctype="multipart/form-data" method="post" action="/index.php/admin/update_idea/<?=$idea['id']?>">
+    <form enctype="multipart/form-data" method="post" action="/admin/update_idea/<?=$idea['id']?>">
 
         <h3>Фото</h3>
         <input type="file" name="idea_photo" class="btn btn-info btn-lg"/>

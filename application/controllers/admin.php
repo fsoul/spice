@@ -13,12 +13,12 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Вход';
         $data['error'] = null;
-        $login = 'a';
-        $pass = 'b';
+        $login = 'tatsianak';
+        $pass = '123';
 
         if ($this->input->post('login') == $login && $this->input->post('pass') == $pass) {
             $this->session->set_userdata('is_admin', true);
-            redirect(base_url('index.php/admin/view/recipes/'));
+            redirect(base_url('/admin/view/recipes/'));
         } else {
             if ($this->input->post('enter')) {
                 $data['error'] = 'Неправильные данные для входа. Попробуйте снова';
@@ -66,8 +66,14 @@ class Admin extends CI_Controller
 
     function delete($title, $id)
     {
-        $this->db->delete($title.'s', array('id' => $id));
-        redirect(base_url('index.php/admin/view/'.$title.'s'));
+        if($title != 'gallery'){
+            $this->db->delete($title.'s', array('id' => $id));
+            redirect(base_url('/admin/view/'.$title.'s'));
+        }else{
+            $this->db->delete($title, array('id' => $id));
+            redirect(base_url('/admin/view/'.$title));
+        }
+
     }
 
     function update($name, $id)
@@ -175,13 +181,13 @@ class Admin extends CI_Controller
             $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $values";
 
             $this->admin_model->exec_query($query_str);
-            redirect(base_url('index.php/admin/view/recipes/'));
+            redirect(base_url('/admin/view/recipes/'));
         }else{
             $this->idea_photo = $uploads_dir . $_FILES['idea_photo']['name'];
             $arr = $this;
             $this->admin_model->add('ideas', $arr);
 
-            redirect(base_url('index.php/admin/view/ideas/'));
+            redirect(base_url('/admin/view/ideas/'));
         }
 
         //$data['title'] = 'Добавить '.title2rus($name);
@@ -202,7 +208,7 @@ class Admin extends CI_Controller
         $this->title_de = $_POST['title_de'];
         $arr = $this;
         $this->admin_model->update_idea($id, $arr);
-        redirect(base_url('index.php/admin/view/ideas/'));
+        redirect(base_url('/admin/view/ideas/'));
     }
 
 }

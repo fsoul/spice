@@ -1,9 +1,9 @@
 <div class="container">
 <div>
-    <a href="/index.php/admin/view/recipes/">Список рецептов</a> > <span>Добавление рецепта</span>
+    <a href="/admin/view/recipes/">Список рецептов</a> > <span>Добавление рецепта</span>
 </div>
 <hr/>
-<form enctype="multipart/form-data" method="post" action="/index.php/admin/add/recipe/">
+<form enctype="multipart/form-data" method="post" action="/admin/add/recipe/">
 
 <h3>Фото</h3>
 <input type="file" name="finish_photo" class="btn btn-info btn-lg"/>
