@@ -1,0 +1,15 @@
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi) {
+html{
+  background: url('/assets/images/retina-default.jpg') no-repeat center center fixed;
+}
+}
+html {
+  font-family: sans-serif;
+  background: url("/assets/images/default.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+body {
+  margin: 0;
+}
+

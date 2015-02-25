@@ -1,0 +1,14 @@
+.admin-nav-div{
+    width: 740px; margin: 0 auto !important;
+}
+.admin-nav li{
+    padding: 0 20px;
+}
+.area-view textarea{
+    width: 100%;
+    border: none;
+}
+.form-label{
+    font-style: italic;
+    margin: 0 20px 0 5px;
+}
