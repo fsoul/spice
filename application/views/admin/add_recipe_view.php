@@ -1,6 +1,6 @@
 <div class="container">
 <div>
-    <a href="/admin/view/recipes/">Список рецептов</a> > <span>Добавление рецепта</span>
+    <a href="/admin/view/recipes">Список рецептов</a> > <span>Добавление рецепта</span>
 </div>
 <hr/>
 <form enctype="multipart/form-data" method="post" action="/admin/add/recipe/">

@@ -3,7 +3,7 @@
         <div>
             <span>Список идей</span>
         </div>
-        <hr/>
+        <hr class="hr"/>
         <div class="alert alert-info">
             <a href="<?= base_url('/admin/view/add_idea/'); ?>">+Добавить</a>
         </div>
@@ -17,9 +17,11 @@
                 <tbody>
                 <? foreach ($ideas as $item): ?>
                     <tr>
-                        <td><img width="160" src="<?= $item['idea_photo']; ?>" alt="idea_photo"/></td>
-                        <td><?= $item['title_ru']; ?></td>
-                        <td><?= rus_date_format($item['created_at']); ?></td>
+                        <td width="160">
+                            <img width="160" src="<?= $item['idea_photo']; ?>" alt="idea_photo"/>
+                        </td>
+                        <td width="160" class="text-uppercase"><?= $item['title_ru']; ?></td>
+                        <td class="text-center"><?= rus_date_format($item['created_at']); ?></td>
                         <td><a href="<?= base_url('/admin/update/idea/' . $item['id']); ?>">Редактировать</a></td>
                         <td>
                             <a class="text-danger"

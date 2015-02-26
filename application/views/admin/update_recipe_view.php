@@ -3,7 +3,7 @@
     <a href="/admin/view/recipes/">Список идей</a> > <span>Редактирование рецепта</span>
 </div>
 <hr/>
-<form enctype="multipart/form-data" method="post" action="/admin/update_recipe/">
+<form enctype="multipart/form-data" method="post" action="/admin/update_recipe">
 
 <h3>Фото</h3>
 <input type="file" name="finish_photo" class="btn btn-info btn-lg"/>

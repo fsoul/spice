@@ -3,8 +3,8 @@
         <div>
             <span>Список рецептов</span>
         </div>
-        <hr/>
-        <div class="alert alert-info">
+        <hr class="hr"/>
+        <div class="padding alert alert-info">
             <a href="<?= base_url('/admin/view/add_recipe/'); ?>">+Добавить</a>
         </div>
         <div>
@@ -19,15 +19,14 @@
         ?>
         <div class="table">
             <table class="table">
-                <thead></thead>
                 <tbody>
                 <? foreach ($recipes as $recipe): ?>
                     <tr>
-                        <td>
-                            <img width="160" src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
+                        <td width="165">
+                            <img width="165" src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
                         </td>
-                        <td><?= $recipe['title_ru']; ?></td>
-                        <td><?= rus_date_format($recipe['created_at']); ?>
+                        <td width="165" class="text-uppercase"><?= $recipe['title_ru']; ?></td>
+                        <td class="text-center xs"><?= rus_date_format($recipe['created_at']); ?>
                             <br/>
 
                             <div style="font-size: 12px; color: #c9c9c9;">Выпечка, Десерты, Завтраки, Тесто</div>

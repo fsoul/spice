@@ -1,6 +1,6 @@
 <div class="container">
     <div>
-        <a href="/admin/view/ideas/">Список идей</a> > <span>Добавление идеи</span>
+        <a href="/admin/view/ideas">Список идей</a> > <span>Добавление идеи</span>
     </div>
     <hr/>
     <form enctype="multipart/form-data" method="post" action="/admin/add/idea/">
