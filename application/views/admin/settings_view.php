@@ -1,9 +1,12 @@
 <div class="container">
     <div class="row">
-        <span>Настройки</span>
-        <hr/>
-    </div>
-    <div class="row">
-        <a class="text-danger" href="/admin/logout/">Выход из аккаунта (убедитесь, что помните пароль)</a>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="pad">
+                <span>Настройки</span>
+
+            </div>
+            <hr/>
+            <a class="pad text-danger" href="/admin/logout/">Выход из аккаунта (убедитесь, что помните пароль)</a>
+        </div>
     </div>
 </div>

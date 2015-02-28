@@ -56,3 +56,10 @@ if ( ! function_exists('title2rus'))
         return $title_ru[$key];
     }
 }
+
+if ( ! function_exists('sort_categories'))
+{
+    function sort_categories($arr){
+
+    }
+}

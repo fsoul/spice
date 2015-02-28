@@ -1,12 +1,15 @@
 <div class="container">
-<div>
+<div class="pad">
     <a href="/admin/view/recipes/">Список идей</a> > <span>Редактирование рецепта</span>
 </div>
 <hr/>
 <form enctype="multipart/form-data" method="post" action="/admin/update_recipe">
 
-<h3>Фото</h3>
-<input type="file" name="finish_photo" class="btn btn-info btn-lg"/>
+<div class="upl-photo">
+    <p>Выбрать фото</p>
+    <p>(можно просто перетащить нужное фото в эту область)</p>
+    <input type="file" name="finish_photo"/>
+</div>
 <img src="<?=$recipe['finish_photo']?>"/>
 <div class="checkbox-div">
     <input id="is_gallery" name="is_gallery" type="checkbox" checked="checked"/><span class="form-label"><label for="is_gallery">дублировать
@@ -118,59 +121,59 @@
 
 <h3>Категории</h3>
 <div class="row">
-    <div class="col-md-12">
-        <div class="col-md-2">
+    <div class="col-md-12 checkbox-div">
+        <div class="col-md-4">
             <input type="checkbox" name="category[1]" id="cat1"/><label for="cat1">Блины и оладьи</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[2]" id="cat2"/><label for="cat2">Гарниры</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[3]" id="cat3"/><label for="cat3">Закуски</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[4]" id="cat4"/><label for="cat4">Паста</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[5]" id="cat5"/><label for="cat5">Соленья</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[6]" id="cat6"/><label for="cat6">Рыба и морепрод.</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[7]" id="cat7"/><label for="cat7">Варенье</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[8]" id="cat8"/><label for="cat8">Десерты</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[9]" id="cat9"/><label for="cat9">Крема</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[10]" id="cat10"/><label for="cat10">Пицца</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[11]" id="cat11"/><label for="cat11">Супы</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[12]" id="cat12"/><label for="cat12">Тесто</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[13]" id="cat13"/><label for="cat13">Выпечка</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[14]" id="cat14"/><label for="cat14">Завтраки</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[15]" id="cat15"/><label for="cat15">Мясо и субпрод.</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[16]" id="cat16"/><label for="cat16">Салаты</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[17]" id="cat17"/><label for="cat17">Соусы</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <input type="checkbox" name="category[18]" id="cat18"/><label for="cat18">Хлеб</label>
         </div>
     </div>

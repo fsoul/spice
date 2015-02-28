@@ -64,6 +64,17 @@ class Admin extends CI_Controller
         $this->template->admin_view($title, $data);
     }
 
+    function test(){
+        $query = "SELECT recipes.id, finish_photo, recipes.title_ru, recipes.title_en, recipes.title_de, ingridients_ru, ingridients_en, ingridients_de, recipes.description_ru, recipes.description_en, recipes.description_de, created_at, is_gallery, is_public, categories.title_ru, categories.title_en, categories.title_de, photo, recipe_steps.description_ru, recipe_steps.description_en, recipe_steps.description_de
+FROM recipes, categories, recipe_categories, recipe_steps
+WHERE categories.id = recipe_categories.category_id
+AND recipes.id = recipe_steps.recipe_id";
+        $arr = $this->admin_model->get_categories($query);
+        echo '<pre>';
+        print_r($arr);
+        echo '</pre>';
+    }
+
     function delete($title, $id)
     {
         if($title != 'gallery'){

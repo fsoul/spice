@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row">
-        <div>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="pad">
             <span>Фотографии галереи</span>
         </div>
        <?//@todo выровнять и переделать загрузчик?>
