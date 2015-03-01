@@ -2,48 +2,60 @@
 
 if ( ! function_exists('rus_date_format'))
 {
-    function rus_date_format($date){
+    function rus_date_format($date, $key){
         $date = substr($date, 0, 10);
         $res = explode("-", $date);
         switch($res[1]){
             case '01':
-                $m = 'января';
+                $m[0] = 'января';
+                $m[1] = 'янв';
                 break;
             case '02':
-                $m = 'февраля';
+                $m[0] = 'февраля';
+                $m[1] = 'фев';
                 break;
             case '03':
-                $m = 'марта';
+                $m[0] = 'марта';
+                $m[1] = 'мар';
                 break;
             case '04':
-                $m = 'апреля';
+                $m[0] = 'апреля';
+                $m[1] = 'апр';
                 break;
             case '05':
-                $m = 'мая';
+                $m[0] = 'мая';
+                $m[1] = 'мая';
                 break;
             case '06';
-                $m = 'июня';
+                $m[0] = 'июня';
+                $m[1] = 'июн';
                 break;
             case '07':
-                $m = 'июля';
+                $m[0] = 'июля';
+                $m[1] = 'июл';
                 break;
             case '08':
-                $m = 'августа';
+                $m[0] = 'августа';
+                $m[1] = 'авг';
                 break;
             case '09':
-                $m = 'сентября';
+                $m[0] = 'сентября';
+                $m[1] = 'сен';
                 break;
             case '10':
-                $m = 'октября';
+                $m[0] = 'октября';
+                $m[1] = 'окт';
                 break;
             case '11':
-                $m = 'ноября';
+                $m[0] = 'ноября';
+                $m[1] = 'ноя';
                 break;
             case '12':
-                $m = 'декабря';
+                $m[0] = 'декабря';
+                $m[1] = 'дек';
                 break;
         }
-        return $res[2]." "." ".$m." ".$res[0];
+        return $res[2]." ".$m[$key]." ".$res[0];
     }
 }
 

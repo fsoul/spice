@@ -1,10 +1,3 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <hr/>
-        </div>
-    </div>
-</div>
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.ui.widget.js') ?>"></script>

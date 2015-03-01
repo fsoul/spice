@@ -40,40 +40,19 @@ class Admin extends CI_Controller
         if($title == 'recipes' || $title == 'ideas' || $title == 'gallery'){
             $data[$title] = $this->admin_model->get($title);
             if($title == 'recipes'){
-                $query = "SELECT title_ru, recipe_id FROM categories JOIN recipe_categories ON categories.id = recipe_categories.category_id";
-                $data['categories'] = $this->admin_model->get_categories($query);
+                foreach($data['recipes'] as $key =>  $recipe) {
+                    //query
+                    $query = "SELECT categories.* FROM recipes, categories, recipe_categories
+                     WHERE categories.id = recipe_categories.category_id AND recipe_categories.recipe_id = recipes.id AND recipes.id = ". $recipe['id'];
+                    $data['recipes'][$key]['categories'] = $this->admin_model->get_categories($query);
+                }
             }
         }
-        /*elseif($title == 'recipes'){
-            $cat =  $this->admin_model->get_recipes();
-        }
-            //$data[$title] = $this->admin_model->get_recipes();
-           // foreach($data[$title] as $recipe){
-             //   $category_id[$recipe['id']] = $recipe['category_id'];
-           // }
-            //$query = "SELECT * FROM categories WHERE id = $category_id";
-            //$data['categories'] = $this->admin_model->get_categories($query);
 
-        //}
-        echo '<pre>';
-        print_r($cat);
-        echo '</pre>';
-
-
-         exit;*/
         $this->template->admin_view($title, $data);
     }
 
-    function test(){
-        $query = "SELECT recipes.id, finish_photo, recipes.title_ru, recipes.title_en, recipes.title_de, ingridients_ru, ingridients_en, ingridients_de, recipes.description_ru, recipes.description_en, recipes.description_de, created_at, is_gallery, is_public, categories.title_ru, categories.title_en, categories.title_de, photo, recipe_steps.description_ru, recipe_steps.description_en, recipe_steps.description_de
-FROM recipes, categories, recipe_categories, recipe_steps
-WHERE categories.id = recipe_categories.category_id
-AND recipes.id = recipe_steps.recipe_id";
-        $arr = $this->admin_model->get_categories($query);
-        echo '<pre>';
-        print_r($arr);
-        echo '</pre>';
-    }
+
 
     function delete($title, $id)
     {
