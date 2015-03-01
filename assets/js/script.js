@@ -33,18 +33,18 @@ $(document).ready(function () {
     $('.navbar-nav li').each(function () {
         var location = window.location.href;
         var link = this.children;
-        if(location == link[0]) {
+        if (location == link[0]) {
             $(this).addClass('active');
         }
     });
 
-    $('label').click(function(){
+    $('label').click(function () {
         var id = this.getAttribute('for');
         var targ = document.getElementById(id);
-        if(targ.checked){
+        if (targ.checked) {
             this.style.backgroundPosition = 'left 0px';
             this.style.color = '#737373';
-        }else{
+        } else {
             this.style.backgroundPosition = 'left -20px';
             this.style.color = '#42CEFF';
         }
@@ -52,20 +52,84 @@ $(document).ready(function () {
     });
 
 //
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        progressall: function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('.progress .bar').css('width', progress + '%'); },
-        done: function (e, data) {
-            if(data.result.error != undefined){
-                $('#error').html(data.result.error); // выводим на страницу сообщение об ошибке если оно есть
-                $('#error').fadeIn('slow');
-            }else{
-                $('#error').hide(); //на случай если сообщение об ошибке уже отображалось
-                $('#files').append("<img class='img-polaroid' style='margin-left:15%;padding:10px;width:auto;height:250px' src=''>");
-                $('#success').fadeIn('slow');
-            }
+
+    $('#idea_photo').fileupload({
+        dropZone: $('.tmp'),
+        multipart: true,
+        drop: function (e, data) {
+            $.each(data.files, function (index, file) {
+                handleFile(file)
+            });
+        },
+        change: function (e, data) {
+            $.each(data.files, function (index, file) {
+                handleFile(file)
+            });
         }
     });
+
+    $('#finish_photo').fileupload({
+        dropZone: $('.tmp'),
+        multipart: true,
+        drop: function (e, data) {
+            $.each(data.files, function (index, file) {
+                handleFile(file)
+            });
+        },
+        change: function (e, data) {
+            $.each(data.files, function (index, file) {
+                handleFile(file)
+            });
+        }
+    });
+
+    function handleFile(file) {
+        if (file)
+            if (file.size < 1000000) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = $('.img');
+                    img.attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            } else {
+                alert('файл слишком большой');
+            }
+    }
+
+
+
+    /*
+     $('#userfile').fileupload({
+     dropZone: $('#upl-wrap'),
+     multipart: true,
+     drop: function (e, data) {
+     $.each(data.files, function (index, file) {
+     handleFile(file)
+     });
+     },
+     change: function (e, data) {
+     $.each(data.files, function (index, file) {
+     handleFile(file)
+     });
+     }
+
+     });
+
+     function handleFile(file) {
+     if(file)
+     if(file.size< 1000000){
+     var reader = new FileReader();
+     reader.onload = function(e) {
+     var img = $('<img class="img-thumbnail" >');
+     img.attr('src', e.target.result);
+     $('#preview').append(img);
+     }
+     reader.readAsDataURL(file);
+     }else{
+     alert('файл слишком большой');
+     }
+     }*/
 });
+
+

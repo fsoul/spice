@@ -16,6 +16,7 @@ body {
 .area-view textarea {
     width: 100%;
     border: none;
+    max-width: 100%;
 }
 
 .text-lora-italic {
@@ -134,11 +135,32 @@ a.text-danger:hover {
 .marg-l {
     margin-left: 25px;
 }
-
+.tmp{
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.tmp>img{
+    width: 100%;
+    height: auto;
+}
+.tmp span{
+    position: absolute;
+    right: 70px;
+    bottom: 40px;
+}
+.tmp input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
 .marg-r {
     margin-right: 25px;
 }
-
 .date {
     font-family: lorabold;
 }
@@ -303,7 +325,7 @@ a.text-danger:hover {
 }
 
 #recipe-h2 {
-    font-style: italic;
+    font-family: loraitalic;
 }
 
 .step-wrap {

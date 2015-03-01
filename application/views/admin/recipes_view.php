@@ -21,11 +21,15 @@
                         <td class="date text-center"><div class="parent"><div class="child"><?= rus_date_format($recipe['created_at'], 0); ?>
                             <p class="categories">
                                 <?
-                                foreach ($recipe['categories'] as $k => $category) {
-                                    $arr[$k] = $category['title_ru'];
+                                if(!empty($recipe['categories'])){
+                                    foreach ($recipe['categories'] as $k => $category) {
+                                        $arr[$k] = $category['title_ru'];
+                                    }
+                                    $cat_str = implode(', ', $arr);
+                                    echo $cat_str;
+                                }else{
+                                    echo 'Без категории';
                                 }
-                                $cat_str = implode(', ', $arr);
-                                echo $cat_str;
                                 ?>
                             </p></div><div class="helper"></div></div>
                         </td>

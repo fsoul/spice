@@ -41,7 +41,6 @@ class Admin extends CI_Controller
             $data[$title] = $this->admin_model->get($title);
             if($title == 'recipes'){
                 foreach($data['recipes'] as $key =>  $recipe) {
-                    //query
                     $query = "SELECT categories.* FROM recipes, categories, recipe_categories
                      WHERE categories.id = recipe_categories.category_id AND recipe_categories.recipe_id = recipes.id AND recipes.id = ". $recipe['id'];
                     $data['recipes'][$key]['categories'] = $this->admin_model->get_categories($query);
@@ -71,7 +70,8 @@ class Admin extends CI_Controller
         $action = explode(':',__METHOD__);
         $title = $action[2].'_'.$name;
         $data['title'] = 'Редактирование';
-        $data['idea'] = $this->admin_model->get_once($name.'s', $id);
+        $data[$name] = $this->admin_model->get_once($name.'s', $id);
+
         $this->template->admin_view($title, $data);
     }
 

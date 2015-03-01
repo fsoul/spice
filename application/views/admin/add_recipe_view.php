@@ -6,11 +6,13 @@
         <hr/>
         <form enctype="multipart/form-data" method="post" action="/admin/add/recipe/">
 
+
         <div class="upl-photo">
             <p>Выбрать фото</p>
             <p>(можно просто перетащить нужное фото в эту область)</p>
-            <input type="file" name="finish_photo"/>
+            <input type="file" name="finish_photo" id="finish_photo"/>
         </div>
+        
         <div class="checkbox-div text-center">
             <input id="is_gallery" name="is_gallery" type="checkbox"/><span class="form-label"><label for="is_gallery">дублировать
                     в галерею</label></span>

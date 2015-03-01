@@ -5,12 +5,16 @@
         </div>
     </div>
     <div class="col-md-10 col-md-offset-1 bord">
-        <div class="upl-wrap">
+        <div class="upl-wrap" id="upl-wrap">
             <div class="upl-photo-gal">
-                <p><span>+Добавить фото</span><span>(можно просто перетащить нужное фото в эту область)</span></p>
-                <input type="file" name="userfile"/>
+                <p><span>+Добавить фото</span><span>(можно просто перетащить нужные фото в эту область)</span></p>
+                <input type="file" name="userfile[]" id="userfile" multiple="true"/>
             </div>
         </div>
+        <div id="preview">
+
+        </div>
+
 
         <? foreach ($gallery as $item): ?>
         <div class="col-md-3 marg">

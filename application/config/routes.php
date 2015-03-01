@@ -39,6 +39,8 @@
 */
 
 $route['default_controller'] = "recipes";
+$route['upload'] = 'upload';
+$route['upload/do_upload'] = 'upload/do_upload';
 $route['404_override'] = '';
 
 
