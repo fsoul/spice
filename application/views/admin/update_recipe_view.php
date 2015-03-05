@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-md-10 col-md-offset-1">
         <div class="pad">
-            <a href="/admin/view/recipes">Список рецептов</a> > <span>Редактирование рецепта</span>
+            <a href="/admin/view/recipes/0">Список рецептов</a> > <span>Редактирование рецепта</span>
         </div>
         <hr/>
         <form enctype="multipart/form-data" method="post" action="/admin/update_recipe/"<?= $recipe['id'] ?>>

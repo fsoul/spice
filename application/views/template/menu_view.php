@@ -17,8 +17,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?= base_url('/admin/view/recipes/'); ?>">РЕЦЕПТЫ</a></li>
-                    <li><a href="<?= base_url('/admin/view/ideas/'); ?>">ИДЕИ</a></li>
+                    <li><a href="<?= base_url('/admin/view/recipes/0'); ?>">РЕЦЕПТЫ</a></li>
+                    <li><a href="<?= base_url('/admin/view/ideas/0'); ?>">ИДЕИ</a></li>
                     <li><a href="<?= base_url('/admin/view/gallery/'); ?>">ГАЛЕРЕЯ</a></li>
                     <li><a href="<?= base_url('/admin/view/movies/'); ?>">ФИЛЬМЫ</a></li>
                     <li><a href="<?= base_url('/admin/view/settings/'); ?>">НАСТРОЙКИ</a></li>

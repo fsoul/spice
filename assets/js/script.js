@@ -6,10 +6,37 @@ function del(cnt) {
 var cnt = 2;
 
 $(document).ready(function () {
+    /**
+     * pre_delete function
+     *
+     */
+    $('.delete').click(function (e) {
+        e.preventDefault();
+        var id = e.target.attributes.rel.value;
+        var name = e.target.attributes.name.value;
 
+        if (e.target.text == 'Удалить') {
+            e.target.text = 'Возобновить';
+            e.target.attributes.class.value = 'delete';
+            var set_value = 1;
+        } else {
+            e.target.text = 'Удалить';
+            e.target.attributes.class.value = 'text-danger delete';
+            var set_value = 0;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/pre_delete",
+            data: "id=" + id + "&name=" + name + "&set_value=" + set_value
+        });
+    });
+
+    /**
+     *  add steps to recipe
+     */
     $('#add').click(function () {
         var append_div = document.getElementById('append' + cnt);
-        //$('#append').append('<div class="append-wrap"><h4 class="form-label">Шаг '+cnt+'</h4><input type="file" name="step_'+cnt+'_photo" class="btn btn-info btn-lg marg-top-btm"/><div class="panel-group" id="accordion_s'+cnt+'" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="step_ru_'+cnt+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion_s'+cnt+'" href="#collapseStepRu'+cnt+'" aria-expanded="true" aria-controls="collapseStepRu'+cnt+'">Русский</a></h4></div><div id="collapseStepRu'+cnt+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="step_ru_'+cnt+'"><div class="panel-body area-view"><textarea name="step_ru[]"></textarea></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="step_en_'+cnt+'"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion_s'+cnt+'" href="#collapseStepEn'+cnt+'" aria-expanded="false" aria-controls="collapseStepEn'+cnt+'">English</a></h4></div><div id="collapseStepEn'+cnt+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_en_'+cnt+'"><div class="panel-body area-view"><textarea name="step_en[]"></textarea></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="step_de_'+cnt+'"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion_s'+cnt+'" href="#collapseStepDe'+cnt+'" aria-expanded="false" aria-controls="collapseStepDe'+cnt+'">Deutch</a></h4></div><div id="collapseStepDe'+cnt+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_de_'+cnt+'"><div class="panel-body area-view"><textarea name="step_de[]"></textarea></div></div></div></div></div>');
         $.ajax({
             type: "POST",
             url: "/assets/js/append_view.php",
@@ -24,12 +51,17 @@ $(document).ready(function () {
         }
     });
 
-
+    /**
+     * cancel of adding
+     */
     $('#cancel').click(function (e) {
         e.preventDefault();
         window.location.href = document.referrer;
     });
 
+    /**
+     *  menu highlighting
+     */
     $('.navbar-nav li').each(function () {
         var location = window.location.href;
         var link = this.children;
@@ -38,6 +70,9 @@ $(document).ready(function () {
         }
     });
 
+    /**
+     * extra checkbox view
+     */
     $('label').click(function () {
         var id = this.getAttribute('for');
         var targ = document.getElementById(id);
@@ -52,53 +87,45 @@ $(document).ready(function () {
     });
 
 //
+    /*
+     $('.tmp').mouseenter(function(el){
+     var id = '#'+el.currentTarget.children[0].children[2].attributes.id.value;
+     console.log(id);
+     $(id).fileupload({
+     dropZone: $('.tmp'),
+     multipart: true,
+     drop: function (e, data) {
+     $.each(data.files, function (index, file) {
+     handleAddFile(file, e.target);
+     });
+     },
+     change: function (e, data) {
+     $.each(data.files, function (index, file) {
+     handleAddFile(file, e.target);
+     });
+     }
+     });
 
-    $('#idea_photo').fileupload({
-        dropZone: $('.tmp'),
-        multipart: true,
-        drop: function (e, data) {
-            $.each(data.files, function (index, file) {
-                handleFile(file)
-            });
-        },
-        change: function (e, data) {
-            $.each(data.files, function (index, file) {
-                handleFile(file)
-            });
-        }
-    });
+     function handleAddFile(file, target) {
+     if (file)
+     if (file.size < 1000000) {
+     var reader = new FileReader();
+     reader.onload = function (e) {
+     $(target).parent().remove();
 
-    $('#finish_photo').fileupload({
-        dropZone: $('.tmp'),
-        multipart: true,
-        drop: function (e, data) {
-            $.each(data.files, function (index, file) {
-                handleFile(file)
-            });
-        },
-        change: function (e, data) {
-            $.each(data.files, function (index, file) {
-                handleFile(file)
-            });
-        }
-    });
-
-    function handleFile(file) {
-        if (file)
-            if (file.size < 1000000) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var img = $('.img');
-                    img.attr('src', e.target.result);
-                }
-                reader.readAsDataURL(file);
-            } else {
-                alert('файл слишком большой');
-            }
-    }
-
-
-
+     var img = $('<img class="img" >');
+     var src =  img.attr('src', e.target.result);
+     var div = '<div><p></p><p></p><input type="file" id="dsadas"/><img class="img" src="'+img[0].attributes.src.value+'"/></div>';
+     $('.tmp').append(div);
+     console.log(img[0].attributes.src.value);
+     }
+     reader.readAsDataURL(file);
+     } else {
+     alert('файл слишком большой');
+     }
+     }
+     });
+     */
     /*
      $('#userfile').fileupload({
      dropZone: $('#upl-wrap'),

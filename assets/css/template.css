@@ -132,15 +132,15 @@ a.text-danger:hover {
 .marg {
     margin: 20px 0;
 }
-.marg-l {
-    margin-left: 25px;
+#marg-l {
+    margin-left: 3px;
 }
 .tmp{
     position: relative;
     width: 100%;
     margin-bottom: 10px;
 }
-.tmp>img{
+.tmp img{
     width: 100%;
     height: auto;
 }
@@ -368,14 +368,48 @@ a.text-danger:hover {
 
 #search-view {
     text-transform: uppercase;
-    padding-left: 20px;
+    padding-left: 35px;
 }
 
 .panel-title > a {
     font-family: sans-serif;
     text-decoration: none;
 }
-
 #nav {
     max-width: 950px;
+}
+.pagination li.active a{
+    background-color: #85C4DB;
+    border-color: #85C4DB;
+}
+.pagination li.active a:hover{
+    opacity: 0.7;
+}
+.field-wrap{
+    position: relative;
+}
+.button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border: none;
+    height: 100%;
+    width: 40px;
+    background: url("/assets/images/site/ic_search.png") no-repeat center center;
+    background-size: 30%;
+    cursor: pointer;
+    outline: none;
+}
+.btn-reset{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    border: none;
+    text-decoration: underline;
+    color: #337ab7;
+    font-family: sans-serif;
+    background-color: transparent;
+    outline: none;
 }

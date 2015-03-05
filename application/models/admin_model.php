@@ -3,9 +3,24 @@
 class Admin_model extends CI_Model
 {
 
-    function get($title){
+    function get($title, $page, $per_page){
+        $this->db->where('delete', 0);
+        $this->db->order_by('id');
+        $this->db->limit($per_page, $page);
         $query = $this->db->get($title);
         return $query->result_array();
+    }
+    function get_gallery_photo(){
+        $this->db->where('delete', 0);
+        $this->db->order_by('id');
+        $query = $this->db->get('gallery');
+        return $query->result_array();
+    }
+
+    function all_items($title){
+        $this->db->where('delete', 0);
+        $this->db->from($title);
+        return $this->db->count_all_results();
     }
 
     function get_once($name, $id){
@@ -46,5 +61,21 @@ class Admin_model extends CI_Model
     function update_idea($id, $arr){
         $this->db->where('id', $id);
         $this->db->update('ideas', $arr);
+    }
+
+    function search($title, $like){
+        $this->db->like('title_ru', $like);
+        $query = $this->db->get($title);
+        return $query->result_array();
+    }
+
+    function pre_delete($id, $name, $set_value){
+        $data = array(
+            'delete' => $set_value
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update($name, $data);
+
     }
 }

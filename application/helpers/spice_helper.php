@@ -75,3 +75,19 @@ if ( ! function_exists('sort_categories'))
 
     }
 }
+
+
+if ( ! function_exists('rand_name'))
+{
+    function rand_name($name, $length = 1) {
+        $gener = '123456789QqWwEeRrTtYyUuIiOoPp_aAsSdDFfGgHhJjKkLlZzXxCcVvBbNnMm';
+        $length_need = min($length, strlen($gener));
+
+        $ext = substr($name, -4);
+        $result = '';
+        while (strlen($result) < $length)
+            $result .= substr(str_shuffle($gener), 0, $length_need);
+
+        return $result.$ext;
+    }
+}

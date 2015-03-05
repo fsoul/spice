@@ -2,10 +2,12 @@
 
 class Admin extends CI_Controller
 {
+
     function  index()
     {
         $data['title'] = 'Админка';
-        $data['recipes'] = $this->admin_model->get('recipes');
+        $data['search'] = 'recipes';
+        $data['recipes'] = $this->admin_model->get('recipes', 0, 5);
         $this->template->admin_view('recipes', $data);
     }
 
@@ -18,7 +20,7 @@ class Admin extends CI_Controller
 
         if ($this->input->post('login') == $login && $this->input->post('pass') == $pass) {
             $this->session->set_userdata('is_admin', true);
-            redirect(base_url('/admin/view/recipes/'));
+            redirect(base_url('/admin/view/recipes/0'));
         } else {
             if ($this->input->post('enter')) {
                 $data['error'] = 'Неправильные данные для входа. Попробуйте снова';
@@ -33,49 +35,87 @@ class Admin extends CI_Controller
         redirect(base_url());
     }
 
-    function view($title)
+    function add($title)
     {
-
         $data['title'] = 'Админка';
-        if($title == 'recipes' || $title == 'ideas' || $title == 'gallery'){
-            $data[$title] = $this->admin_model->get($title);
-            if($title == 'recipes'){
-                foreach($data['recipes'] as $key =>  $recipe) {
-                    $query = "SELECT categories.* FROM recipes, categories, recipe_categories
-                     WHERE categories.id = recipe_categories.category_id AND recipe_categories.recipe_id = recipes.id AND recipes.id = ". $recipe['id'];
-                    $data['recipes'][$key]['categories'] = $this->admin_model->get_categories($query);
+        $this->template->admin_view($title, $data);
+    }
+
+    function view()
+    {
+        $args = func_get_args();
+        $title = $args[0];
+        if (isset($args[1]))
+            $page = $args[1];
+        else
+            $page = null;
+
+        $per_page = 5;
+
+        $data['search'] = $title;
+        $data['title'] = 'Админка';
+        if ($title == 'recipes' || $title == 'ideas') {
+            $data[$title] = $this->admin_model->get($title, $page, $per_page);
+            if (empty($data[$title])) {
+                $data[$title]['empty'] = 'Записи отсутствуют';
+            } else {
+                $this->load->library('pagination');
+
+                $config['per_page'] = $per_page;
+                $config['base_url'] = base_url() . '/admin/view/' . $title;
+                $config['first_url'] = '/admin/view/' . $title . '/0';
+                $config['total_rows'] = $this->admin_model->all_items($title);
+
+                $this->pagination->initialize($config);
+
+                $data['pages'] = $this->pagination->create_links();
+
+                if ($title == 'recipes') {
+                    foreach ($data['recipes'] as $key => $recipe) {
+                        $query = "SELECT categories.* FROM recipes, categories, recipe_categories
+                     WHERE categories.id = recipe_categories.category_id AND recipe_categories.recipe_id = recipes.id AND recipes.id = " . $recipe['id'];
+                        $data['recipes'][$key]['categories'] = $this->admin_model->get_categories($query);
+                    }
                 }
             }
+        } else if ($title == 'gallery') {
+            $data[$title] = $this->admin_model->get_gallery_photo();
         }
 
         $this->template->admin_view($title, $data);
     }
-
 
 
     function delete($title, $id)
     {
-        if($title != 'gallery'){
-            $this->db->delete($title.'s', array('id' => $id));
-            redirect(base_url('/admin/view/'.$title.'s'));
-        }else{
+        if ($title != 'gallery') {
+            $this->db->delete($title . 's', array('id' => $id));
+            redirect(base_url('/admin/view/' . $title . 's/0'));
+        } else {
             $this->db->delete($title, array('id' => $id));
-            redirect(base_url('/admin/view/'.$title));
+            redirect(base_url('/admin/view/' . $title));
         }
 
     }
 
+    function pre_delete(){
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $set_value = $_POST['set_value'];
+        $this->admin_model->pre_delete($id, $name, $set_value);
+    }
+
     function update($name, $id)
     {
-        $action = explode(':',__METHOD__);
-        $title = $action[2].'_'.$name;
+        $action = explode(':', __METHOD__);
+        $title = $action[2] . '_' . $name;
         $data['title'] = 'Редактирование';
-        $data[$name] = $this->admin_model->get_once($name.'s', $id);
+        $data[$name] = $this->admin_model->get_once($name . 's', $id);
 
         $this->template->admin_view($title, $data);
     }
 
-    function add($title)
+    function add_action($title)
     {
 
         /*
@@ -88,22 +128,30 @@ class Admin extends CI_Controller
         */
 
 
-        $uploads_dir = '/assets/images/';
-
-        if ($_FILES['finish_photo']['error'] == 0) {
-            move_uploaded_file($_FILES['finish_photo']['tmp_name'], '.'.$uploads_dir . $_FILES['finish_photo']['name']);
-        }
-        if ($_FILES['idea_photo']['error'] == 0) {
-            move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.'.$uploads_dir . $_FILES['idea_photo']['name']);
-        }
+        $recipe_upload_dir = '/assets/images/recipes/';
+        $idea_upload_dir = '/assets/images/ideas/';
+        $steps_upload_dir = '/assets/images/steps/';
 
         $this->title_ru = $_POST['title_ru'];
         $this->title_en = $_POST['title_en'];
         $this->title_de = $_POST['title_de'];
 
-        if($title == 'recipe'){
-
-            $this->finish_photo = $uploads_dir . $_FILES['finish_photo']['name'];
+        if ($title == 'recipe') {
+            foreach ($_FILES['photos']['error'] as $key => $error) {
+                if ($error == UPLOAD_ERR_OK) {
+                    $tmp_name = $_FILES['photos']['tmp_name'][$key];
+                    $name = rand_name($_FILES['photos']['name'][$key], 11);
+                    if($key == 0){
+                        $this->finish_photo = $recipe_upload_dir . $name;
+                        $dir = $this->finish_photo;
+                    }else{
+                        $step_photo[] = $steps_upload_dir . $name;
+                        $dir = $steps_upload_dir . $name;
+                    }
+                    move_uploaded_file($tmp_name, '.' . $dir);
+                    $this->watermark->add_watermark($dir);
+                }
+            }
 
             if (isset($_POST['is_gallery'])) {
                 $this->is_gallery = 1;
@@ -127,9 +175,9 @@ class Admin extends CI_Controller
 
             $recipe_id = mysql_insert_id();
 
-            if(isset($_POST['category'])){
-                foreach($_POST['category'] as $k => $v){
-                    $category[$k] = '('.$recipe_id.','.$k.')';
+            if (isset($_POST['category'])) {
+                foreach ($_POST['category'] as $k => $v) {
+                    $category[$k] = '(' . $recipe_id . ',' . $k . ')';
                 }
 
                 $cat_values = implode(',', $category);
@@ -138,19 +186,10 @@ class Admin extends CI_Controller
                 $this->admin_model->exec_query($cat_query_str);
             }
 
-            foreach ($_FILES as $k => $v) {
-                if ($k === 'finish_photo') {
-                    continue;
-                }
-                if ($_FILES[$k]['error'] == 0) {
-                    move_uploaded_file($_FILES[$k]['tmp_name'], '.'.$uploads_dir . $_FILES[$k]['name']);
-                }
-                $step_photo[] = $uploads_dir . $_FILES[$k]['name'];
-            }
-
             $step_ru = $_POST['step_ru'];
             $step_en = $_POST['step_en'];
             $step_de = $_POST['step_de'];
+
 
             $arr = array($step_photo, $step_ru, $step_en, $step_de);
 
@@ -171,24 +210,29 @@ class Admin extends CI_Controller
             $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $values";
 
             $this->admin_model->exec_query($query_str);
-            redirect(base_url('/admin/view/recipes/'));
-        }else{
-            $this->idea_photo = $uploads_dir . $_FILES['idea_photo']['name'];
+            redirect(base_url('/admin/view/recipes/0'));
+        } else {
+            $name = rand_name($_FILES['idea_photo']['name'], 11);
+            $this->idea_photo = $idea_upload_dir . $name;
+            if (isset($_FILES['idea_photo'])) {
+                if ($_FILES['idea_photo']['error'] == 0) {
+                    move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $idea_upload_dir . $name);
+                    $this->watermark->add_watermark($idea_upload_dir . $name);
+                }
+            }
             $arr = $this;
             $this->admin_model->add('ideas', $arr);
 
-            redirect(base_url('/admin/view/ideas/'));
+            redirect(base_url('/admin/view/ideas/0'));
         }
-
-        //$data['title'] = 'Добавить '.title2rus($name);
-        //$this->template->admin_view($name, $data);
     }
 
-    function update_idea($id){
+    function update_idea($id)
+    {
         $uploads_dir = '/assets/images/';
-        if(!empty($_FILES['idea_photo']['tmp_name'])){
+        if (!empty($_FILES['idea_photo']['tmp_name'])) {
             if ($_FILES['idea_photo']['error'] == 0) {
-                move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.'.$uploads_dir . $_FILES['idea_photo']['name']);
+                move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $uploads_dir . $_FILES['idea_photo']['name']);
             }
             $this->idea_photo = $uploads_dir . $_FILES['idea_photo']['name'];
         }
@@ -198,7 +242,25 @@ class Admin extends CI_Controller
         $this->title_de = $_POST['title_de'];
         $arr = $this;
         $this->admin_model->update_idea($id, $arr);
-        redirect(base_url('/admin/view/ideas/'));
+        redirect(base_url('/admin/view/ideas/0'));
     }
 
+    function search($title)
+    {
+        $like = $_POST['like'];
+        $data['search'] = $title;
+        $data['title'] = 'Поиск';
+        $page = 0;
+        $per_page = 5;
+        if ($like == '') {
+            $data[$title] = $this->admin_model->get($title, $page, $per_page);
+            redirect(base_url() . 'admin/view/' . $title . '/0');
+        } else {
+            $data[$title] = $this->admin_model->search($title, $like);
+            if (empty($data[$title])) {
+                $data[$title]['empty'] = 'Поиск не дал результатов';
+            }
+            $this->template->admin_view($title, $data);
+        }
+    }
 }
