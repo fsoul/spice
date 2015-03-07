@@ -72,7 +72,7 @@ $(document).ready(function () {
         if(file)
             if(file.size< 1024*1024*5){
 
-            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
+            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary text-center"><img style="margin-top:50px; opacity: 0.5;" src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
 
 
             }
@@ -172,21 +172,23 @@ function handler(file, target) {
         if(file.size< 1024*1024*5){
             var reader = new FileReader();
             reader.onload = function(e) {
+
                 var tmp = target.parentNode.parentNode;
+
                 $(target).parent().remove();
 
                 var img = $('<img  >');
                 img.attr('src', e.target.result).attr('class', 'img');
                 var drop_inpt = $('<input >');
-                drop_inpt.attr('type', 'file').attr('class', 'drop');
+                drop_inpt.attr('type', 'file').attr('class', 'drop').attr('name', 'photos[]');
                 var inpt = $('<input >');
                 inpt.attr('value', 'Заменить').attr('type', 'button').attr('class', 'change btn btn-primary');
                 inpt.bind('click', function () {
-                    $(target).trigger('click')
+                    $(drop_inpt).trigger('click')
                 });
                 var div = $('<div ></div>');
-                $('.img', tmp).remove();
-                $('.change', tmp).remove();
+                $(tmp).find('.img').remove();
+                $(tmp).find('.change').remove();
                 $(div).append(img).append(inpt).append(drop_inpt);
                 $(tmp).append(div);
                 $('.drop').bind('change', function (e) {

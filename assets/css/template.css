@@ -185,6 +185,9 @@ a.text-danger:hover {
 .m{
     height: 165px
 }
+#block{
+    border: none;
+}
 .date {
     font-family: lorabold;
 }

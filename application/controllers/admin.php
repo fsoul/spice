@@ -241,6 +241,12 @@ class Admin extends CI_Controller
             $this->admin_model->exec_query($query_str);
             redirect(base_url('/admin/view/recipes/0'));
         } else {
+            echo '<pre>';
+            print_r($_FILES);
+            echo '</pre>';
+
+
+            exit;
             $name = rand_name($_FILES['idea_photo']['name'], 11);
             $this->idea_photo = $idea_upload_dir . $name;
             if (isset($_FILES['idea_photo'])) {
@@ -258,7 +264,9 @@ class Admin extends CI_Controller
 
     function update_idea($id)
     {
-        $uploads_dir = '/assets/images/';
+        var_dump($_FILES);
+        exit;
+        $uploads_dir = '/assets/images/ideas/';
         if (!empty($_FILES['idea_photo']['tmp_name'])) {
             if ($_FILES['idea_photo']['error'] == 0) {
                 move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $uploads_dir . $_FILES['idea_photo']['name']);

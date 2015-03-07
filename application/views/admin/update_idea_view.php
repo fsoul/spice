@@ -5,10 +5,13 @@
         </div>
         <hr/>
         <form enctype="multipart/form-data" method="post" action="/admin/update_idea/<?= $idea['id'] ?>">
-
+<?//@todo устранить id = block?>
             <div class="tmp">
-                <img class="img" src="<?= $idea['idea_photo'] ?>" alt="idea_photo"/>
-                <span class="btn btn-primary"><input type="file" name="idea_photo" id="idea_photo"/>Заменить</span>
+                <div class="" id="">
+                    <input type="button" value="Заменить" class="change btn btn-primary">
+                    <input class="drop" type="file" name="idea_photo"/>
+                    <img style="height: 450px;" src="<?= $idea['idea_photo'] ?>">
+                </div>
             </div>
 
             <h3>Заголовок</h3>

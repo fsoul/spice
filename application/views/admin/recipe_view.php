@@ -234,10 +234,12 @@
         <hr/>
         <h2 id="recipe-h2" class="text-center">Рецепт</h2>
 
-        <div class="upl-photo">
-            <p>Выбрать фото</p>
-            <p>(можно просто перетащить нужное фото в эту область)</p>
-            <input type="file" name="photos[]"/>
+        <div class="tmp">
+            <div class="upl-photo">
+                <p>Выбрать фото</p>
+                <p>(можно просто перетащить нужное фото в эту область)</p>
+                <input rel="1" class="drop" type="file" name="photos[]"/>
+            </div>
         </div>
 
         <div class="panel-group" id="accordion_s1" role="tablist" aria-multiselectable="true">
