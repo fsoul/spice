@@ -6,6 +6,56 @@ function del(cnt) {
 var cnt = 2;
 
 $(document).ready(function () {
+    $('#userfile').fileupload({
+        dropZone: $('#upl-wrap'),
+        url: "/admin/gogo",
+        multipart: true,
+        drop: function(e,data){
+            $.each(data.files, function(index, file){
+                gallery_handler(file)
+            });
+        },
+        change: function(e,data){
+            $.each(data.files, function(index, file){
+                gallery_handler(file)
+            });
+        },
+        done: function (e, data) {
+            console.log(data);
+            var arr = $.parseJSON(data.result);
+
+            var im = $('<img>');
+            im.attr('class', 'img-responsive g-photo').attr('src', arr.name).attr('alt', 'gallery_photo');
+            var p = $('<p></p>');
+            p.attr('class', 'text-center');
+            var span = $('<span></span>');
+            span.attr('class', 'date marg-r');
+            span.text(arr.created_at);
+            var a = $('<a></a>');
+            a.attr('class', 'text-danger delete').attr('name', 'gallery').attr('rel', arr.id);
+            a.text('Удалить');
+            var hr = $('<hr>');
+            hr.attr('class', 'hr');
+            p.append(span).append(a);
+            $('.bord .temporary').slice(-1).html('').append(im).append(p).append(hr).removeClass('temporary');
+        },
+        fail: function (e, data) {
+            $('.bord .temporary:last-child').html('error').removeClass('temporary');
+
+        }
+    })
+
+    function gallery_handler(file) {
+        if(file)
+            if(file.size< 1024*1024*5){
+
+            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spice/assets/images/site/loader.gif"/></div>')
+
+
+            }
+
+    }
+
     /**
      * pre_delete function
      *
@@ -87,76 +137,42 @@ $(document).ready(function () {
     });
 
 //
-    /*
-     $('.tmp').mouseenter(function(el){
-     var id = '#'+el.currentTarget.children[0].children[2].attributes.id.value;
-     console.log(id);
-     $(id).fileupload({
-     dropZone: $('.tmp'),
-     multipart: true,
-     drop: function (e, data) {
-     $.each(data.files, function (index, file) {
-     handleAddFile(file, e.target);
-     });
-     },
-     change: function (e, data) {
-     $.each(data.files, function (index, file) {
-     handleAddFile(file, e.target);
-     });
-     }
-     });
 
-     function handleAddFile(file, target) {
-     if (file)
-     if (file.size < 1000000) {
-     var reader = new FileReader();
-     reader.onload = function (e) {
-     $(target).parent().remove();
+    $('.drop').on('change', function (e) {
+        handler(this.files[0], this);
+    })
 
-     var img = $('<img class="img" >');
-     var src =  img.attr('src', e.target.result);
-     var div = '<div><p></p><p></p><input type="file" id="dsadas"/><img class="img" src="'+img[0].attributes.src.value+'"/></div>';
-     $('.tmp').append(div);
-     console.log(img[0].attributes.src.value);
-     }
-     reader.readAsDataURL(file);
-     } else {
-     alert('файл слишком большой');
-     }
-     }
-     });
-     */
-    /*
-     $('#userfile').fileupload({
-     dropZone: $('#upl-wrap'),
-     multipart: true,
-     drop: function (e, data) {
-     $.each(data.files, function (index, file) {
-     handleFile(file)
-     });
-     },
-     change: function (e, data) {
-     $.each(data.files, function (index, file) {
-     handleFile(file)
-     });
-     }
-
-     });
-
-     function handleFile(file) {
-     if(file)
-     if(file.size< 1000000){
-     var reader = new FileReader();
-     reader.onload = function(e) {
-     var img = $('<img class="img-thumbnail" >');
-     img.attr('src', e.target.result);
-     $('#preview').append(img);
-     }
-     reader.readAsDataURL(file);
-     }else{
-     alert('файл слишком большой');
-     }
-     }*/
 });
+function handler(file, target) {
+    if(file)
+        if(file.size< 1024*1024*5){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var tmp = target.parentNode.parentNode;
+                $(target).parent().remove();
+
+                var img = $('<img  >');
+                img.attr('src', e.target.result).attr('class', 'img');
+                var drop_inpt = $('<input >');
+                drop_inpt.attr('type', 'file').attr('class', 'drop');
+                var inpt = $('<input >');
+                inpt.attr('value', 'Заменить').attr('type', 'button').attr('class', 'change btn btn-primary');
+                inpt.bind('click', function () {
+                    $(target).trigger('click')
+                });
+                var div = $('<div ></div>');
+                $('.img', tmp).remove();
+                $('.change', tmp).remove();
+                $(div).append(img).append(inpt).append(drop_inpt);
+                $(tmp).append(div);
+                $('.drop').bind('change', function (e) {
+                    handler(this.files[0], this);
+                })
+            }
+            reader.readAsDataURL(file);
+        }else{
+            $.notify('файл слишком большой');
+        }
+}
 
 

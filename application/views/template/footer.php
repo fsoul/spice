@@ -7,6 +7,7 @@
     <script src="<?php echo base_url('assets/js/jquery.fileupload.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.fileupload-process.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.fileupload-image.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/notify.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 </body>
 </html>

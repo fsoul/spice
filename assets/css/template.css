@@ -139,17 +139,28 @@ a.text-danger:hover {
     position: relative;
     width: 100%;
     margin-bottom: 10px;
+    height: 450px;
+}
+.img{
+    height: 450px;
 }
 .tmp img{
-    width: 100%;
-    height: auto;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+.change{
+    bottom: 0;
+    right: 0;
+    position: absolute;
 }
 .tmp span{
     position: absolute;
     right: 70px;
     bottom: 40px;
 }
-.tmp input{
+.drop{
     position: absolute;
     top: 0;
     left: 0;
@@ -157,9 +168,22 @@ a.text-danger:hover {
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    z-index: 2;
+}
+.tmp input{
+  /*  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;*/
 }
 .marg-r {
     margin-right: 25px;
+}
+.m{
+    height: 165px
 }
 .date {
     font-family: lorabold;

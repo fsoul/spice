@@ -115,6 +115,35 @@ class Admin extends CI_Controller
         $this->template->admin_view($title, $data);
     }
 
+    function add_watermark($dir){
+        $this->load->library('image_lib');
+        $config['source_image']	= '.'.$dir;
+        $config['wm_overlay_path'] = './assets/images/site/watermark.png';
+        $config['wm_type'] = 'overlay';
+        $config['quality'] = '100';
+        $config['wm_vrt_alignment'] = 'bottom';
+        $config['wm_hor_alignment'] = 'right';
+        $this->image_lib->initialize($config);
+        $this->image_lib->watermark();
+    }
+
+    function gogo(){
+        $idea_upload_dir = '/assets/images/ideas/';
+        $tmp_name = $_FILES['userfile']['tmp_name'];
+        $name = rand_name($_FILES['userfile']['name'][0], 11);
+        $dir = $idea_upload_dir . $name;
+
+        move_uploaded_file($tmp_name[0], '.' . $dir);
+
+        $this->add_watermark($dir);
+
+        $this->admin_model->set_image($dir);
+        $last = mysql_insert_id();
+        $row_arr = $this->admin_model->get_image($last);
+        $row_arr['created_at'] = rus_date_format($row_arr['created_at'], 1);
+        echo json_encode(array('name'=>$row_arr['gallery_photo'], 'id'=>$row_arr['id'], 'created_at'=>$row_arr['created_at']));
+    }
+
     function add_action($title)
     {
 
@@ -126,7 +155,6 @@ class Admin extends CI_Controller
 
         exit;
         */
-
 
         $recipe_upload_dir = '/assets/images/recipes/';
         $idea_upload_dir = '/assets/images/ideas/';
@@ -149,7 +177,8 @@ class Admin extends CI_Controller
                         $dir = $steps_upload_dir . $name;
                     }
                     move_uploaded_file($tmp_name, '.' . $dir);
-                    $this->watermark->add_watermark($dir);
+
+                    $this->add_watermark($dir);
                 }
             }
 
@@ -217,7 +246,7 @@ class Admin extends CI_Controller
             if (isset($_FILES['idea_photo'])) {
                 if ($_FILES['idea_photo']['error'] == 0) {
                     move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $idea_upload_dir . $name);
-                    $this->watermark->add_watermark($idea_upload_dir . $name);
+                    $this->add_watermark($idea_upload_dir . $name);
                 }
             }
             $arr = $this;

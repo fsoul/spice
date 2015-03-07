@@ -11,13 +11,9 @@
                 <input type="file" name="userfile[]" id="userfile" multiple="true"/>
             </div>
         </div>
-        <div id="preview">
-
-        </div>
-
 
         <? foreach ($gallery as $item): ?>
-            <div class="col-md-3 marg">
+            <div class="col-md-3 marg m">
                 <img class="img-responsive g-photo" src="<?= base_url($item['gallery_photo']); ?>" alt="gallery_photo"/>
 
                 <p class="text-center">

@@ -2,6 +2,13 @@
 
 class Admin_model extends CI_Model
 {
+    function set_image($dir){
+        $this->db->insert('gallery', array('gallery_photo'=>$dir));
+    }
+    function get_image($id){
+        $query = $this->db->get_where('gallery', array('id'=>$id));
+        return $query->row_array();
+    }
 
     function get($title, $page, $per_page){
         $this->db->where('delete', 0);
