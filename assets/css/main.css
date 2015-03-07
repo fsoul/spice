@@ -1,0 +1,26 @@
+.area-view textarea{
+    width: 100%;
+    border: none;
+}
+.form-label{
+    font-style: italic;
+    margin: 0 20px 0 5px;
+}
+.marg-top-btm{
+    margin: 5px 0px;
+}
+.marg{
+    height: 300px;
+}
+#add-view{
+    margin-bottom: 50px;
+}
+.checkbox-div{
+    margin: 15px 0px;
+}
+.spice-add{
+    background: #F8FDFF;
+    border: 4px dashed #D9F5FF;
+    border-radius: 6px;
+    padding: 20px;
+}
