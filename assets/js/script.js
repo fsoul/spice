@@ -72,7 +72,7 @@ $(document).ready(function () {
         if(file)
             if(file.size< 1024*1024*5){
 
-            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spice/assets/images/site/loader.gif"/></div>');
+            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spiceandpassion/assets/images/site/loader.gif"/></div>');
 
 
             }
