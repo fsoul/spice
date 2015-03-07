@@ -21,7 +21,6 @@ $(document).ready(function () {
             });
         },
         done: function (e, data) {
-            console.log(data);
             var arr = $.parseJSON(data.result);
 
             var im = $('<img>');
@@ -32,12 +31,36 @@ $(document).ready(function () {
             span.attr('class', 'date marg-r');
             span.text(arr.created_at);
             var a = $('<a></a>');
-            a.attr('class', 'text-danger delete').attr('name', 'gallery').attr('rel', arr.id);
+            a.attr('style', 'cursor:pointer;').attr('class', 'text-danger delete').attr('name', 'gallery').attr('rel', arr.id);
             a.text('Удалить');
             var hr = $('<hr>');
             hr.attr('class', 'hr');
             p.append(span).append(a);
-            $('.bord .temporary').slice(-1).html('').append(im).append(p).append(hr).removeClass('temporary');
+            var targ = $('.bord .temporary').slice(-1);
+
+            targ.html('').append(im).append(p).append(hr).removeClass('temporary');
+            targ.find('.delete').bind('click', function (e) {
+                    e.preventDefault();
+                    var id = e.target.attributes.rel.value;
+                    var name = e.target.attributes.name.value;
+
+                    if (e.target.text == 'Удалить') {
+                        e.target.text = 'Возобновить';
+                        e.target.attributes.class.value = 'delete';
+                        var set_value = 1;
+                    } else {
+                        e.target.text = 'Удалить';
+                        e.target.attributes.class.value = 'text-danger delete';
+                        var set_value = 0;
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/pre_delete",
+                        data: "id=" + id + "&name=" + name + "&set_value=" + set_value
+                    });
+                }
+            );
         },
         fail: function (e, data) {
             $('.bord .temporary:last-child').html('error').removeClass('temporary');
@@ -49,7 +72,7 @@ $(document).ready(function () {
         if(file)
             if(file.size< 1024*1024*5){
 
-            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spice/assets/images/site/loader.gif"/></div>')
+            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary"><img src="http://spice/assets/images/site/loader.gif"/></div>');
 
 
             }
@@ -60,6 +83,7 @@ $(document).ready(function () {
      * pre_delete function
      *
      */
+
     $('.delete').click(function (e) {
         e.preventDefault();
         var id = e.target.attributes.rel.value;

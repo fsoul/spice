@@ -12,14 +12,14 @@ class Admin_model extends CI_Model
 
     function get($title, $page, $per_page){
         $this->db->where('delete', 0);
-        $this->db->order_by('id');
+        $this->db->order_by('created_at', 'desc');
         $this->db->limit($per_page, $page);
         $query = $this->db->get($title);
         return $query->result_array();
     }
     function get_gallery_photo(){
         $this->db->where('delete', 0);
-        $this->db->order_by('id');
+        $this->db->order_by('created_at', 'desc');
         $query = $this->db->get('gallery');
         return $query->result_array();
     }
