@@ -9,7 +9,7 @@
             <div class="tmp">
                 <div class="" id="">
                     <input type="button" value="Заменить" class="change btn btn-primary">
-                    <input class="drop" type="file" name="idea_photo"/>
+                    <input class="drop" type="file" name="photos"/>
                     <img style="height: 450px;" src="<?= $idea['idea_photo'] ?>">
                 </div>
             </div>
@@ -67,8 +67,8 @@
                     </div>
                 </div>
             </div>
-            <button id="cancel" class="btn btn-primary btn-sm pull-left marg-lt-rt"/>
-            Отмена</button>
+            <a href="<?= base_url().'admin/view/ideas/0';?>" class="btn btn-primary btn-sm pull-left marg-lt-rt">
+                Отмена</a>
             <input name="submit" type="submit" value="Сохранить" class="btn btn-primary btn-lg pull-right marg-lt-rt"/>
         </form>
     </div>

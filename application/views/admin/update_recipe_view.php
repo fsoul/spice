@@ -4,14 +4,19 @@
             <a href="/admin/view/recipes/0">Список рецептов</a> > <span>Редактирование рецепта</span>
         </div>
         <hr/>
-        <form enctype="multipart/form-data" method="post" action="/admin/update_recipe/"<?= $recipe['id'] ?>>
+        <form enctype="multipart/form-data" method="post" action="/admin/update_recipe/<?= $recipe['id']; ?>">
             <div class="tmp">
-                <img class="img" src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
-                <span class="btn btn-primary"><input type="file" name="finish_photo" id="idea_photo"/>Заменить</span>
+                <div class="text-center">
+                    <input class="drop" type="file" name="photos[]">
+                    <img class="img" src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
+                    <input value="Заменить" type="button" class="change btn btn-primary">
+
+                    <input type="hidden" value="<?= $recipe['finish_photo']; ?>" name="<?= $hidden= 'finish_photo'; ?>">
+                </div>
             </div>
             <div class="checkbox-div text-center">
-                <input id="is_gallery" name="is_gallery" type="checkbox"/><span class="form-label"><label for="is_gallery">дублировать
-                        в галерею</label></span>
+                <input checked="checked" id="is_gallery" name="is_gallery" type="checkbox"/><label class="form-label" for="is_gallery">дублировать
+                        в галерею</label>
                 <!--<input id="is_public" name="is_public" type="checkbox"/><span class="form-label"><label for="is_public">опубликовать
                         рецепт</label></span>-->
             </div>
@@ -118,63 +123,36 @@
             </div>
 
             <h3>Категории</h3>
-
+            <?
+            if(!isset($empty)):
+                $arr = array();
+                for($i=0; $i<count($recipe['categories']); $i++){
+                    $arr[] .= '^'.$recipe['categories'][$i]['id'].'$';
+                }
+                $pattern = '/('.implode('|', $arr).')/';
+            else:
+                $pattern = '/\s/';
+            endif;
+            ?>
             <div class="row text-lora-italic">
                 <div class="col-md-12 checkbox-div">
+                    <?
+                     foreach($categories as $category):
+                     if(preg_match($pattern, $category['id'])):
+                    ?>
                     <div class="col-md-4">
-                        <input type="checkbox" name="category[1]" id="cat1"/><label for="cat1">Блины и оладьи</label>
+                        <input checked="checked" type="checkbox" name="category[<?= $category['id']?>]" id="cat<?= $category['id']?>"/>
+                        <label for="cat<?= $category['id']?>"><?= $category['title_ru']?></label>
                     </div>
+                    <? else:?>
                     <div class="col-md-4">
-                        <input type="checkbox" name="category[2]" id="cat2"/><label for="cat2">Гарниры</label>
+                        <input type="checkbox" name="category[<?= $category['id']?>]" id="cat<?= $category['id']?>"/>
+                        <label for="cat<?= $category['id']?>"><?= $category['title_ru']?></label>
                     </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[3]" id="cat3"/><label for="cat3">Закуски</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[4]" id="cat4"/><label for="cat4">Паста</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[5]" id="cat5"/><label for="cat5">Соленья</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[6]" id="cat6"/><label for="cat6">Рыба и морепрод.</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[7]" id="cat7"/><label for="cat7">Варенье</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[8]" id="cat8"/><label for="cat8">Десерты</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[9]" id="cat9"/><label for="cat9">Крема</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[10]" id="cat10"/><label for="cat10">Пицца</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[11]" id="cat11"/><label for="cat11">Супы</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[12]" id="cat12"/><label for="cat12">Тесто</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[13]" id="cat13"/><label for="cat13">Выпечка</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[14]" id="cat14"/><label for="cat14">Завтраки</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[15]" id="cat15"/><label for="cat15">Мясо и субпрод.</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[16]" id="cat16"/><label for="cat16">Салаты</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[17]" id="cat17"/><label for="cat17">Соусы</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="checkbox" name="category[18]" id="cat18"/><label for="cat18">Хлеб</label>
-                    </div>
+                    <?
+                     endif;
+                     endforeach;
+                    ?>
                 </div>
             </div>
 
@@ -230,76 +208,77 @@
 
             <hr/>
             <h2 id="recipe-h2" class="text-center">Рецепт</h2>
-            <?/*
-                echo '<pre>';
-                print_r($recipe);
-                echo '</pre>'
-                */
-            ?>
-            <div class="upl-photo">
-                <p>Выбрать фото</p>
-
-                <p>(можно просто перетащить нужное фото в эту область)</p>
-                <input type="file" name="step_1_photo"/>
+            <? foreach($recipe['steps'] as $k => $step): ?>
+                <? if($step['photo'] == '')
+                    $step['photo'] = '/assets/images/site/empty_pic.png';
+                ?>
+            <div class="tmp">
+                <div class="text-center">
+                    <input class="drop" type="file" name="photos[]">
+                    <img class="img" src="<?= $step['photo']; ?>" alt="recipe_step_photo"/>
+                    <input value="Заменить" type="button" class="change btn btn-primary">
+                    <input type="hidden" value="<?= $step['photo']; ?>" name="step_photo[<?= $k;?>]">
+                </div>
             </div>
-
-            <div class="panel-group" id="accordion_s1" role="tablist" aria-multiselectable="true">
+            <div class="panel-group" id="accordion_s<?= $k+1;?>" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="step_ru_1">
+                    <div class="panel-heading" role="tab" id="step_ru_<?= $k+1;?>">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion_s1" href="#collapseStepRu1" aria-expanded="true"
-                               aria-controls="collapseStepRu1">
+                            <a data-toggle="collapse" data-parent="#accordion_s<?= $k+1;?>" href="#collapseStepRu<?= $k+1;?>" aria-expanded="true"
+                               aria-controls="collapseStepRu<?= $k+1;?>">
                                 Русский
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseStepRu1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="step_ru_1">
+                    <div id="collapseStepRu<?= $k+1;?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="step_ru_<?= $k+1;?>">
                         <div class="panel-body area-view">
-                            <textarea name="step_ru[]"></textarea>
+                            <textarea name="step_ru[]"><?= $step['description_ru']?></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="step_en_1">
+                    <div class="panel-heading" role="tab" id="step_en_<?= $k+1;?>">
                         <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion_s1" href="#collapseStepEn1"
-                               aria-expanded="false" aria-controls="collapseStepEn1">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion_s<?= $k+1;?>" href="#collapseStepEn<?= $k+1;?>"
+                               aria-expanded="false" aria-controls="collapseStepEn<?= $k+1;?>">
                                 English
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseStepEn1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_en_1">
+                    <div id="collapseStepEn<?= $k+1;?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_en_<?= $k+1;?>">
                         <div class="panel-body area-view">
-                            <textarea name="step_en[]"></textarea>
+                            <textarea name="step_en[]"><?= $step['description_en']?></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="step_de_1">
+                    <div class="panel-heading" role="tab" id="step_de_<?= $k+1;?>">
                         <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion_s1" href="#collapseStepDe1"
-                               aria-expanded="false" aria-controls="collapseStepDe1">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion_s<?= $k+1;?>" href="#collapseStepDe<?= $k+1;?>"
+                               aria-expanded="false" aria-controls="collapseStepDe<?= $k+1;?>">
                                 Deutch
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseStepDe1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_de_1">
+                    <div id="collapseStepDe<?= $k+1;?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="step_de_<?= $k+1;?>">
                         <div class="panel-body area-view">
-                            <textarea name="step_de[]"></textarea>
+                            <textarea name="step_de[]"><?= $step['description_de']?></textarea>
                         </div>
                     </div>
                 </div>
             </div>
+            <? endforeach; ?>
+
             <?
-            for ($i = 2; $i < 21; $i++) {
+            /*for ($i = 2; $i < 21; $i++) {
                 echo '<div id="append' . $i . '"></div>';
-            }
+            }*/
             ?>
 
-            <p id="add" class="btn btn-primary btn-sm marg-lt-rt">Добавить этап</p>
+            <!--<p id="add" class="btn btn-primary btn-sm marg-lt-rt">Добавить этап</p>-->
             <hr/>
-            <button id="cancel" class="btn btn-primary btn-sm pull-left marg-lt-rt"/>
-            Отмена</button>
+            <a href="<?= base_url().'admin/view/recipes/0';?>" class="btn btn-primary btn-sm pull-left marg-lt-rt">
+            Отмена</a>
 
             <input name="submit" type="submit" value="Сохранить" class="btn btn-primary btn-lg pull-right"/>
         </form>

@@ -74,7 +74,6 @@ $(document).ready(function () {
 
             $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary text-center"><img style="margin-top:50px; opacity: 0.5;" src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
 
-
             }
 
     }
@@ -126,14 +125,6 @@ $(document).ready(function () {
     });
 
     /**
-     * cancel of adding
-     */
-    $('#cancel').click(function (e) {
-        e.preventDefault();
-        window.location.href = document.referrer;
-    });
-
-    /**
      *  menu highlighting
      */
     $('.navbar-nav li').each(function () {
@@ -144,9 +135,13 @@ $(document).ready(function () {
         }
     });
 
-    /**
-     * extra checkbox view
-     */
+    $(document).on('change', '.drop', function(e) {
+        handler(this.files[0], this);
+        console.log(this.files[0].name);
+    });
+});
+
+function label(){
     $('label').click(function () {
         var id = this.getAttribute('for');
         var targ = document.getElementById(id);
@@ -157,16 +152,8 @@ $(document).ready(function () {
             this.style.backgroundPosition = 'left -20px';
             this.style.color = '#42CEFF';
         }
-
     });
-
-//
-
-    $('.drop').on('change', function (e) {
-        handler(this.files[0], this);
-    })
-
-});
+}
 function handler(file, target) {
     if(file)
         if(file.size< 1024*1024*5){
@@ -174,23 +161,23 @@ function handler(file, target) {
             reader.onload = function(e) {
 
                 var tmp = target.parentNode.parentNode;
+                var div = $(target).parent();
 
-                $(target).parent().remove();
+                $(div).removeClass('upl-photo');
+                $(target).siblings('p').remove();
 
                 var img = $('<img  >');
                 img.attr('src', e.target.result).attr('class', 'img');
-                var drop_inpt = $('<input >');
-                drop_inpt.attr('type', 'file').attr('class', 'drop').attr('name', 'photos[]');
                 var inpt = $('<input >');
                 inpt.attr('value', 'Заменить').attr('type', 'button').attr('class', 'change btn btn-primary');
                 inpt.bind('click', function () {
-                    $(drop_inpt).trigger('click')
+                    $(target).trigger('click')
                 });
-                var div = $('<div ></div>');
+
                 $(tmp).find('.img').remove();
                 $(tmp).find('.change').remove();
-                $(div).append(img).append(inpt).append(drop_inpt);
-                $(tmp).append(div);
+                $(div).append(img).append(inpt);
+
                 $('.drop').bind('change', function (e) {
                     handler(this.files[0], this);
                 })

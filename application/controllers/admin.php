@@ -74,7 +74,7 @@ class Admin extends CI_Controller
                     foreach ($data['recipes'] as $key => $recipe) {
                         $query = "SELECT categories.* FROM recipes, categories, recipe_categories
                      WHERE categories.id = recipe_categories.category_id AND recipe_categories.recipe_id = recipes.id AND recipes.id = " . $recipe['id'];
-                        $data['recipes'][$key]['categories'] = $this->admin_model->get_categories($query);
+                        $data['recipes'][$key]['categories'] = $this->admin_model->get_($query);
                     }
                 }
             }
@@ -111,7 +111,19 @@ class Admin extends CI_Controller
         $title = $action[2] . '_' . $name;
         $data['title'] = 'Редактирование';
         $data[$name] = $this->admin_model->get_once($name . 's', $id);
+        if ($name == 'recipe') {
+            $match_categories_query = "SELECT categories.* FROM categories, recipe_categories WHERE categories.id = recipe_categories.category_id
+                AND recipe_categories.recipe_id = $id
+             ";
+            $all_categories_query = "SELECT * FROM categories";
+            $steps_query = "SELECT recipe_steps.* FROM recipe_steps, recipes WHERE recipe_steps.recipe_id = recipes.id AND recipes.id = $id";
 
+            $data['recipe']['steps'] = $this->admin_model->get_($steps_query);
+            $data['recipe']['categories'] = $this->admin_model->get_($match_categories_query);
+            if(empty($data['recipe']['categories']))
+                $data['empty'] = true;
+            $data['categories'] = $this->admin_model->get_($all_categories_query);
+        }
         $this->template->admin_view($title, $data);
     }
 
@@ -241,17 +253,11 @@ class Admin extends CI_Controller
             $this->admin_model->exec_query($query_str);
             redirect(base_url('/admin/view/recipes/0'));
         } else {
-            echo '<pre>';
-            print_r($_FILES);
-            echo '</pre>';
-
-
-            exit;
-            $name = rand_name($_FILES['idea_photo']['name'], 11);
+            $name = rand_name($_FILES['photos']['name'], 11);
             $this->idea_photo = $idea_upload_dir . $name;
-            if (isset($_FILES['idea_photo'])) {
-                if ($_FILES['idea_photo']['error'] == 0) {
-                    move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $idea_upload_dir . $name);
+            if (isset($_FILES['photos'])) {
+                if ($_FILES['photos']['error'] == 0) {
+                    move_uploaded_file($_FILES['photos']['tmp_name'], '.' . $idea_upload_dir . $name);
                     $this->add_watermark($idea_upload_dir . $name);
                 }
             }
@@ -260,6 +266,82 @@ class Admin extends CI_Controller
 
             redirect(base_url('/admin/view/ideas/0'));
         }
+    }
+
+    function update_recipe($id){
+  /*
+        echo '<pre>';
+        print_r($_FILES);
+        echo '</pre>';
+*/
+        // пересобираем $_POST если есть новые фотки
+        foreach($_FILES['photos']['name'] as $k => $photo){
+            if(!empty($_FILES['photos']['name'][$k])){
+                if($k == 0){
+                    $dir = '/assets/images/recipes/'.rand_name($_FILES['photos']['name'][0], 11);
+                    move_uploaded_file($_FILES['photos']['tmp_name'][0], '.'.$dir);
+                    $this->add_watermark($dir);
+                    $_POST['finish_photo'] = $dir;
+                    continue;
+                }
+                $dir = '/assets/images/steps/'.rand_name($_FILES['photos']['name'][$k], 11);
+                move_uploaded_file($_FILES['photos']['tmp_name'][$k], '.'.$dir);
+                $this->add_watermark($dir);
+                $new_step_photo['photo'][$k-1] = $dir;
+            }
+        }
+        if(isset($new_step_photo)){
+            $_POST['step_photo'] = $new_step_photo['photo'] + $_POST['step_photo'];
+            ksort($_POST['step_photo']);
+        }
+
+        $arr = array();
+
+        $arr['finish_photo'] = $_POST['finish_photo'];
+        if (isset($_POST['is_gallery'])) {
+            $arr['is_gallery'] = 1;
+            $this->admin_model->add('gallery', array('gallery_photo' => $arr['finish_photo']));
+        }
+
+        $arr['title_ru'] = $_POST['title_ru'];
+        $arr['title_en'] = $_POST['title_en'];
+        $arr['title_de'] = $_POST['title_de'];
+
+        $arr['description_ru'] = $_POST['description_ru'];
+        $arr['description_en'] = $_POST['description_en'];
+        $arr['description_de'] = $_POST['description_de'];
+
+        $arr['ingridients_ru'] = $_POST['ingridients_ru'];
+        $arr['ingridients_en'] = $_POST['ingridients_en'];
+        $arr['ingridients_de'] = $_POST['ingridients_de'];
+
+        $this->admin_model->update_recipe($id, $arr);
+
+        if (isset($_POST['category'])) {
+            foreach ($_POST['category'] as $k => $v) {
+                $category[$k] = '(' . $id . ',' . $k . ')';
+            }
+
+            $cat_values = implode(',', $category);
+            $this->admin_model->delete_rows($id, 'recipe_categories');
+            $cat_query_str = "INSERT INTO recipe_categories(recipe_id, category_id) VALUES $cat_values";
+            $this->admin_model->exec_query($cat_query_str);
+        }
+
+        for($i=0; $i<count($_POST['step_photo']); $i++){
+            $step_arr[$i] = array($id, "'".$_POST['step_photo'][$i]."'", "'".$_POST['step_ru'][$i]."'", "'".$_POST['step_en'][$i]."'", "'".$_POST['step_de'][$i]."'", $i);
+        }
+
+        foreach($step_arr as $value){
+            $values[] = '('.implode(',', $value).')';
+        }
+        $val_str = implode(',', $values);
+
+        $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $val_str";
+        $this->admin_model->delete_rows($id, 'recipe_steps');
+        $this->admin_model->exec_query($query_str);
+
+        redirect(base_url('admin/view/recipes/0'));
     }
 
     function update_idea($id)

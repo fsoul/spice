@@ -7,15 +7,15 @@
         <form enctype="multipart/form-data" method="post" action="/admin/add_action/recipe">
 
         <div class="tmp">
-            <div class="upl-photo">
+            <div class="upl-photo text-center">
                 <p>Выбрать фото</p>
                 <p>(можно просто перетащить нужное фото в эту область)</p>
                 <input class="drop" type="file" name="photos[]" id="add_finish_photo"/>
             </div>
         </div>
         <div class="checkbox-div text-center">
-            <input id="is_gallery" name="is_gallery" type="checkbox"/><span class="form-label"><label for="is_gallery">дублировать
-                    в галерею</label></span>
+            <input checked="checked" id="is_gallery" name="is_gallery" type="checkbox"/><label class="form-label" for="is_gallery">дублировать
+                    в галерею</label>
             <!--<input id="is_public" name="is_public" type="checkbox"/><span class="form-label"><label for="is_public">опубликовать
                     рецепт</label></span>-->
         </div>
@@ -235,10 +235,10 @@
         <h2 id="recipe-h2" class="text-center">Рецепт</h2>
 
         <div class="tmp">
-            <div class="upl-photo">
+            <div class="upl-photo text-center">
                 <p>Выбрать фото</p>
                 <p>(можно просто перетащить нужное фото в эту область)</p>
-                <input rel="1" class="drop" type="file" name="photos[]"/>
+                <input class="drop" type="file" name="photos[]"/>
             </div>
         </div>
 
@@ -297,7 +297,8 @@
 
         <p id="add" class="btn btn-primary btn-sm marg-lt-rt">Добавить этап</p>
         <hr/>
-        <button id="cancel" class="btn btn-primary btn-sm pull-left marg-lt-rt"/>Отмена</button>
+        <a href="<?= base_url().'admin/view/recipes/0';?>" class="btn btn-primary btn-sm pull-left marg-lt-rt">
+            Отмена</a>
 
         <input name="submit" type="submit" value="Сохранить" class="btn btn-primary btn-lg pull-right"/>
 

@@ -4,6 +4,7 @@ body {
     font-family: loraregular;
 }
 
+
 .admin-nav-div {
     width: 740px;
     margin: 0 auto !important;
@@ -23,7 +24,7 @@ body {
     font-family: loraitalic;
 }
 
-.form-label label {
+.form-label{
     font-family: loraitalic;
     margin: 0 20px 0 5px;
 }
@@ -145,14 +146,13 @@ a.text-danger:hover {
     height: 450px;
 }
 .tmp img{
-    position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
 }
 .change{
-    bottom: 0;
-    right: 0;
+    bottom: 20px;
+    right: 166px;
     position: absolute;
 }
 .tmp span{
@@ -327,7 +327,10 @@ a.text-danger:hover {
     opacity: 0;
     cursor: pointer;
 }
-
+.checkbox-div input:checked + label{
+    background-position: left -20px;
+    color: #42CEFF;
+}
 .checkbox-div input {
     opacity: 0;
     display: none;
@@ -372,6 +375,7 @@ a.text-danger:hover {
 .btn-primary {
     background: linear-gradient(to top, #00ACFF, #00F2FE);
     border-color: #00ACFF;
+    text-decoration: none;
 }
 
 .btn-primary:hover {

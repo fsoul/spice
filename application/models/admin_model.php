@@ -55,11 +55,10 @@ class Admin_model extends CI_Model
         return $query->result_array();
     }
 
-    function get_categories($query_str){
+    function get_($query_str){
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
-
 
     function exec_query($query){
         $this->db->query($query);
@@ -68,6 +67,11 @@ class Admin_model extends CI_Model
     function update_idea($id, $arr){
         $this->db->where('id', $id);
         $this->db->update('ideas', $arr);
+    }
+
+    function update_recipe($id, $arr){
+        $this->db->where('id', $id);
+        $this->db->update('recipes', $arr);
     }
 
     function search($title, $like){
@@ -84,5 +88,9 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update($name, $data);
 
+    }
+
+    function delete_rows($id, $table){
+        $this->db->delete($table, array('recipe_id' => $id));
     }
 }

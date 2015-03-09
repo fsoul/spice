@@ -6,14 +6,12 @@
         <hr/>
         <form enctype="multipart/form-data" method="post" action="/admin/add_action/idea/">
 
-            <div class="tmp">
-                <div class="upl-photo">
-                    <p>Выбрать фото</p>
-                    <p>(можно просто перетащить нужное фото в эту область)</p>
-                    <input class="drop" type="file" name="idea_photo[]"/>
-                </div>
-            </div>
 
+            <div class="upl-photo">
+                <p>Выбрать фото</p>
+                <p>(можно просто перетащить нужное фото в эту область)</p>
+                <input type="file" name="photos"/>
+            </div>
 
             <h3>Заголовок</h3>
 
@@ -64,7 +62,8 @@
                     </div>
                 </div>
             </div>
-            <button id="cancel" class="btn btn-primary btn-sm pull-left marg-lt-rt"/>Отмена</button>
+            <a href="<?= base_url().'admin/view/ideas/0';?>" class="btn btn-primary btn-sm pull-left marg-lt-rt">
+                Отмена</a>
             <input name="submit" type="submit" value="Сохранить" class="btn btn-primary btn-lg pull-right marg-lt-rt"/>
         </form>
     </div>
