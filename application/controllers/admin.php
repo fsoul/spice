@@ -15,10 +15,9 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Вход';
         $data['error'] = null;
-        $login = 'tatsianak';
-        $pass = '123';
+        $admin_data = $this->admin_model->get_admin_data();
 
-        if ($this->input->post('login') == $login && $this->input->post('pass') == $pass) {
+        if ($this->input->post('login') == $admin_data['login'] && md5($this->input->post('pass')) == $admin_data['pass_phrase']) {
             $this->session->set_userdata('is_admin', true);
             redirect(base_url('/admin/view/recipes/0'));
         } else {
@@ -54,7 +53,7 @@ class Admin extends CI_Controller
 
         $data['search'] = $title;
         $data['title'] = 'Админка';
-        if ($title == 'recipes' || $title == 'ideas') {
+        if ($title == 'recipes' || $title == 'ideas' || $title = 'movies') {
             $data[$title] = $this->admin_model->get($title, $page, $per_page);
             if (empty($data[$title])) {
                 $data[$title]['empty'] = 'Записи отсутствуют';

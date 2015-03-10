@@ -75,7 +75,11 @@ class Admin_model extends CI_Model
     }
 
     function search($title, $like){
-        $this->db->like('title_ru', $like);
+        if($title == 'movies'){
+            $this->db->like('title', $like);
+        }else{
+            $this->db->like('title_ru', $like);
+        }
         $query = $this->db->get($title);
         return $query->result_array();
     }
@@ -92,5 +96,10 @@ class Admin_model extends CI_Model
 
     function delete_rows($id, $table){
         $this->db->delete($table, array('recipe_id' => $id));
+    }
+
+    function get_admin_data(){
+        $query = $this->db->get('admin');
+        return $query->row_array();
     }
 }
