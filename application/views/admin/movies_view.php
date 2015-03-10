@@ -38,7 +38,7 @@
                                     <div class="helper"></div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="del_width">
                                 <a class="text-danger delete" name="movies" rel="<?= $movie['id']; ?>"
                                    href="<?= base_url('/admin/delete/movie/' . $movie['id']); ?>">Удалить</a>
                             </td>

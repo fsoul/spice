@@ -49,7 +49,7 @@
                                 <a rel="recipe"
                                    href="<?= base_url('admin/update/recipe/' . $recipe['id']); ?>">Редактировать</a>
                             </td>
-                            <td>
+                            <td class="del_width">
                                 <a class="text-danger delete" name="recipes" rel="<?= $recipe['id']; ?>"
                                    href="<?= base_url('admin/delete/recipe/' . $recipe['id']); ?>">Удалить</a>
                             </td>

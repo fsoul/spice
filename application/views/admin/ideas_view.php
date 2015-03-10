@@ -33,7 +33,7 @@
                                 </div>
                             </td>
                             <td><a href="<?= base_url('/admin/update/idea/' . $item['id']); ?>">Редактировать</a></td>
-                            <td>
+                            <td class="del_width">
                                 <a class="text-danger delete" name="ideas" rel="<?= $item['id']; ?>"
                                    href="<?= base_url('/admin/delete/idea/' . $item['id']); ?>">Удалить</a>
                             </td>

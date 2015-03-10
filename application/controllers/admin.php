@@ -53,7 +53,7 @@ class Admin extends CI_Controller
 
         $data['search'] = $title;
         $data['title'] = 'Админка';
-        if ($title == 'recipes' || $title == 'ideas' || $title = 'movies') {
+        if ($title == 'recipes' || $title == 'ideas' || $title == 'movies') {
             $data[$title] = $this->admin_model->get($title, $page, $per_page);
             if (empty($data[$title])) {
                 $data[$title]['empty'] = 'Записи отсутствуют';

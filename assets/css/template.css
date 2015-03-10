@@ -28,7 +28,9 @@ body {
     font-family: loraitalic;
     margin: 0 20px 0 5px;
 }
-
+.del_width{
+    width: 124px;
+}
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background: #85C4DB;
     color: #ffffff;
