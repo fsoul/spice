@@ -194,7 +194,7 @@ class Admin extends CI_Controller
                 }
             }
 
-            if (isset($_POST['is_gallery'])) {
+            if (isset($_POST['is_gallery']) && !empty($_POST['finish_photo'])) {
                 $this->is_gallery = 1;
                 $this->admin_model->add('gallery', array('gallery_photo' => $this->finish_photo));
             }
@@ -253,15 +253,23 @@ class Admin extends CI_Controller
             $this->admin_model->exec_query($query_str);
             redirect(base_url('/admin/view/recipes/0'));
         } else {
-            $name = rand_name($_FILES['photos']['name'], 11);
-            $this->idea_photo = $idea_upload_dir . $name;
-            if (isset($_FILES['photos'])) {
-                if ($_FILES['photos']['error'] == 0) {
-                    move_uploaded_file($_FILES['photos']['tmp_name'], '.' . $idea_upload_dir . $name);
+            $arr = array();
+
+            if (!empty($_FILES['photos']['name'][0])) {
+                $name = rand_name($_FILES['photos']['name'][0], 11);
+                $arr['idea_photo'] = $idea_upload_dir . $name;
+                if ($_FILES['photos']['error'][0] == 0) {
+                    move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $idea_upload_dir . $name);
                     $this->add_watermark($idea_upload_dir . $name);
                 }
+            }else{
+                $arr['idea_photo'] = '/assets/images/site/empty_pic.png';
             }
-            $arr = $this;
+
+            $arr['title_ru'] = $_POST['title_ru'];
+            $arr['title_en'] = $_POST['title_en'];
+            $arr['title_de'] = $_POST['title_de'];
+
             $this->admin_model->add('ideas', $arr);
 
             redirect(base_url('/admin/view/ideas/0'));
@@ -346,21 +354,31 @@ class Admin extends CI_Controller
 
     function update_idea($id)
     {
-        var_dump($_FILES);
-        exit;
-        $uploads_dir = '/assets/images/ideas/';
-        if (!empty($_FILES['idea_photo']['tmp_name'])) {
-            if ($_FILES['idea_photo']['error'] == 0) {
-                move_uploaded_file($_FILES['idea_photo']['tmp_name'], '.' . $uploads_dir . $_FILES['idea_photo']['name']);
+        /*
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+        */
+
+        $arr = array();
+        if (!empty($_FILES['photos']['name'][0])) {
+            if ($_FILES['photos']['error'][0] == 0) {
+                $name = rand_name($_FILES['photos']['name'][0], 11);
+                $dir = '/assets/images/ideas/'.$name;
+                move_uploaded_file($_FILES['photos']['tmp_name'][0], '.'.$dir);
+                $this->add_watermark($dir);
+                $_POST['idea_photo'] = $dir;
             }
-            $this->idea_photo = $uploads_dir . $_FILES['idea_photo']['name'];
         }
 
-        $this->title_ru = $_POST['title_ru'];
-        $this->title_en = $_POST['title_en'];
-        $this->title_de = $_POST['title_de'];
-        $arr = $this;
+        $arr['idea_photo'] = $_POST['idea_photo'];
+
+        $arr['title_ru'] = $_POST['title_ru'];
+        $arr['title_en'] = $_POST['title_en'];
+        $arr['title_de'] = $_POST['title_de'];
+
         $this->admin_model->update_idea($id, $arr);
+
         redirect(base_url('/admin/view/ideas/0'));
     }
 

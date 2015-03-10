@@ -10,7 +10,6 @@
                     <input class="drop" type="file" name="photos[]">
                     <img class="img" src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
                     <input value="Заменить" type="button" class="change btn btn-primary">
-
                     <input type="hidden" value="<?= $recipe['finish_photo']; ?>" name="<?= $hidden= 'finish_photo'; ?>">
                 </div>
             </div>

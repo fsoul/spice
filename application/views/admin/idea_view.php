@@ -7,10 +7,12 @@
         <form enctype="multipart/form-data" method="post" action="/admin/add_action/idea/">
 
 
-            <div class="upl-photo">
-                <p>Выбрать фото</p>
-                <p>(можно просто перетащить нужное фото в эту область)</p>
-                <input type="file" name="photos"/>
+            <div class="tmp">
+                <div class="upl-photo text-center">
+                    <p>Выбрать фото</p>
+                    <p>(можно просто перетащить нужное фото в эту область)</p>
+                    <input class="drop" type="file" name="photos[]"/>
+                </div>
             </div>
 
             <h3>Заголовок</h3>
