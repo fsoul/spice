@@ -91,3 +91,13 @@ if ( ! function_exists('rand_name'))
         return $result.$ext;
     }
 }
+
+if ( ! function_exists('thumb'))
+{
+    function thumb($path) {
+        $arr = explode('.', $path);
+        $name = $arr[0].'_thumb.';
+        $ext = $arr[1];
+        return $name.$ext;
+    }
+}

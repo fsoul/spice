@@ -18,7 +18,7 @@
                     <? foreach ($recipes as $recipe): ?>
                         <tr>
                             <td>
-                                <img src="<?= $recipe['finish_photo']; ?>" alt="recipe_photo"/>
+                                <img src="<?= thumb($recipe['finish_photo']); ?>" alt="recipe_photo"/>
                             </td>
                             <td class="text-uppercase">
                                 <div class="parent">

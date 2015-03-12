@@ -18,7 +18,7 @@
                     <? foreach ($ideas as $item): ?>
                         <tr>
                             <td>
-                                <img src="<?= $item['idea_photo']; ?>" alt="idea_photo"/>
+                                <img src="<?= thumb($item['idea_photo']); ?>" alt="idea_photo"/>
                             </td>
                             <td class="text-uppercase">
                                 <div class="parent">

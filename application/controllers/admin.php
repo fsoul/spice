@@ -79,6 +79,9 @@ class Admin extends CI_Controller
             }
         } else if ($title == 'gallery') {
             $data[$title] = $this->admin_model->get_gallery_photo();
+            if(empty($data[$title])){
+                $data[$title]['empty'] = 'Фотографии отсутствуют';
+            }
         }
 
         $this->template->admin_view($title, $data);
@@ -127,19 +130,39 @@ class Admin extends CI_Controller
     }
 
     function add_watermark($dir){
-        $this->load->library('image_lib');
+        $this->image_lib->clear();
+        $config['image_library'] = 'gd2';
         $config['source_image']	= '.'.$dir;
         $config['wm_overlay_path'] = './assets/images/site/watermark.png';
+        $config['opacity'] = '1';
         $config['wm_type'] = 'overlay';
         $config['quality'] = '100';
         $config['wm_vrt_alignment'] = 'bottom';
+        $config['wm_vrt_offset'] = '0';
+        $config['wm_hor_offset'] = '0';
         $config['wm_hor_alignment'] = 'right';
         $this->image_lib->initialize($config);
         $this->image_lib->watermark();
+        $this->image_lib->clear();
+    }
+
+    function make_thumb($dir){
+        $this->image_lib->clear();
+        $config['image_library'] = 'gd2'; // выбираем библиотеку
+        $config['source_image']	= '.'.$dir;
+        $config['create_thumb'] = TRUE; // ставим флаг создания эскиза
+        $config['maintain_ratio'] = TRUE; // сохранять пропорции
+        //$config['new_image'] = './assets/images/thumbs/'; // и задаем размеры
+        $config['thumb_marker'] = '_thumb';
+        $config['width'] = 190;
+        $config['height']	= 127;
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->image_lib->clear();
     }
 
     function gogo(){
-        $idea_upload_dir = '/assets/images/ideas/';
+        $idea_upload_dir = '/assets/images/gallery/';
         $tmp_name = $_FILES['userfile']['tmp_name'];
         $name = rand_name($_FILES['userfile']['name'][0], 11);
         $dir = $idea_upload_dir . $name;
@@ -147,12 +170,14 @@ class Admin extends CI_Controller
         move_uploaded_file($tmp_name[0], '.' . $dir);
 
         $this->add_watermark($dir);
+        $this->make_thumb($dir);
+        $photo_thumb = thumb($dir);
 
         $this->admin_model->set_image($dir);
         $last = mysql_insert_id();
         $row_arr = $this->admin_model->get_image($last);
         $row_arr['created_at'] = rus_date_format($row_arr['created_at'], 1);
-        echo json_encode(array('name'=>$row_arr['gallery_photo'], 'id'=>$row_arr['id'], 'created_at'=>$row_arr['created_at']));
+        echo json_encode(array('name'=>$row_arr['gallery_photo'], 'thumb' => $photo_thumb,'id'=>$row_arr['id'], 'created_at'=>$row_arr['created_at']));
     }
 
     function add_action($title)
@@ -190,7 +215,12 @@ class Admin extends CI_Controller
                     move_uploaded_file($tmp_name, '.' . $dir);
 
                     $this->add_watermark($dir);
+                    $thumbs[] = $dir;
                 }
+            }
+
+            foreach($thumbs as $item){
+                $this->make_thumb($item);
             }
 
             if (isset($_POST['is_gallery']) && !empty($_POST['finish_photo'])) {
@@ -260,6 +290,7 @@ class Admin extends CI_Controller
                 if ($_FILES['photos']['error'][0] == 0) {
                     move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $idea_upload_dir . $name);
                     $this->add_watermark($idea_upload_dir . $name);
+                    $this->make_thumb($idea_upload_dir . $name);
                 }
             }else{
                 $arr['idea_photo'] = '/assets/images/site/empty_pic.png';

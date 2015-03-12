@@ -12,19 +12,19 @@ $(document).ready(function () {
         multipart: true,
         drop: function(e,data){
             $.each(data.files, function(index, file){
-                gallery_handler(file)
+                gallery_handler(file);
             });
         },
         change: function(e,data){
             $.each(data.files, function(index, file){
-                gallery_handler(file)
+                gallery_handler(file);
             });
         },
         done: function (e, data) {
             var arr = $.parseJSON(data.result);
 
             var im = $('<img>');
-            im.attr('class', 'img-responsive g-photo').attr('src', arr.name).attr('alt', 'gallery_photo');
+            im.attr('class', 'img-responsive g-photo').attr('src', arr.thumb).attr('alt', 'gallery_photo');
             var p = $('<p></p>');
             p.attr('class', 'text-center');
             var span = $('<span></span>');
@@ -71,7 +71,7 @@ $(document).ready(function () {
     function gallery_handler(file) {
         if(file)
             if(file.size< 1024*1024*5){
-
+            $('#empty-gallery').remove();
             $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary text-center"><img style="margin-top:50px; opacity: 0.5;" src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
 
             }
