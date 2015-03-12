@@ -204,85 +204,89 @@ class Admin extends CI_Controller
         $this->title_de = $_POST['title_de'];
 
         if ($title == 'recipe') {
-            foreach ($_FILES['photos']['error'] as $key => $error) {
-                if ($error == UPLOAD_ERR_OK) {
-                    $tmp_name = $_FILES['photos']['tmp_name'][$key];
-                    $name = rand_name($_FILES['photos']['name'][$key], 11);
-                    if($key == 0){
-                        $this->finish_photo = $recipe_upload_dir . $name;
-                        $dir = $this->finish_photo;
-                    }else{
-                        $step_photo[] = $steps_upload_dir . $name;
-                        $dir = $steps_upload_dir . $name;
+            if(!empty($_FILES['photos']['name'][0])){
+                foreach ($_FILES['photos']['error'] as $key => $error) {
+                    if ($error == UPLOAD_ERR_OK) {
+                        $tmp_name = $_FILES['photos']['tmp_name'][$key];
+                        $name = rand_name($_FILES['photos']['name'][$key], 11);
+                        if($key == 0){
+                            $this->finish_photo = $recipe_upload_dir . $name;
+                            $dir = $this->finish_photo;
+                        }else{
+                            $step_photo[] = $steps_upload_dir . $name;
+                            $dir = $steps_upload_dir . $name;
+                        }
+                        move_uploaded_file($tmp_name, '.' . $dir);
+
+                        $this->add_watermark($dir);
+                        //$thumbs[] = $dir;   // превьюхи для фото-шагов
                     }
-                    move_uploaded_file($tmp_name, '.' . $dir);
-
-                    $this->add_watermark($dir);
-                    $thumbs[] = $dir;
                 }
-            }
+                $this->make_thumb($this->finish_photo);
+                /*foreach($thumbs as $item){
+                    $this->make_thumb($item); // превьюхи для фото-шагов
+                }*/
 
-            foreach($thumbs as $item){
-                $this->make_thumb($item);
-            }
-
-            if (isset($_POST['is_gallery']) && !empty($_POST['finish_photo'])) {
-                $this->is_gallery = 1;
-                $this->admin_model->add('gallery', array('gallery_photo' => $this->finish_photo));
-            }
-            if (isset($_POST['is_public'])) {
-                $this->is_public = 1;
-            }
-
-            $this->description_ru = $_POST['description_ru'];
-            $this->description_en = $_POST['description_en'];
-            $this->description_de = $_POST['description_de'];
-
-            $this->ingridients_ru = $_POST['ingridients_ru'];
-            $this->ingridients_en = $_POST['ingridients_en'];
-            $this->ingridients_de = $_POST['ingridients_de'];
-
-            $arr = $this;
-
-            $this->admin_model->add('recipes', $arr);
-
-            $recipe_id = mysql_insert_id();
-
-            if (isset($_POST['category'])) {
-                foreach ($_POST['category'] as $k => $v) {
-                    $category[$k] = '(' . $recipe_id . ',' . $k . ')';
+                if (isset($_POST['is_gallery'])) {
+                    $this->is_gallery = 1;
+                    $this->admin_model->add('gallery', array('gallery_photo' => $this->finish_photo));
+                }
+                if (isset($_POST['is_public'])) {
+                    $this->is_public = 1;
                 }
 
-                $cat_values = implode(',', $category);
+                $this->description_ru = $_POST['description_ru'];
+                $this->description_en = $_POST['description_en'];
+                $this->description_de = $_POST['description_de'];
 
-                $cat_query_str = "INSERT INTO recipe_categories(recipe_id, category_id) VALUES $cat_values";
-                $this->admin_model->exec_query($cat_query_str);
-            }
+                $this->ingridients_ru = $_POST['ingridients_ru'];
+                $this->ingridients_en = $_POST['ingridients_en'];
+                $this->ingridients_de = $_POST['ingridients_de'];
 
-            $step_ru = $_POST['step_ru'];
-            $step_en = $_POST['step_en'];
-            $step_de = $_POST['step_de'];
+                $arr = $this;
+
+                $this->admin_model->add('recipes', $arr);
+
+                $recipe_id = mysql_insert_id();
+
+                if (isset($_POST['category'])) {
+                    foreach ($_POST['category'] as $k => $v) {
+                        $category[$k] = '(' . $recipe_id . ',' . $k . ')';
+                    }
+
+                    $cat_values = implode(',', $category);
+
+                    $cat_query_str = "INSERT INTO recipe_categories(recipe_id, category_id) VALUES $cat_values";
+                    $this->admin_model->exec_query($cat_query_str);
+                }
+
+                $step_ru = $_POST['step_ru'];
+                $step_en = $_POST['step_en'];
+                $step_de = $_POST['step_de'];
 
 
-            $arr = array($step_photo, $step_ru, $step_en, $step_de);
+                if(!empty($step_photo[0])){
+                    $arr = array($step_photo, $step_ru, $step_en, $step_de);
 
-            for ($i = 0; $i < count($step_ru); $i++) {
-                for ($j = 0; $j < count($arr); $j++) {
-                    $new_arr[$i][$j] = "'" . $arr[$j][$i] . "'";
+                    for ($i = 0; $i < count($step_ru); $i++) {
+                        for ($j = 0; $j < count($arr); $j++) {
+                            $new_arr[$i][$j] = "'" . $arr[$j][$i] . "'";
+                        }
+                    }
+
+                    for ($i = 0; $i < count($new_arr); $i++) {
+                        array_unshift($new_arr[$i], '(' . $recipe_id);
+                        array_push($new_arr[$i], "'" . $i . "')");
+                        $values[$i] = implode(',', $new_arr[$i]);
+                    }
+
+                    $values = implode(',', $values);
+
+                    $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $values";
+
+                    $this->admin_model->exec_query($query_str);
                 }
             }
-
-            for ($i = 0; $i < count($new_arr); $i++) {
-                array_unshift($new_arr[$i], '(' . $recipe_id);
-                array_push($new_arr[$i], "'" . $i . "')");
-                $values[$i] = implode(',', $new_arr[$i]);
-            }
-
-            $values = implode(',', $values);
-
-            $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $values";
-
-            $this->admin_model->exec_query($query_str);
             redirect(base_url('/admin/view/recipes/0'));
         } else {
             $arr = array();
@@ -331,6 +335,7 @@ class Admin extends CI_Controller
                 $new_step_photo['photo'][$k-1] = $dir;
             }
         }
+
         if(isset($new_step_photo)){
             $_POST['step_photo'] = $new_step_photo['photo'] + $_POST['step_photo'];
             ksort($_POST['step_photo']);
@@ -339,6 +344,7 @@ class Admin extends CI_Controller
         $arr = array();
 
         $arr['finish_photo'] = $_POST['finish_photo'];
+        $this->make_thumb($arr['finish_photo']);
         if (isset($_POST['is_gallery'])) {
             $arr['is_gallery'] = 1;
             $this->admin_model->add('gallery', array('gallery_photo' => $arr['finish_photo']));
@@ -405,6 +411,7 @@ class Admin extends CI_Controller
         }
 
         $arr['idea_photo'] = $_POST['idea_photo'];
+        $this->make_thumb($arr['idea_photo']);
 
         $arr['title_ru'] = $_POST['title_ru'];
         $arr['title_en'] = $_POST['title_en'];
