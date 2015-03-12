@@ -8,6 +8,9 @@ class Admin extends CI_Controller
         $data['title'] = 'Админка';
         $data['search'] = 'recipes';
         $data['recipes'] = $this->admin_model->get('recipes', 0, 5);
+        if(empty($data['recipes'])){
+            $data['recipes']['empty'] = 'Записи отсутствуют';
+        }
         $this->template->admin_view('recipes', $data);
     }
 

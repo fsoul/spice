@@ -28,7 +28,7 @@
                             </td>
                             <td>
                                 <div class="parent">
-                                    <div class="child text-justifys"><?= $movie['description']; ?></div>
+                                    <div class="child text-justify"><?= $movie['description']; ?></div>
                                     <div class="helper"></div>
                                 </div>
                             </td>
