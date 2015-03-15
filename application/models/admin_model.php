@@ -75,6 +75,7 @@ class Admin_model extends CI_Model
     }
 
     function search($title, $like){
+        $this->db->where('delete', 0);
         if($title == 'movies'){
             $this->db->like('title', $like);
         }else{
@@ -102,4 +103,5 @@ class Admin_model extends CI_Model
         $query = $this->db->get('admin');
         return $query->row_array();
     }
+
 }

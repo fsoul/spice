@@ -8,7 +8,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Админка';
         $data['search'] = 'recipes';
         $data['recipes'] = $this->admin_model->get('recipes', 0, 5);
-        if(empty($data['recipes'])){
+        if (empty($data['recipes'])) {
             $data['recipes']['empty'] = 'Записи отсутствуют';
         }
         $this->template->admin_view('recipes', $data);
@@ -37,9 +37,19 @@ class Admin extends CI_Controller
         redirect(base_url());
     }
 
-    function add($title)
+    function add($title, $page = null)
     {
         $data['title'] = 'Админка';
+        if ($title == 'movie') {
+            $movies = $this->tmdb->popular_movies($page);
+            if (!empty($movies['results'])) {
+                foreach ($movies['results'] as $movie) {
+                    $data['movies'][] = $this->tmdb->movie_info($movie['id'], $append = NULL, $language = 'ru');
+                }
+            } else {
+                $data['movies']['no_match'] = 'Поиск не дал результатов';
+            }
+        }
         $this->template->admin_view($title, $data);
     }
 
@@ -80,9 +90,9 @@ class Admin extends CI_Controller
                     }
                 }
             }
-        } else if ($title == 'gallery') {
+        } elseif ($title == 'gallery') {
             $data[$title] = $this->admin_model->get_gallery_photo();
-            if(empty($data[$title])){
+            if (empty($data[$title])) {
                 $data[$title]['empty'] = 'Фотографии отсутствуют';
             }
         }
@@ -103,7 +113,8 @@ class Admin extends CI_Controller
 
     }
 
-    function pre_delete(){
+    function pre_delete()
+    {
         $id = $_POST['id'];
         $name = $_POST['name'];
         $set_value = $_POST['set_value'];
@@ -125,17 +136,18 @@ class Admin extends CI_Controller
 
             $data['recipe']['steps'] = $this->admin_model->get_($steps_query);
             $data['recipe']['categories'] = $this->admin_model->get_($match_categories_query);
-            if(empty($data['recipe']['categories']))
+            if (empty($data['recipe']['categories']))
                 $data['empty'] = true;
             $data['categories'] = $this->admin_model->get_($all_categories_query);
         }
         $this->template->admin_view($title, $data);
     }
 
-    function add_watermark($dir){
+    function add_watermark($dir)
+    {
         $this->image_lib->clear();
         $config['image_library'] = 'gd2';
-        $config['source_image']	= '.'.$dir;
+        $config['source_image'] = '.' . $dir;
         $config['wm_overlay_path'] = './assets/images/site/watermark.png';
         $config['opacity'] = '1';
         $config['wm_type'] = 'overlay';
@@ -149,22 +161,24 @@ class Admin extends CI_Controller
         $this->image_lib->clear();
     }
 
-    function make_thumb($dir){
+    function make_thumb($dir)
+    {
         $this->image_lib->clear();
         $config['image_library'] = 'gd2'; // выбираем библиотеку
-        $config['source_image']	= '.'.$dir;
+        $config['source_image'] = '.' . $dir;
         $config['create_thumb'] = TRUE; // ставим флаг создания эскиза
         $config['maintain_ratio'] = TRUE; // сохранять пропорции
         //$config['new_image'] = './assets/images/thumbs/'; // и задаем размеры
         $config['thumb_marker'] = '_thumb';
         $config['width'] = 190;
-        $config['height']	= 127;
+        $config['height'] = 127;
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         $this->image_lib->clear();
     }
 
-    function gogo(){
+    function gogo()
+    {
         $idea_upload_dir = '/assets/images/gallery/';
         $tmp_name = $_FILES['userfile']['tmp_name'];
         $name = rand_name($_FILES['userfile']['name'][0], 11);
@@ -180,7 +194,7 @@ class Admin extends CI_Controller
         $last = mysql_insert_id();
         $row_arr = $this->admin_model->get_image($last);
         $row_arr['created_at'] = rus_date_format($row_arr['created_at'], 1);
-        echo json_encode(array('name'=>$row_arr['gallery_photo'], 'thumb' => $photo_thumb,'id'=>$row_arr['id'], 'created_at'=>$row_arr['created_at']));
+        echo json_encode(array('name' => $row_arr['gallery_photo'], 'thumb' => $photo_thumb, 'id' => $row_arr['id'], 'created_at' => $row_arr['created_at']));
     }
 
     function add_action($title)
@@ -204,15 +218,15 @@ class Admin extends CI_Controller
         $this->title_de = $_POST['title_de'];
 
         if ($title == 'recipe') {
-            if(!empty($_FILES['photos']['name'][0])){
+            if (!empty($_FILES['photos']['name'][0])) {
                 foreach ($_FILES['photos']['error'] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {
                         $tmp_name = $_FILES['photos']['tmp_name'][$key];
                         $name = rand_name($_FILES['photos']['name'][$key], 11);
-                        if($key == 0){
+                        if ($key == 0) {
                             $this->finish_photo = $recipe_upload_dir . $name;
                             $dir = $this->finish_photo;
-                        }else{
+                        } else {
                             $step_photo[] = $steps_upload_dir . $name;
                             $dir = $steps_upload_dir . $name;
                         }
@@ -265,7 +279,7 @@ class Admin extends CI_Controller
                 $step_de = $_POST['step_de'];
 
 
-                if(!empty($step_photo[0])){
+                if (!empty($step_photo[0])) {
                     $arr = array($step_photo, $step_ru, $step_en, $step_de);
 
                     for ($i = 0; $i < count($step_ru); $i++) {
@@ -299,7 +313,7 @@ class Admin extends CI_Controller
                     $this->add_watermark($idea_upload_dir . $name);
                     $this->make_thumb($idea_upload_dir . $name);
                 }
-            }else{
+            } else {
                 $arr['idea_photo'] = '/assets/images/site/empty_pic.png';
             }
 
@@ -313,30 +327,31 @@ class Admin extends CI_Controller
         }
     }
 
-    function update_recipe($id){
-  /*
-        echo '<pre>';
-        print_r($_FILES);
-        echo '</pre>';
-*/
+    function update_recipe($id)
+    {
+        /*
+              echo '<pre>';
+              print_r($_FILES);
+              echo '</pre>';
+      */
         // пересобираем $_POST если есть новые фотки
-        foreach($_FILES['photos']['name'] as $k => $photo){
-            if(!empty($_FILES['photos']['name'][$k])){
-                if($k == 0){
-                    $dir = '/assets/images/recipes/'.rand_name($_FILES['photos']['name'][0], 11);
-                    move_uploaded_file($_FILES['photos']['tmp_name'][0], '.'.$dir);
+        foreach ($_FILES['photos']['name'] as $k => $photo) {
+            if (!empty($_FILES['photos']['name'][$k])) {
+                if ($k == 0) {
+                    $dir = '/assets/images/recipes/' . rand_name($_FILES['photos']['name'][0], 11);
+                    move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $dir);
                     $this->add_watermark($dir);
                     $_POST['finish_photo'] = $dir;
                     continue;
                 }
-                $dir = '/assets/images/steps/'.rand_name($_FILES['photos']['name'][$k], 11);
-                move_uploaded_file($_FILES['photos']['tmp_name'][$k], '.'.$dir);
+                $dir = '/assets/images/steps/' . rand_name($_FILES['photos']['name'][$k], 11);
+                move_uploaded_file($_FILES['photos']['tmp_name'][$k], '.' . $dir);
                 $this->add_watermark($dir);
-                $new_step_photo['photo'][$k-1] = $dir;
+                $new_step_photo['photo'][$k - 1] = $dir;
             }
         }
 
-        if(isset($new_step_photo)){
+        if (isset($new_step_photo)) {
             $_POST['step_photo'] = $new_step_photo['photo'] + $_POST['step_photo'];
             ksort($_POST['step_photo']);
         }
@@ -375,12 +390,12 @@ class Admin extends CI_Controller
             $this->admin_model->exec_query($cat_query_str);
         }
 
-        for($i=0; $i<count($_POST['step_photo']); $i++){
-            $step_arr[$i] = array($id, "'".$_POST['step_photo'][$i]."'", "'".$_POST['step_ru'][$i]."'", "'".$_POST['step_en'][$i]."'", "'".$_POST['step_de'][$i]."'", $i);
+        for ($i = 0; $i < count($_POST['step_photo']); $i++) {
+            $step_arr[$i] = array($id, "'" . $_POST['step_photo'][$i] . "'", "'" . $_POST['step_ru'][$i] . "'", "'" . $_POST['step_en'][$i] . "'", "'" . $_POST['step_de'][$i] . "'", $i);
         }
 
-        foreach($step_arr as $value){
-            $values[] = '('.implode(',', $value).')';
+        foreach ($step_arr as $value) {
+            $values[] = '(' . implode(',', $value) . ')';
         }
         $val_str = implode(',', $values);
 
@@ -403,8 +418,8 @@ class Admin extends CI_Controller
         if (!empty($_FILES['photos']['name'][0])) {
             if ($_FILES['photos']['error'][0] == 0) {
                 $name = rand_name($_FILES['photos']['name'][0], 11);
-                $dir = '/assets/images/ideas/'.$name;
-                move_uploaded_file($_FILES['photos']['tmp_name'][0], '.'.$dir);
+                $dir = '/assets/images/ideas/' . $name;
+                move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $dir);
                 $this->add_watermark($dir);
                 $_POST['idea_photo'] = $dir;
             }
@@ -439,5 +454,50 @@ class Admin extends CI_Controller
             }
             $this->template->admin_view($title, $data);
         }
+    }
+
+    function search_tmdb_movies()
+    {
+        $query = $_POST['query'];
+        $data['title'] = 'Поиск по базе фильмов';
+        $movies = $this->tmdb->search_movies($query);
+        if (!empty($movies['results'])) {
+            foreach ($movies['results'] as $movie) {
+                $data['search_result'][] = $this->tmdb->movie_info($movie['id'], $append = NULL, $language = 'ru');
+            }
+        } else {
+            $data['search_result']['no_match'] = 'Поиск не дал результатов';
+        }
+
+        $this->template->admin_view('movie', $data);
+    }
+
+    function add_from_tmdb($id)
+    {
+        $data = $this->tmdb->movie_info($id, $append = NULL, $language = 'ru');
+        $arr = array('movie_photo' => POSTPTH . $data['poster_path'], 'movie_release' => movie_release($data['release_date']),
+            'title' => $data['title'], 'description' => $data['overview']);
+        $this->admin_model->add('movies', $arr);
+        redirect(base_url('admin/view/movies'));
+    }
+
+
+    function data()
+    {
+        $id = $_POST['id'];
+        $method = $_POST['method'];
+
+        if($method == 'add'){
+            $data = $this->tmdb->movie_info($id, $append = NULL, $language = 'ru');
+            $arr = array('movie_photo' => POSTPTH . $data['poster_path'], 'movie_release' => movie_release($data['release_date']),
+                'title' => $data['title'], 'description' => $data['overview']);
+
+            //добавить в общий массив
+        }elseif($method == 'cancel'){
+
+            // удалить из массива
+        }
+        return '';
+        //echo json_encode(array('name' => $row_arr['gallery_photo'], 'thumb' => $photo_thumb, 'id' => $row_arr['id'], 'created_at' => $row_arr['created_at']));
     }
 }

@@ -22,13 +22,16 @@
                             </td>
                             <td class="text-uppercase">
                                 <div class="parent">
-                                    <div class="child"><?= $movie['title']; ?></div>
+                                    <div class="child">
+                                        <p><?= $movie['title']; ?></p>
+                                        <p><?= $movie['movie_release']; ?></p>
+                                    </div>
                                     <div class="helper"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="parent">
-                                    <div class="child text-justify"><?= $movie['description']; ?></div>
+                                    <div class="child text-justify"><?= cut($movie['description'], 400); ?></div>
                                     <div class="helper"></div>
                                 </div>
                             </td>

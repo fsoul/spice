@@ -101,3 +101,25 @@ if ( ! function_exists('thumb'))
         return $name.$ext;
     }
 }
+
+if ( ! function_exists('cut'))
+{
+    function cut($text, $cnt) {
+        if(strlen($text)>$cnt){
+            $text = trim(substr($text,0,strripos(substr($text,0,$cnt),' ')), ',').'...';
+        }
+        return $text;
+    }
+}
+
+if ( ! function_exists('movie_release'))
+{
+    function movie_release($date) {
+        if(strlen($date)>0){
+            $date = '('.substr($date, 0, 4).')';
+        }
+        return $date;
+    }
+}
+
+

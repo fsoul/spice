@@ -106,6 +106,33 @@ $(document).ready(function () {
     });
 
     /**
+     *
+     */
+
+    /*$('.ajax').click(function (e) {
+        e.preventDefault();
+        var id = e.target.attributes.rel.value;
+        var method = '';
+
+        if (e.target.text == 'Добавить') {
+            e.target.text = 'Отменить';
+            e.target.attributes.class.value = 'ajax_delete';
+            method = 'method=add';
+        } else {
+            e.target.text = 'Добавить';
+            e.target.attributes.class.value = 'ajax_add';
+            method = 'method=cancel';
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/data",
+            data: "id=" + id + "&" + method
+        });
+    });*/
+
+
+    /**
      *  add steps to recipe
      */
     $('#add').click(function () {
