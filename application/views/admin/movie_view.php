@@ -88,7 +88,7 @@
             <div id="pagination">
                 <nav class="text-center">
                     <ul class="pagination movie">
-                        <li class="<?=($page == '1')?' active':'';?>"><a href="http://spice/admin/add/movie/1">1</a></li>
+                        <li class="<?=($page == '1' || $page == '')?' active':'';?>"><a href="http://spice/admin/add/movie/1">1</a></li>
                         <li class="<?=($page == '2')?' active':'';?>"><a href="http://spice/admin/add/movie/2">2</a></li>
                         <li class="<?=($page == '3')?' active':'';?>"><a href="http://spice/admin/add/movie/3">3</a></li>
                         <li class="<?=($page == '4')?' active':'';?>"><a href="http://spice/admin/add/movie/4">4</a></li>
