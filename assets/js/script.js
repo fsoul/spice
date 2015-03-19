@@ -105,6 +105,16 @@ $(document).ready(function () {
         });
     });
 
+
+    /**
+     *
+     */
+
+    var href = window.location.href;
+    console.log(document.getElementsByClassName('movie'));
+
+
+
     /**
      *
      */

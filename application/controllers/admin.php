@@ -42,6 +42,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Админка';
         if ($title == 'movie') {
             $movies = $this->tmdb->popular_movies($page);
+            $data['page'] = $page;
             if (!empty($movies['results'])) {
                 foreach ($movies['results'] as $movie) {
                     $data['movies'][] = $this->tmdb->movie_info($movie['id'], $append = NULL, $language = 'ru');
@@ -159,6 +160,19 @@ class Admin extends CI_Controller
         $this->image_lib->initialize($config);
         $this->image_lib->watermark();
         $this->image_lib->clear();
+        $size_arr = getimagesize(base_url().$dir);
+        if($size_arr[0] > $size_arr[1] && $size_arr[0] > 1920){
+            $config['source_image'] = '.' . $dir;
+            $config['create_thumb'] = FALSE; // ставим флаг создания эскиза
+            $config['maintain_ratio'] = TRUE; // сохранять пропорции
+            $config['width'] = 1920;
+            $config['height'] = 1080;
+            $this->image_lib->initialize($config);
+            $this->image_lib->resize();
+            $this->image_lib->clear();
+        }
+        /**/
+
     }
 
     function make_thumb($dir)
@@ -171,7 +185,7 @@ class Admin extends CI_Controller
         //$config['new_image'] = './assets/images/thumbs/'; // и задаем размеры
         $config['thumb_marker'] = '_thumb';
         $config['width'] = 190;
-        $config['height'] = 127;
+        $config['height'] = 107;
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         $this->image_lib->clear();
@@ -474,9 +488,21 @@ class Admin extends CI_Controller
 
     function add_from_tmdb($id)
     {
-        $data = $this->tmdb->movie_info($id, $append = NULL, $language = 'ru');
-        $arr = array('movie_photo' => POSTPTH . $data['poster_path'], 'movie_release' => movie_release($data['release_date']),
-            'title' => $data['title'], 'description' => $data['overview']);
+        $data['ru'] = $this->tmdb->movie_info($id, $append = NULL, $language = 'ru');
+        $data['en'] = $this->tmdb->movie_info($id, $append = NULL, $language = 'en');
+        $data['de'] = $this->tmdb->movie_info($id, $append = NULL, $language = 'de');
+
+        foreach($data as $k => $v){
+            $arr[] = array(
+               'poster_path_'.$k => POSTPTH. $data[$k]['poster_path'],
+               'movie_release'  => movie_release($data['ru']['release_date']),
+               'title_'.$k       => $data[$k]['title'],
+               'overview_'.$k    => $data[$k]['overview']
+            );
+        }
+
+        $arr = $arr[0]+$arr[1]+$arr[2];
+
         $this->admin_model->add('movies', $arr);
         redirect(base_url('admin/view/movies'));
     }

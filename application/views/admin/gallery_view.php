@@ -15,7 +15,7 @@
             <div id="empty-gallery" style="padding: 10px 0;" class="text-center bg-warning"><?= $gallery['empty']; ?></div>
         <? else:?>
             <? foreach ($gallery as $item): ?>
-                <div class="col-md-3 marg m">
+                <div class="col-xs-3 marg m">
                     <img class="img-responsive g-photo" src="<?= thumb($item['gallery_photo']); ?>" alt="gallery_photo"/>
 
                     <p class="text-center">

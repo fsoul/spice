@@ -18,12 +18,12 @@
                     <? foreach ($movies as $movie): ?>
                         <tr>
                             <td>
-                                <img src="<?= $movie['movie_photo']; ?>" alt="movie_photo"/>
+                                <img src="<?= $movie['poster_path_ru']; ?>" alt="movie_photo"/>
                             </td>
                             <td class="text-uppercase">
                                 <div class="parent">
                                     <div class="child">
-                                        <p><?= $movie['title']; ?></p>
+                                        <p><?= $movie['title_ru']; ?></p>
                                         <p><?= $movie['movie_release']; ?></p>
                                     </div>
                                     <div class="helper"></div>
@@ -31,7 +31,7 @@
                             </td>
                             <td>
                                 <div class="parent">
-                                    <div class="child text-justify"><?= cut($movie['description'], 400); ?></div>
+                                    <div class="child text-justify"><?= cut($movie['overview_ru'], 400); ?></div>
                                     <div class="helper"></div>
                                 </div>
                             </td>

@@ -85,6 +85,22 @@
                 <? endif; ?>
                 </tbody>
             </table>
+            <div id="pagination">
+                <nav class="text-center">
+                    <ul class="pagination movie">
+                        <li class="<?=($page == '1')?' active':'';?>"><a href="http://spice/admin/add/movie/1">1</a></li>
+                        <li class="<?=($page == '2')?' active':'';?>"><a href="http://spice/admin/add/movie/2">2</a></li>
+                        <li class="<?=($page == '3')?' active':'';?>"><a href="http://spice/admin/add/movie/3">3</a></li>
+                        <li class="<?=($page == '4')?' active':'';?>"><a href="http://spice/admin/add/movie/4">4</a></li>
+                        <li class="<?=($page == '5')?' active':'';?>"><a href="http://spice/admin/add/movie/5">5</a></li>
+                        <li class="<?=($page == '6')?' active':'';?>"><a href="http://spice/admin/add/movie/6">6</a></li>
+                        <li class="<?=($page == '7')?' active':'';?>"><a href="http://spice/admin/add/movie/7">7</a></li>
+                        <li class="<?=($page == '8')?' active':'';?>"><a href="http://spice/admin/add/movie/8">8</a></li>
+                        <li class="<?=($page == '9')?' active':'';?>"><a href="http://spice/admin/add/movie/9">9</a></li>
+                        <li class="<?=($page == '10')?' active':'';?>"><a href="http://spice/admin/add/movie/10">10</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
