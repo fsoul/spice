@@ -83,7 +83,7 @@ class Admin_model extends CI_Model
         }
         $query = $this->db->get($title);
         return $query->result_array();
-    }
+        }
 
     function pre_delete($id, $name, $set_value){
         $data = array(

@@ -7,9 +7,10 @@ class Template
         $CI =& get_instance();
 
         $CI->load->view('template/header', $data);
-        $CI->load->view('template/menu_view');
-        //$CI->load->view('template/breadcrumbs_view');
-        $CI->load->view('page/' . $name . '_view', $data);
+        $CI->load->view('pages_template/top_view');
+        $CI->load->view('pages_template/menu_view', $data);
+        $CI->load->view('pages/' . $name . '_view', $data);
+        $CI->load->view('pages_template/bottom_view');
         $CI->load->view('template/footer');
     }
 

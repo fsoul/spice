@@ -147,8 +147,61 @@ class Admin extends CI_Controller
     function add_watermark($dir)
     {
         $this->image_lib->clear();
-        $config['image_library'] = 'gd2';
-        $config['source_image'] = '.' . $dir;
+        $src = '.' . $dir;
+        $size_arr = getimagesize(base_url().$dir);
+        $width = $size_arr[0];
+        $height = $size_arr[1];
+        $ratio = 16/9;
+
+        if($width > $height && $width/$height != $ratio){
+
+            $new_height = $width/$ratio;
+            $diff = ($height - $new_height)/2;
+
+            $step1 = $height-$diff;
+            $step2 = $step1-$diff;
+
+            $config['source_image'] = $src;
+            $config['maintain_ratio'] = FALSE;
+            $config['width'] = $width;
+            $config['height'] = $step1;
+            $config['y_axis'] = $diff;
+            $this->image_lib->initialize($config);
+            $this->image_lib->crop();
+            $this->image_lib->clear();
+
+            $config['source_image'] = $src;
+            $config['rotation_angle'] = '180';
+            $this->image_lib->initialize($config);
+            $this->image_lib->rotate();
+            $this->image_lib->clear();
+
+            $config['source_image'] = $src;
+            $config['maintain_ratio'] = FALSE;
+            $config['width'] = $width;
+            $config['height'] = $step2;
+            $config['y_axis'] = $diff;
+            $this->image_lib->initialize($config);
+            $this->image_lib->crop();
+            $this->image_lib->clear();
+
+            $config['source_image'] = $src;
+            $config['rotation_angle'] = '180';
+            $this->image_lib->initialize($config);
+            $this->image_lib->rotate();
+            $this->image_lib->clear();
+        }
+
+        if($width > $height && $width > 1920){
+            $config['source_image'] = $src;
+            $config['width'] = 1920;
+            $config['height'] = 1080;
+            $this->image_lib->initialize($config);
+            $this->image_lib->resize();
+            $this->image_lib->clear();
+        }
+
+        $config['source_image'] = $src;
         $config['wm_overlay_path'] = './assets/images/site/watermark.png';
         $config['opacity'] = '1';
         $config['wm_type'] = 'overlay';
@@ -160,32 +213,16 @@ class Admin extends CI_Controller
         $this->image_lib->initialize($config);
         $this->image_lib->watermark();
         $this->image_lib->clear();
-        $size_arr = getimagesize(base_url().$dir);
-        if($size_arr[0] > $size_arr[1] && $size_arr[0] > 1920){
-            $config['source_image'] = '.' . $dir;
-            $config['create_thumb'] = FALSE; // ставим флаг создания эскиза
-            $config['maintain_ratio'] = TRUE; // сохранять пропорции
-            $config['width'] = 1920;
-            $config['height'] = 1080;
-            $this->image_lib->initialize($config);
-            $this->image_lib->resize();
-            $this->image_lib->clear();
-        }
-        /**/
-
     }
 
     function make_thumb($dir)
     {
         $this->image_lib->clear();
-        $config['image_library'] = 'gd2'; // выбираем библиотеку
         $config['source_image'] = '.' . $dir;
         $config['create_thumb'] = TRUE; // ставим флаг создания эскиза
-        $config['maintain_ratio'] = TRUE; // сохранять пропорции
-        //$config['new_image'] = './assets/images/thumbs/'; // и задаем размеры
         $config['thumb_marker'] = '_thumb';
-        $config['width'] = 190;
-        $config['height'] = 107;
+        $config['width'] = 444;
+        $config['height'] = 250;
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         $this->image_lib->clear();

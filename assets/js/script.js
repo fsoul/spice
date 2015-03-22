@@ -79,6 +79,18 @@ $(document).ready(function () {
     }
 
     /**
+     *
+     */
+    $('.hint').hide();
+    $('.show-hint').hover(
+        function(){
+            $(this).find('.hint').show();
+        },
+        function(){
+            $(this).find('.hint').hide();
+        });
+
+    /**
      * pre_delete function
      *
      */
@@ -111,7 +123,7 @@ $(document).ready(function () {
      */
 
     var href = window.location.href;
-    console.log(document.getElementsByClassName('movie'));
+//    console.log(document.getElementsByClassName('movie'));
 
 
 
@@ -174,7 +186,6 @@ $(document).ready(function () {
 
     $(document).on('change', '.drop', function(e) {
         handler(this.files[0], this);
-        console.log(this.files[0].name);
     });
 });
 
@@ -192,7 +203,7 @@ function label(){
     });
 }
 function handler(file, target) {
-    if(file)
+    if(file && (file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'image/gif')){
         if(file.size< 1024*1024*5){
             var reader = new FileReader();
             reader.onload = function(e) {
@@ -223,6 +234,10 @@ function handler(file, target) {
         }else{
             $.notify('файл слишком большой');
         }
+    }else{
+
+        $.notify('файл не правильного формата');
+    }
 }
 
 
