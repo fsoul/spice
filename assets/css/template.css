@@ -477,12 +477,12 @@ a.text-danger:hover {
     height: 17px;
     width: 18px;
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 10px;
     background: url("/assets/images/site/tmp/ic_music.png")no-repeat center center;
 }
 #lang{
     color: #92B6D2;
-    margin: 0 5px;
+    margin: 0 10px;
     padding-right: 10px;
     display: inline-block;
     background: url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right center;
