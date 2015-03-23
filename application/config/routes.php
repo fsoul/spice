@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = 'plug';
-$route['pages/:any'] = 'pages';
+//$route['pages/:any'] = 'pages';
 $route['404_override'] = '';
 //$route['admin/view/recipes/(:any)'] = "admin/view/recipes/$1";
 

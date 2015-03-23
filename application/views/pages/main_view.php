@@ -13,6 +13,6 @@
             <? endforeach; ?>
         </div>
     </div>
-    <?echo $this->uri->segment(2);?>
+
     <hr>
 </div>

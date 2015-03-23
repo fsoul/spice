@@ -1,4 +1,4 @@
-<div style="background-image: url('http://spice/assets/images/site/tmp/1.jpg');background-repeat: no-repeat;
+<div style="background-image: url('http://spiceandpassion.me/assets/images/site/tmp/1.jpg');background-repeat: no-repeat;
  background-position: center center;
  border: 1px solid #000000; height: 500px;">
     <div style="background-color: #ffffff; height: 50px;">
