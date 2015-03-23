@@ -1,9 +1,9 @@
 <div style="background-image: url('http://spiceandpassion.me/assets/images/site/tmp/1.jpg');background-repeat: no-repeat;
  background-position: center center;
- border: 1px solid #000000; height: 500px;">
-    <div style="background-color: #ffffff; height: 50px;">
+ height: 898px;">
+    <div style="background-color: rgba(255,255,255,0.7); height: 50px;">
         <div class="col-xs-8 col-xs-offset-2">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav style="background-color: transparent" class="navbar navbar-default" role="navigation">
                 <ul class="nav navbar-nav">
                     <? foreach($pages as $page): ?>
                     <li>
