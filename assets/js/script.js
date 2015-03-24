@@ -128,8 +128,19 @@ $(document).ready(function () {
 
 
     /**
-     *
+     * music
      */
+
+    $("#music").click(function(){
+        if ($('#audio-player').get(0).paused) {
+            $('#audio-player').get(0).play();
+            $(this).addClass('musicoff').removeClass('musicon');
+        }
+        else {
+            $('#audio-player').get(0).pause();
+            $(this).addClass('musicon').removeClass('musicoff');
+        }
+    });
 
     /*$('.ajax').click(function (e) {
         e.preventDefault();

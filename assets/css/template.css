@@ -448,7 +448,7 @@ a.text-danger:hover {
 #main{
     position: relative;
     height: 160px;
-    background: url("/assets/images/site/tmp/head.png")no-repeat center 20px;
+    background: url("/assets/images/site/tmp/head.png")no-repeat center 16px;
 }
 #outer{
     position: absolute;
@@ -468,7 +468,7 @@ a.text-danger:hover {
 }
 #rght_block{
     position: absolute;
-    top: 40px;
+    top: 35px;
     right: 0;
     width: 150px;
     height: 17px;
@@ -486,4 +486,7 @@ a.text-danger:hover {
     padding-right: 10px;
     display: inline-block;
     background: url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right center;
+}
+#music{
+    cursor: pointer;
 }
