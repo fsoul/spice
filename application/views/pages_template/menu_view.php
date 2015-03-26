@@ -1,20 +1,15 @@
-<div style="background-image: url('http://spiceandpassion.me/assets/images/site/tmp/1.jpg');background-repeat: no-repeat;
- background-position: center center;
- height: 898px;
- margin-top: 10px;
- ">
-    <div style="background-color: rgba(255,255,255,0.7); height: 50px;">
-        <div class="col-xs-8 col-xs-offset-2">
-            <nav style="background-color: transparent" class="navbar navbar-default" role="navigation">
+
+    <div style=" height: 40px; z-index: 11; width: 100%">
+        <nav style="min-height: 40px; border-radius: 0; border: none; background-color: rgba(255,255,255,0.7); width: 100%;" class="navbar navbar-default" role="navigation">
+            <div style="height: 40px; width: 1190px; margin: 0 auto">
                 <ul class="nav navbar-nav">
                     <? foreach($pages as $page): ?>
-                    <li>
-                        <a class="text-uppercase" href="<?= base_url().$page['href']?>"><?= $page['name_ru']?></a>
-                    </li>
+                        <li style="width: 170px; text-align: center">
+                            <a style="color: #5c5c5c; padding: 0; line-height:40px; letter-spacing: 1.5px;" class="text-uppercase" href="<?= base_url().$page['href']?>"><?= $page['name_ru']?></a>
+                        </li>
                     <? endforeach; ?>
                 </ul>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </div>
-</div>
-
+    <img src="http://spiceandpassion.me/assets/images/site/tmp/1.jpg" style="border-top: 1px solid #7399bf;width: 100%; margin: -41px auto 0; z-index: 0">
