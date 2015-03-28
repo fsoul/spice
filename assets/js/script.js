@@ -187,6 +187,29 @@ $(document).ready(function () {
         }
     });
 
+    /**
+    *  scroll fich
+     */
+    $(window).scroll(scroll);
+    function scroll(){
+        if($('body').scrollTop()>0){
+            $('#main').css('height', '70px').addClass('transition');
+            $('#outer').css('opacity', '0');
+            $('#inner').css('opacity', '0');
+        }else{
+            $('#main').css('height', '161px').addClass('transition');
+            $('#outer').css('opacity', '1').addClass('transition');
+            $('#inner').css('opacity', '1').addClass('transition');
+        }
+
+        //console.log($('body').scrollTop());
+    }
+    //
+
+
+    /**
+     * dropzone для фоток рецепта
+     */
     $(document).on('change', '.drop', function (e) {
         handler(this.files[0], this);
     });
