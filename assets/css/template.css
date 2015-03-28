@@ -445,33 +445,69 @@ a.text-danger:hover {
     background-color: transparent;
     outline: none;
 }
-#main{
-    position: relative;
-    min-width: 1200px;
-    height: 161px;
-    background: url("/assets/images/site/tmp/head.png")no-repeat center 16px;
+.fix_menu{
+    top: 69px !important;
 }
-#outer{
-    position: absolute;
+#main{
+    position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     min-width: 1200px;
-    height: 151px;
-    background: url("/assets/images/site/tmp/ribbon_texture.png")repeat-x center bottom;
+    height: 69px;
+    background: url("/assets/images/site/tmp/img_logo_1.png")no-repeat center center;
+    background-color: #ffffff;
+    z-index: 50;
 }
-
-#inner{
-    position: relative;
+.hide_el{
+    top: -20px !important;
+}
+.hide_el *{
+    opacity: 0;
+}
+#wrapper.show_el{
+    transition: 0.5s;
+    transition-delay: 0s;
+}
+#wrapper.hide_el{
+    transition: 0.5s;
+    transition-delay: 0.3s;
+}
+#wrapper.show_el #logo1, #wrapper.show_el #stamp{
+    transition-delay: 0.3s;
+}
+#wrapper{
+    background-color: #ffffff;
+    width: 100%;
+    min-width: 1200px;
+    position: fixed;
+    top: 69px;
+    height: 81px;
+}
+#logo1{
     width: 1200px;
+    height: 14px;
     margin: 0 auto;
-    height: 151px;
-    background: url("/assets/images/site/tmp/img_stamp.png")no-repeat center bottom;
+    background: url("/assets/images/site/tmp/img_logo_2.png")no-repeat center center;
+    transition: opacity 0.5s;
+}
+#logo2{
+    width: 1200px;
+    height: 67px;
+    margin: 0 auto;
+    background: url("/assets/images/site/tmp/img_stamp.png")no-repeat center center;
+    margin-bottom: 5px;
+    transition: opacity 0.5s;
+}
+#stamp{
+    width: 100%;
+    height: 67px;
+    background: url("/assets/images/site/tmp/ribbon_texture.png")repeat-x center center;
+    transition: opacity 0.5s;
 }
 #rght_block{
     position: absolute;
-    top: 35px;
-    right: 32px;
+    top: 26px;
+    right: 48px;
     width: 177px;
     height: 17px;
 }
@@ -536,11 +572,15 @@ a.text-danger:hover {
     height: 10%;
 }
 
-
 #menu_wrap{
+    position: fixed;
+    border-top: 1px solid #7399bf;
+    top: 150px;
     width: 100%;
     height: 40px;
     z-index: 11;
+    transition: top 0.5s;
+    transition-delay: 0;
 }
 #menu_wrap nav{
     min-height: 40px;
@@ -570,7 +610,6 @@ a.text-danger:hover {
     letter-spacing: 1.5px;
 }
 #main_img{
-    border-top: 1px solid #7399bf;
     width: 100%;
     min-width: 1200px;
     margin: -41px auto 0;
@@ -659,7 +698,4 @@ a.text-danger:hover {
     min-width: 1200px;
     position: relative;
     top: -16px;
-}
-.transition{
-    transition: 1s;
 }

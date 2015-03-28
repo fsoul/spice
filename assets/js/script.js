@@ -190,16 +190,22 @@ $(document).ready(function () {
     /**
     *  scroll fich
      */
+    scroll();
+    var isscroll = false;
     $(window).scroll(scroll);
     function scroll(){
         if($('body').scrollTop()>0){
-            $('#main').css('height', '70px').addClass('transition');
-            $('#outer').css('opacity', '0');
-            $('#inner').css('opacity', '0');
+            if(!isscroll){
+                $('#wrapper').addClass('hide_el').removeClass('show_el');
+          //      setTimeout(function(){
+                    $('#menu_wrap').addClass('fix_menu');
+            //    }, 800);
+                isscroll = true;
+            }
         }else{
-            $('#main').css('height', '161px').addClass('transition');
-            $('#outer').css('opacity', '1').addClass('transition');
-            $('#inner').css('opacity', '1').addClass('transition');
+            isscroll = false;
+            $('#wrapper').removeClass('hide_el').addClass('show_el');
+            $('#menu_wrap').removeClass('fix_menu');
         }
 
         //console.log($('body').scrollTop());
