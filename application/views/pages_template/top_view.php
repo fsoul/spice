@@ -16,9 +16,9 @@
                         <div class="line white w5"></div>
                     </div>
                     <audio loop="loop" id="audio-player">
-                        <source src="http://spiceandpassion.me/assets/audio/track.mp3" type="audio/mpeg">
+                        <source src="/assets/audio/track.mp3" type="audio/mpeg">
                         Тег audio не поддерживается вашим браузером.
-                        <a href="http://spiceandpassion.me/assets/audio/track.mp3">Скачайте музыку</a>.
+                        <a href="/assets/audio/track.mp3">Скачайте музыку</a>.
                     </audio>
                 </div>
                 <div id="lang">РУССКИЙ</div>

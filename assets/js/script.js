@@ -10,13 +10,13 @@ $(document).ready(function () {
         dropZone: $('#upl-wrap'),
         url: "/admin/gogo",
         multipart: true,
-        drop: function(e,data){
-            $.each(data.files, function(index, file){
+        drop: function (e, data) {
+            $.each(data.files, function (index, file) {
                 gallery_handler(file);
             });
         },
-        change: function(e,data){
-            $.each(data.files, function(index, file){
+        change: function (e, data) {
+            $.each(data.files, function (index, file) {
                 gallery_handler(file);
             });
         },
@@ -69,10 +69,10 @@ $(document).ready(function () {
     })
 
     function gallery_handler(file) {
-        if(file)
-            if(file.size< 1024*1024*5){
-            $('#empty-gallery').remove();
-            $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary text-center"><img style="margin-top:50px; opacity: 0.5;" src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
+        if (file)
+            if (file.size < 1024 * 1024 * 5) {
+                $('#empty-gallery').remove();
+                $('.bord #upl-wrap').after('<div  class="col-md-3 marg m temporary text-center"><img style="margin-top:50px; opacity: 0.5;" src="http://spiceandpassion.me/assets/images/site/loader.gif"/></div>');
 
             }
 
@@ -83,10 +83,10 @@ $(document).ready(function () {
      */
     $('.hint').hide();
     $('.show-hint').hover(
-        function(){
+        function () {
             $(this).find('.hint').show();
         },
-        function(){
+        function () {
             $(this).find('.hint').hide();
         });
 
@@ -126,44 +126,36 @@ $(document).ready(function () {
 //    console.log(document.getElementsByClassName('movie'));
 
 
-
     /**
-     * music
-     */
+    *   music and equalizer control
+    */
 
-    $("#music").click(function(){
+    var interval = [];
+
+    $("#music").click(function () {
         if ($('#audio-player').get(0).paused) {
             $('#audio-player').get(0).play();
-            $(this).addClass('musicoff').removeClass('musicon');
+            $('#eq .line.white').each(function () {
+                var _this = $(this);
+                var item = setInterval(function () {
+                    var rand = Math.round(Math.random() * 100) + 1;
+                    _this.css('height', rand + "%");
+                }, 150);
+                interval.push(item);
+            });
         }
         else {
             $('#audio-player').get(0).pause();
-            $(this).addClass('musicon').removeClass('musicoff');
+            for (var i in interval) {
+                clearInterval(interval[i]);
+            }
         }
     });
 
-    /*$('.ajax').click(function (e) {
-        e.preventDefault();
-        var id = e.target.attributes.rel.value;
-        var method = '';
-
-        if (e.target.text == 'Добавить') {
-            e.target.text = 'Отменить';
-            e.target.attributes.class.value = 'ajax_delete';
-            method = 'method=add';
-        } else {
-            e.target.text = 'Добавить';
-            e.target.attributes.class.value = 'ajax_add';
-            method = 'method=cancel';
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/admin/data",
-            data: "id=" + id + "&" + method
-        });
-    });*/
-
+    /**
+     *  Инициализация ajax обвертки
+     */
+    //AjaxContent.init({containerDiv: "#ajax-wrap", contentDiv: "#ajax-response"}).ajaxify_links(".menu_links");
 
     /**
      *  add steps to recipe
@@ -195,12 +187,12 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('change', '.drop', function(e) {
+    $(document).on('change', '.drop', function (e) {
         handler(this.files[0], this);
     });
 });
 
-function label(){
+function label() {
     $('label').click(function () {
         var id = this.getAttribute('for');
         var targ = document.getElementById(id);
@@ -214,10 +206,10 @@ function label(){
     });
 }
 function handler(file, target) {
-    if(file && (file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'image/gif')){
-        if(file.size< 1024*1024*5){
+    if (file && (file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'image/gif')) {
+        if (file.size < 1024 * 1024 * 5) {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
 
                 var tmp = target.parentNode.parentNode;
                 var div = $(target).parent();
@@ -242,13 +234,17 @@ function handler(file, target) {
                 })
             }
             reader.readAsDataURL(file);
-        }else{
+        } else {
             $.notify('файл слишком большой');
         }
-    }else{
+    } else {
 
         $.notify('файл не правильного формата');
     }
 }
 
 
+//window.addEventListener('popstate', AjaxContent.getContent());
+/*window.addEventListener('popstate', function(e) {
+   //console.log(history.back());
+});*/
