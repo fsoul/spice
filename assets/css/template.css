@@ -482,6 +482,7 @@ a.text-danger:hover {
     min-width: 1200px;
     position: fixed;
     top: 69px;
+    z-index: 11;
     height: 81px;
     transition: top 0.5s ;
     transition-delay: 0 ;
