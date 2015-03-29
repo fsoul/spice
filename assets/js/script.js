@@ -194,9 +194,9 @@ $(document).ready(function () {
     var isscroll = false;
     $(window).scroll(scroll);
     function scroll(){
-        if($('body').scrollTop()>0){
+        if($('body').scrollTop()>69){
             if(!isscroll){
-                $('#wrapper').addClass('hide_el').removeClass('show_el');
+                $('#wrapper').addClass('hide_el');
           //      setTimeout(function(){
                     $('#menu_wrap').addClass('fix_menu');
             //    }, 800);
@@ -204,7 +204,7 @@ $(document).ready(function () {
             }
         }else{
             isscroll = false;
-            $('#wrapper').removeClass('hide_el').addClass('show_el');
+            $('#wrapper').removeClass('hide_el');
             $('#menu_wrap').removeClass('fix_menu');
         }
 

@@ -447,6 +447,8 @@ a.text-danger:hover {
 }
 .fix_menu{
     top: 69px !important;
+    transition: top 0.5s !important;
+    transition-delay: 0.3s !important;
 }
 #main{
     position: fixed;
@@ -459,7 +461,7 @@ a.text-danger:hover {
     z-index: 50;
 }
 .hide_el{
-    top: -20px !important;
+    top: -12px !important;
 }
 .hide_el *{
     opacity: 0;
@@ -469,8 +471,7 @@ a.text-danger:hover {
     transition-delay: 0s;
 }
 #wrapper.hide_el{
-    transition: 0.5s;
-    transition-delay: 0.3s;
+    transition-delay: 0.3s !important;
 }
 #wrapper.show_el #logo1, #wrapper.show_el #stamp{
     transition-delay: 0.3s;
@@ -482,6 +483,8 @@ a.text-danger:hover {
     position: fixed;
     top: 69px;
     height: 81px;
+    transition: top 0.5s ;
+    transition-delay: 0 ;
 }
 #logo1{
     width: 1200px;
