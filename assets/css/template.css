@@ -654,15 +654,16 @@ a.text-danger:hover {
     margin-bottom: 10px;
 }
 #page_wrap{
-    width: 1140px;
+    width: 1200px;
     margin: 0 auto;
 }
 #page_wrap .show-hint{
     float: left;
-    margin: 10px 5px;
+    margin: 24px 12px;
     overflow: hidden;
     position: relative;
-    width: 275px;
+    border-radius: 2px;
+    width: 276px;
     height: 450px;
 }
 .show-hint img{
@@ -671,28 +672,57 @@ a.text-danger:hover {
     height: 450px;
     left:-25%;
 }
+
 .show-hint .hint{
-    padding: 20px;
-    background: rgba(231,231,231,0.8);
+    background: rgba(255,255,255,0.75);
     position: absolute;
-    width: 275px;
-    height: 225px;
+    width: 276px;
+    height: 200px;
     bottom: 0;
     left:0;
 }
+.show-hint .hint{
+    /*padding: 20px;
+    background: rgba(231,231,231,0.8);
+    position: absolute;
+    width: 276px;
+    height: 200px;
+    bottom: 0;
+    left:0;*/
+}
 .hint p:first-child{
-    padding: 0 5px;
-    border-bottom: 1px solid #a1a1a1;
+    letter-spacing: 1px;
+    font-size: 24px;
+    line-height: 28px;
+    margin-left: 30px;
+    margin-top: 36px;
+    margin-right: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #5F9AC2;
+}
+.hint p:first-child{
+   /* padding: 0 5px;
+    border-bottom: 1px solid #a1a1a1;*/
 }
 .hint p:last-child{
-    padding: 0 5px;
+  /*  padding: 0 5px;
     font-size: 12px;
-    font-family: sans-serif;
+    font-family: sans-serif;*/
+}
+.hint p:last-child{
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 24px;
+    margin-bottom: 32px;
+    margin-top: 16px;
+    margin-left: 32px;
+    color: #333;
+    font-family: loraitalic;
 }
 #trapezoid {
-    border-bottom: 16px solid #ffffff;
-    border-left: 16px solid transparent;
-    border-right: 16px solid transparent;
+    border-bottom: 17px solid #ffffff;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
     height: 0;
     width: 100%;
     min-width: 1200px;

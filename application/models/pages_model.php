@@ -9,9 +9,22 @@ class Pages_model extends CI_Model
         return $query->result_array();
     }
 
-    function get_recipes(){
+    function get_recipes()
+    {
         $this->db->where('delete', 0);
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get('recipes');
+        return $query->result_array();
+    }
+
+    /**
+     *
+     */
+    function get_items($title, $offset = null, $limit = null)
+    {
+        $this->db->where('delete', 0);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get($title);
         return $query->result_array();
     }
 }
