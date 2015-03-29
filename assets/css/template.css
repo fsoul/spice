@@ -674,7 +674,7 @@ a.text-danger:hover {
 }
 
 .show-hint .hint{
-    background: rgba(231,231,231,0.65);
+    background: rgba(255,255,255,0.75);
     position: absolute;
     width: 276px;
     height: 200px;

@@ -21,7 +21,7 @@
             <div id="eq" class="off">
                 <div class="line blue"></div>
                 <div class="line white w1"></div>
-                <div style="width: 1px;" class="line blue"></div>
+                <div class="line blue"></div>
                 <div class="line white w2"></div>
                 <div class="line blue"></div>
                 <div class="line white w3"></div>
