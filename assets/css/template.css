@@ -777,6 +777,10 @@ a.text-danger:hover {
     background: url("/assets/images/site/ic_about_text_start.png") no-repeat;
     float: left;
 }
+
+#about_text p {
+    font-size: 15px !important;
+}
 #quotes{
     position: absolute;
     width: 19px;
