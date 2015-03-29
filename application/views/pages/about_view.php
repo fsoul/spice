@@ -12,4 +12,4 @@
     </div>
     <div id="right_bord" class="about_border"></div>
 </div>
-<div style="clear: both"></div>
+<div style="clear: both; margin-bottom: 8px"></div>
