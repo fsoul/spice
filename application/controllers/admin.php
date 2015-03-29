@@ -221,8 +221,8 @@ class Admin extends CI_Controller
         $config['source_image'] = '.' . $dir;
         $config['create_thumb'] = TRUE; // ставим флаг создания эскиза
         $config['thumb_marker'] = '_thumb';
-        $config['width'] = 444;
-        $config['height'] = 250;
+        $config['width'] = 800;
+        $config['height'] = 450;
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         $this->image_lib->clear();

@@ -84,10 +84,10 @@ $(document).ready(function () {
     $('.hint').hide();
     $('.show-hint').hover(
         function () {
-            $(this).find('.hint').show();
+            $(this).find('.hint').slideDown('500');
         },
         function () {
-            $(this).find('.hint').hide();
+            $(this).find('.hint').slideUp('500');
         });
 
     /**
