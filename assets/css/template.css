@@ -511,7 +511,7 @@ a.text-danger:hover {
     position: absolute;
     top: 26px;
     right: 48px;
-    width: 177px;
+    width: 131px;
     height: 17px;
 }
 #menu_main{
@@ -525,21 +525,33 @@ a.text-danger:hover {
 }
 #music{
     cursor: pointer;
+    float: left;
     height: 18px;
     width: 20px;
-    display: inline-block;
-    margin: 0 16px;
-  /*  background: url("/assets/images/site/tmp/ic_music.png")no-repeat center center; */
 }
 #lang{
     letter-spacing: 1.5px;
+    height: 17px;
+    overflow: hidden;
+    width: 85px;
     cursor: pointer;
     color: #5F9AC2;
-    margin: 0 16px;
+    float: right;
+    padding: 0px 5px;
+    border-radius: 4px;
     font-size: 12px;
-    padding-right: 10px;
-    display: inline-block;
-    background: url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right center;
+    background: #fff url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right 7px;
+    margin: 2px 0;
+}
+#lang span{
+    width: 72px;
+    padding: 2px;
+    display: block;
+}
+#lang span:hover{
+    color: #fff;
+    background-color: #5F9AC2;
+    border-radius: 2px;
 }
 #eq {
     width: 20px;
@@ -731,4 +743,53 @@ a.text-danger:hover {
     min-width: 1200px;
     position: relative;
     top: -16px;
+}
+#about_main{
+    width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+#left_bord{
+    background: url("/assets/images/site/img_about_vensel_left.png")no-repeat center center;
+    float: left;
+}
+#right_bord{
+    background: url("/assets/images/site/img_about_vensel_left.png")no-repeat center center;
+    transform: rotate(180deg);
+    float: right;
+}
+#img_about{
+    margin-left: 108px;
+    margin-right: 41px;
+    float: left;
+}
+.about_border{
+    width: 25px;
+    height: 404px;
+}
+#about_text{
+    position: relative;
+    font-family: loraitalic;
+    width: 575px;
+    padding: 5px 29px;
+    background: url("/assets/images/site/ic_about_text_start.png") no-repeat;
+    float: left;
+}
+#quotes{
+    position: absolute;
+    width: 19px;
+    height: 17px;
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+    background: url("/assets/images/site/ic_about_text_start.png") no-repeat;
+}
+#author{
+    position: absolute;
+    text-align: center;
+    width: 195px;
+    height: 50px;
+    bottom: -70px;
+    right: 60px;
+    font-size: 24px;
 }

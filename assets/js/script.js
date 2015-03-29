@@ -212,6 +212,12 @@ $(document).ready(function () {
     }
     //
 
+    /**
+     * LANGUAGE
+     */
+    $('#lang').click(function(){
+        console.log('dsad');
+    });
 
     /**
      * dropzone для фоток рецепта

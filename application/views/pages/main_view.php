@@ -1,13 +1,13 @@
 <div id="main_view">
     <div>
         <div id="page_wrap">
-            <? foreach($preview as $item): ?>
+            <? foreach($recipes as $item): ?>
             <div class="show-hint">
                 <img src="<?= thumb($item['finish_photo']); ?>"/>
                 <div class="hint">
-                    <p class="text-uppercase"><?= $item['title_ru']; ?></p>
+                    <p class="text-uppercase"><?= $item['title_'.$lang]; ?></p>
 
-                    <p><?= $item['description_ru']; ?></p>
+                    <p><?= $item['description_'.$lang]; ?></p>
                 </div>
             </div>
             <? endforeach; ?>
