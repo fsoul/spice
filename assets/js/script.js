@@ -216,7 +216,10 @@ $(document).ready(function () {
      * LANGUAGE
      */
     $('#lang').click(function(){
-        console.log('dsad');
+        $(this).css('height', '65px');
+    });
+    $(document).on('mouseover', $('#lang'), function(){
+        $('#lang').css('height', '17px');
     });
 
     /**

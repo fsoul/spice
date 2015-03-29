@@ -12,7 +12,7 @@ class Pages extends CI_Controller
 
         $this->load->model('pages_model');
         $data['pages'] = $this->pages_model->get_pages();
-        $data['preview'] = $this->pages_model->get_recipes();
+        $data['recipes'] = $this->pages_model->get_recipes();
         $data['title'] = $name;
 
         $this->template->page_view($name, $data);

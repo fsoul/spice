@@ -542,6 +542,7 @@ a.text-danger:hover {
     font-size: 12px;
     background: #fff url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right 7px;
     margin: 2px 0;
+    transition: 0.5s;
 }
 #lang span{
     width: 72px;
