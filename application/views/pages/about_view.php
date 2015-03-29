@@ -1,11 +1,12 @@
 <div id="about_main">
     <div id="left_bord" class="about_border"></div>
     <img id="img_about" src="<?= base_url('/assets/images/site/img_about_photo.png')?>">
-    <div id="about_text">
-        <p>dasjk sjadlkasjdlk asjdlkas ndjas bdjasb fjsdb jsdavbuireoiwjr ewn oxc</p>
-        <p>dasjk sjadlkasjdlk asjdlkas ndjas bdjasb fjsdb jsdavbuireoiwjr ewn oxc</p>
-        <p>dasjk sjadlkasjdlk asjdlkas ndjas bdjasb fjsdb jsdavbuireoiwjr ewn oxc</p>
-        <p>dasjk sjadlkasjdlk asjdlkas ndjas bdjasb fjsdb jsdavbuireoiwjr ewn oxc</p>
+    <div id="about_text" class="text-justify">
+        <p>Главное в жизни – чувствовать ее вкус, цвет, ритм и запах, уметь наслаждаться и радоваться каждому дню. Замечательно иметь хобби и заниматься тем делом, которое любишь.</p>
+        <p>Каждый раз, готовя новое блюдо, я словно нанизываю бусинки – аромат к аромату, цвет к цвету… Пока не получится изумительное украшение. Украшение стола, украшение семейного вечера. </p>
+        <p>На моей странице вы ознакомитесь с рецептами, новыми идеями, фотографиями.
+            Я буду очень рада, если кому-нибудь это пригодится. </p>
+        <p>Точно знаю, что любовь к кулинарии,  интерес ко всему новому и неиссякаемое вдохновение дадут  замечательные результаты.</p>
     <div id="quotes"></div>
     <div id="author">Татьяна Крачко</div>
     </div>

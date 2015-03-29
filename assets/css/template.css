@@ -509,7 +509,7 @@ a.text-danger:hover {
 }
 #rght_block{
     position: absolute;
-    top: 26px;
+    top: 25px;
     right: 48px;
     width: 131px;
     height: 17px;
@@ -541,7 +541,7 @@ a.text-danger:hover {
     border-radius: 4px;
     font-size: 12px;
     background: #fff url("/assets/images/site/tmp/ic_lang_dropdown.png")no-repeat right 7px;
-    margin: 2px 0;
+    margin: 0px 0px;
     transition: 0.5s;
 }
 #lang span{
@@ -628,7 +628,7 @@ a.text-danger:hover {
 #main_img{
     width: 100%;
     min-width: 1200px;
-    margin: 150px auto 0;
+    margin: 0 auto;
     z-index: 0;
 }
 #bottom_hr{
@@ -746,8 +746,8 @@ a.text-danger:hover {
     top: -16px;
 }
 #about_main{
-    width: 1200px;
-    margin: 0 auto;
+    width: 1000px;
+    margin: 100px auto;
     height: 100%;
 }
 #left_bord{
@@ -771,7 +771,7 @@ a.text-danger:hover {
 #about_text{
     position: relative;
     font-family: loraitalic;
-    width: 575px;
+    width: 400px;
     padding: 5px 29px;
     background: url("/assets/images/site/ic_about_text_start.png") no-repeat;
     float: left;
@@ -780,7 +780,7 @@ a.text-danger:hover {
     position: absolute;
     width: 19px;
     height: 17px;
-    bottom: 0;
+    bottom: 23px;
     right: 0;
     transform: rotate(180deg);
     background: url("/assets/images/site/ic_about_text_start.png") no-repeat;
@@ -790,7 +790,13 @@ a.text-danger:hover {
     text-align: center;
     width: 195px;
     height: 50px;
-    bottom: -70px;
+    bottom: -35px;
     right: 60px;
     font-size: 24px;
+}
+#about_text p{
+    margin-bottom: 25px;
+}
+.content{
+    height: 150px;
 }

@@ -1,4 +1,3 @@
-
 <hr id="bottom_hr">
 <div id="bottom_wrap">
     <div>
