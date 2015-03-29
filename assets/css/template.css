@@ -662,6 +662,7 @@ a.text-danger:hover {
     margin: 24px 12px;
     overflow: hidden;
     position: relative;
+    border-radius: 2px;
     width: 276px;
     height: 450px;
 }
@@ -673,7 +674,7 @@ a.text-danger:hover {
 }
 
 .show-hint .hint{
-    background: rgba(231,231,231,0.8);
+    background: rgba(231,231,231,0.65);
     position: absolute;
     width: 276px;
     height: 200px;
@@ -715,7 +716,7 @@ a.text-danger:hover {
     margin-bottom: 32px;
     margin-top: 16px;
     margin-left: 32px;
-    color: #ffffff;
+    color: #333;
     font-family: loraitalic;
 }
 #trapezoid {

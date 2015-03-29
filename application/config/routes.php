@@ -39,10 +39,16 @@
 */
 
 $route['default_controller'] = 'plug';
-//$route['(ru|en|de)/(:any)'] = 'pages';
-//$route['(ru|en|de)/pages'] = 'pages';
+$route['(ru|en|de)/main'] = 'main';
+$route['(ru|en|de)/about'] = 'about';
+$route['(ru|en|de)/recipes'] = 'recipes';
+$route['(ru|en|de)/ideas'] = 'ideas';
+$route['(ru|en|de)/gallery'] = 'gallery';
+$route['(ru|en|de)/movies'] = 'movies';
+$route['(ru|en|de)/contacts'] = 'contacts';
+
 $route['404_override'] = '';
-//$route['admin/view/recipes/(:any)'] = "admin/view/recipes/$1";
+
 
 
 /* End of file routes.php */
