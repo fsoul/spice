@@ -793,11 +793,11 @@ a.text-danger:hover {
 #author{
     position: absolute;
     text-align: center;
-    width: 195px;
+    width: 262px;
     height: 50px;
     bottom: -35px;
     right: 60px;
-    font-size: 24px;
+    font-size: 24pt;
 }
 #about_text p{
     margin-bottom: 25px;
