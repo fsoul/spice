@@ -892,8 +892,11 @@ a.text-danger:hover {
     bottom: 33px;
     list-style: none;
 }
-.rec_detail{
+.rec_detail, .rec_detail:hover{
     text-decoration: none;
+}
+.rec_detail p:hover{
+    opacity: 0.8;
 }
 .cat_items{
     font-family: lorabold_italic;

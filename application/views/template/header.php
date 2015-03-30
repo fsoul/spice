@@ -8,10 +8,10 @@
     <title><?= $title ?></title>
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/spiceandpassion.ico'); ?>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/assets/images/spiceandpassion.ico" type="image/x-icon"/>
 
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/template.css') ?>" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/template.css" rel="stylesheet">
 </head>
 <body>
