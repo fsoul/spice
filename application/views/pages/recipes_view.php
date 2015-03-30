@@ -2,7 +2,7 @@
     <div id="bar">
         <div id="sort">Все</div>
         <div id="bordik"><div></div></div>
-        <div id="rec_search">Поиск</div>
+        <div id="rec_search"><input placeholder="Поиск" type="text"></div>
     </div>
 
     <div id="rec_wrap">

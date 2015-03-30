@@ -844,13 +844,20 @@ a.text-danger:hover {
 #rec_search{
     height: 34px;
     line-height: 22px;
-    width: 100px;
+    width: 300px;
     text-align: center;
     padding-left: 22px;
     background: url("/assets/images/site/search.png") no-repeat 24px 6px;
     font-family: loraregular;
     color: #5c5c5c;
 }
+#rec_search input{
+    border: none;
+    margin-left: 22px;
+    outline: none;
+    width: 300px;
+}
+
 .recipe_item{
     padding: 16px 0;
 }
