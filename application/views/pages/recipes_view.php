@@ -6,11 +6,12 @@
     </div>
 
     <div id="rec_wrap">
+        <? foreach($recipes as $item): ?>
         <div class="recipe_item">
-            <img class="recipe_item_img" src="<?= base_url('assets/images/site/tmp/3.jpg');?>">
+            <img class="recipe_item_img" src="<?= thumb($item['finish_photo']); ?>">
             <div class="recipe_item_text">
-                <a class="rec_detail" href="#"><p class="recipe_item_title">Ягодный десерт</p></a>
-                <p class="recipe_item_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac risus ac eros tincidunt mattis ac velificient massa. Vestibulum augue turpis, dignissim tincidunt rutrum sed, lacinia ac mi.</p>
+                <a class="rec_detail" href="<?= '/recipe/'.$item['id']; ?>"><p class="recipe_item_title"><?= $item['title_ru']?></p></a>
+                <p class="recipe_item_desc"><?= $item['description_ru']?></p>
                 <div class="rec_item_cat_wrap">
                     <div class="recipe_item_cat">
                         <span class="cat_items">Десерты,</span>
@@ -23,23 +24,7 @@
             </div>
             <div style="clear: both;"></div>
         </div>
-        <div class="recipe_item">
-            <img class="recipe_item_img" src="<?= base_url('assets/images/site/tmp/2.jpg');?>">
-            <div class="recipe_item_text">
-                <a class="rec_detail" href="#"><p class="recipe_item_title">Яблочный пирог</p></a>
-                <p class="recipe_item_desc">Lorem ipsum dolor sit amet, consectetur adipiscing espant. Sed ac risus ac eros tincidunt mattis ac vespanficient massa. Vestibulum augue turpis, dignissim tincidunt rutrum sed, lacinia ac mi.</p>
-                <div class="rec_item_cat_wrap">
-                    <div class="recipe_item_cat">
-                        <span class="cat_items">Десерты,</span>
-                        <span class="cat_items">Десерты,</span>
-                        <span class="cat_items">Десерты,</span>
-                        <span class="cat_items">Десерты,</span>
-                        <span class="cat_items">Десерты,</span>
-                    </div>
-                </div>
-            </div>
-            <div style="clear: both;"></div>
-        </div>
+        <? endforeach; ?>
     </div
 
 </div>

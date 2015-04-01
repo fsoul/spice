@@ -1,4 +1,4 @@
-<img src="<?= base_url('assets/images/site/tmp/1.jpg')?>" id="main_img">
+<img src="<?= base_url('assets/images/site/img_main.jpg')?>" id="main_img">
 <div id="trapezoid"></div>
 <div id="main_view">
     <div>
