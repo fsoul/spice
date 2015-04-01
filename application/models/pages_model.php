@@ -2,11 +2,20 @@
 
 class Pages_model extends CI_Model
 {
-    function get_pages()
+    function get_pages($lang)
     {
         $this->db->where('visible', 1);
-        $query = $this->db->get('pages');
+        $query = $this->db->query('SELECT href_' . $lang . ', name_' . $lang . ', title_' . $lang . ', description_' . $lang . ' FROM pages');
         return $query->result_array();
+    }
+
+    function current_page($page, $lang)
+    {
+        $query = $this->db->query(
+            'SELECT href_' . $lang . ', name_' . $lang . ', title_' . $lang . ', description_' . $lang
+            . ' FROM pages WHERE name_en="' . $page . '" AND visible=1'
+        );
+        return $query->row_array();
     }
 
     function get_recipes()
@@ -27,4 +36,17 @@ class Pages_model extends CI_Model
         $query = $this->db->get($title);
         return $query->result_array();
     }
+
+    function get_($query_str){
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
+    /*function get_steps($id, $lang)
+    {
+        $query = $this->db->query(
+            'SELECT photo, recipe_steps.description_' . $lang . ', ord FROM recipe_steps
+            WHERE recipe_id="' . $id . '"'
+        );
+        return $query->result_array();
+    }*/
 }

@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" context="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title><?= $meta['title_'.$lang]; ?></title>
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="/assets/images/spiceandpassion.ico" type="image/x-icon"/>
+
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/template.css" rel="stylesheet">
+</head>
+<body>
 <div id="main">
     <div id="rght_block">
         <div id="music">
