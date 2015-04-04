@@ -39,10 +39,13 @@
         <div id="lang">
             <ul class="lang_ul">
                 <?
+                    if(!empty($curr_id)){
+                        $curr_id = '/'.$curr_id;
+                    }
                     $lang_arr = array(
-                        'ru'=>'<a href="/ru/'.$current_controller.'/'.$curr_id.'">РУССКИЙ</a>',
-                        'en'=>'<a href="/en/'.$current_controller.'/'.$curr_id.'">ENGLISH</a>',
-                        'de'=>'<a href="/de/'.$current_controller.'/'.$curr_id.'">DEUTCH</a>'
+                        'ru'=>'<a href="/ru/'.$current_controller.$curr_id.'">РУССКИЙ</a>',
+                        'en'=>'<a href="/en/'.$current_controller.$curr_id.'">ENGLISH</a>',
+                        'de'=>'<a href="/de/'.$current_controller.$curr_id.'">DEUTCH</a>'
                     );
                 ?>
                 <li class="lang_li">

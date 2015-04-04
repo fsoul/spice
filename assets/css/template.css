@@ -456,6 +456,10 @@ a.text-danger:hover {
     font-family: sans-serif;
     background-color: transparent;
     outline: none;
+    opacity: 0;
+}
+.show-xreset{
+    opacity: 1;
 }
 .fix_menu{
     top: 69px !important;
@@ -757,6 +761,7 @@ a.text-danger:hover {
 }
 .hint p:first-child{
     word-wrap: break-word;
+    color: #3c3c3c;
     letter-spacing: 1px;
     font-size: 24px;
     line-height: 28px;
@@ -912,6 +917,8 @@ a.text-danger:hover {
     text-transform: uppercase;
 }
 .recipe_item{
+    width: 1102px;
+    margin: 0 auto;
     padding: 16px 0;
 }
 .recipe_item_img{
@@ -926,6 +933,8 @@ a.text-danger:hover {
     margin-top: 40px;
 }
 .recipe_item_title{
+    word-wrap: break-word;
+    color: #3c3c3c;
     text-transform: uppercase;
     font-family: loraregular;
     font-size: 24px;
@@ -955,11 +964,6 @@ a.text-danger:hover {
     position: absolute;
     bottom: 33px;
     list-style: none;
-}
-.rec_detail, .rec_detail:hover{
-    color: #3c3c3c;
-    text-decoration: none;
-    word-wrap: break-word;
 }
 .cat_items{
     font-family: lorabold_italic;

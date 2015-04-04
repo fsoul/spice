@@ -217,13 +217,14 @@ $(document).ready(function () {
      * search_inp
      */
     $('.srch_inp').on('focus', function(){
-        console.log('dsd');
         $(this).on('keydown click', function(){
             $(this).addClass('srch_inp_focus');
+            $(this).siblings('.xreset').addClass('show-xreset');
         });
     });
     $('.srch_inp').on('blur', function(){
         $(this).removeClass('srch_inp_focus');
+        $(this).siblings('.xreset').removeClass('show-xreset');
     });
 
     /**

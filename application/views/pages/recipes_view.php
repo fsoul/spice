@@ -12,7 +12,7 @@
         <div id="bordik"><div></div></div>
         <div id="rec_search">
             <form>
-                <input class="srch_inp" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
+                <input class="srch_inp" maxlength="60" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
                 <input class="xreset" type="reset" value="X"/>
             </form>
         </div>
@@ -20,10 +20,12 @@
     <div id="rec_wrap">
         <? foreach($recipes as $item): ?>
         <div class="recipe_item">
-            <img class="recipe_item_img" src="<?= thumb($item['finish_photo']); ?>">
+            <a href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>">
+                <img class="recipe_item_img" src="<?= thumb($item['finish_photo']); ?>">
+            </a>
             <div class="recipe_item_text">
                 <p class="recipe_item_title">
-                    <a class="rec_detail" href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>"><?= $item['title_'.$lang];?></a>
+                    <?= $item['title_'.$lang];?>
                 </p>
                 <p class="recipe_item_desc"><?= $item['description_'.$lang];?></p>
                 <div class="rec_item_cat_wrap">
