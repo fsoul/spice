@@ -37,9 +37,26 @@
             </audio>
         </div>
         <div id="lang">
-            <span>РУССКИЙ</span>
-            <span>ENGLISH</span>
-            <span>DEUTCH</span>
+            <ul class="lang_ul">
+                <?
+                    $lang_arr = array(
+                        'ru'=>'<a href="/ru/'.$current_controller.'">РУССКИЙ</a>',
+                        'en'=>'<a href="/en/'.$current_controller.'">ENGLISH</a>',
+                        'de'=>'<a href="/de/'.$current_controller.'">DEUTCH</a>'
+                    );
+                ?>
+                <li class="lang_li">
+                    <?= $lang_arr[$lang]; ?>
+                </li>
+                <? foreach($lang_arr as $k=>$v){
+                    if($k!=$lang){
+                        echo '<li class="lang_li">';
+                        echo $v;
+                        echo '</li>';
+                    }
+                }
+                ?>
+            </ul>
         </div>
     </div>
 </div>

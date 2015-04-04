@@ -127,8 +127,8 @@ $(document).ready(function () {
 
 
     /**
-    *   music and equalizer control
-    */
+     *   music and equalizer control
+     */
 
     var interval = [];
 
@@ -188,21 +188,21 @@ $(document).ready(function () {
     });
 
     /**
-    *  scroll fich
+     *  scroll fich
      */
     scroll();
     var isscroll = false;
     $(window).scroll(scroll);
-    function scroll(){
-        if($('body').scrollTop()>69){
-            if(!isscroll){
+    function scroll() {
+        if ($('body').scrollTop() > 69) {
+            if (!isscroll) {
                 $('#wrapper').addClass('hide_el').removeClass('show_el');
-          //      setTimeout(function(){
-                    $('#menu_wrap').addClass('fix_menu');
-            //    }, 800);
+                //      setTimeout(function(){
+                $('#menu_wrap').addClass('fix_menu');
+                //    }, 800);
                 isscroll = true;
             }
-        }else{
+        } else {
             isscroll = false;
             $('#wrapper').removeClass('hide_el').addClass('show_el');
             $('#menu_wrap').removeClass('fix_menu');
@@ -210,17 +210,12 @@ $(document).ready(function () {
 
         //console.log($('body').scrollTop());
     }
+
     //
 
     /**
      * LANGUAGE
      */
-    $('#lang').click(function(){
-        $(this).css('height', '65px');
-    });
-    $(document).on('mouseover', $('#lang'), function(){
-        $('#lang').css('height', '17px');
-    });
 
     /**
      * dropzone для фоток рецепта
@@ -284,5 +279,5 @@ function handler(file, target) {
 
 //window.addEventListener('popstate', AjaxContent.getContent());
 /*window.addEventListener('popstate', function(e) {
-   //console.log(history.back());
-});*/
+ //console.log(history.back());
+ });*/

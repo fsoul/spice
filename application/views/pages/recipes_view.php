@@ -9,7 +9,9 @@
         <div class="recipe_item">
             <img class="recipe_item_img" src="<?= thumb($item['finish_photo']); ?>">
             <div class="recipe_item_text">
-                <a class="rec_detail" href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>"><p class="recipe_item_title"><?= $item['title_'.$lang];?></p></a>
+                <p class="recipe_item_title">
+                    <a class="rec_detail" href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>"><?= $item['title_'.$lang];?></a>
+                </p>
                 <p class="recipe_item_desc"><?= $item['description_'.$lang];?></p>
                 <div class="rec_item_cat_wrap">
                     <div class="recipe_item_cat">

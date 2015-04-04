@@ -32,12 +32,12 @@ body {
     width: 124px;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background: #5F9AC2;
+    background: #7399bf;
     color: #ffffff !important;
 }
 
 .navbar-default .navbar-brand {
-    color: #00A3C8;
+    color: #7399bf;
     font-size: 14px;
     text-decoration: underline;
 }
@@ -81,7 +81,7 @@ body {
 .navbar a {
     text-decoration: none;
 }
-
+/*7399bf*/
 a {
     color: #00A3C8;
     text-decoration: underline;
@@ -411,8 +411,8 @@ a.text-danger:hover {
     max-width: 950px;
 }
 .pagination li.active a{
-    background-color: #85C4DB;
-    border-color: #85C4DB;
+    background-color: #7399bf;
+    border-color: #7399bf;
 }
 .pagination li.active a:hover{
     opacity: 0.7;
@@ -512,8 +512,8 @@ a.text-danger:hover {
     position: absolute;
     top: 25px;
     right: 48px;
-    width: 131px;
-    height: 17px;
+    width: 134px;
+    height: 18px;
 }
 #menu_main{
     background-image: url('/assets/images/site/img_main.jpg');
@@ -531,29 +531,65 @@ a.text-danger:hover {
     width: 20px;
 }
 #lang{
-    letter-spacing: 1.5px;
-    height: 17px;
+    position: absolute;
+    top: -4px;
+    right: 0;
+    letter-spacing: 1px;
+    height: 29px;
+    width: 91px;
     overflow: hidden;
-    width: 85px;
     cursor: pointer;
-    color: #5F9AC2;
+    color: #7399bf;
     float: right;
-    padding: 0px 5px;
-    border-radius: 4px;
     font-size: 12px;
-    background: #fff url("/assets/images/site/ic_lang_dropdown.png")no-repeat right 7px;
-    margin: 0px 0px;
-    transition: 0.5s;
+    background: #fff url("/assets/images/site/ic_lang_dropdown.png")no-repeat 80px 13px;
+    border: 1px solid #ffffff;
 }
-#lang span{
-    width: 72px;
-    padding: 2px;
-    display: block;
+#lang:hover{
+    background: #ffffff;
+    overflow: visible;
+    transition: 1s;
 }
-#lang span:hover{
+.lang_ul{
+    list-style-type: none;
+    width: 92px;
+    height: 87px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ffffff;
+}
+.lang_ul:hover{
+    background: #ffffff;
+    border: 1px solid #7399bf;
+}
+.lang_li{
+    position: relative;
+    height: 29px;
+    width: 90px;
+    line-height: 29px;
+
+    float: left;
+}
+.lang_li:hover{
+    height: 27px;
+    line-height: 27px;
     color: #fff;
-    background-color: #5F9AC2;
-    border-radius: 2px;
+    background-color: #7399bf;
+    border: 1px solid #7399bf;
+}
+.lang_li>a{
+    text-decoration: none;
+    color: #7399bf;
+    position: absolute;
+    top: 0;
+    left: -2px;
+    padding-left: 8px;
+    width: 94px;
+    height: 100%;
+}
+.lang_li>a:hover{
+    text-decoration: none;
+    color: #ffffff;
 }
 #eq {
     width: 20px;
@@ -565,7 +601,7 @@ a.text-danger:hover {
     transition: height linear 0.15s
 }
 .blue {
-    background: #92B6D2;
+    background: #7399bf;
     height: 100%;
 }
 .white {
@@ -642,7 +678,7 @@ a.text-danger:hover {
     margin: 50px 0;
 }
 #bottom_wrap div{
-    color: #92B6D2;
+    color: #7399bf;
     width: 604px;
     margin: 0 auto;
     height: 50px;
@@ -708,6 +744,7 @@ a.text-danger:hover {
     left:0;*/
 }
 .hint p:first-child{
+    word-wrap: break-word;
     letter-spacing: 1px;
     font-size: 24px;
     line-height: 28px;
@@ -715,7 +752,7 @@ a.text-danger:hover {
     margin-top: 36px;
     margin-right: 20px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #5F9AC2;
+    border-bottom: 1px solid #7399bf;
 }
 .hint p:first-child{
    /* padding: 0 5px;
@@ -870,17 +907,21 @@ a.text-danger:hover {
     width: 302px;
     padding: 0 37px;
     float:left;
+    margin-top: 40px;
 }
 .recipe_item_title{
     text-transform: uppercase;
     font-family: loraregular;
-    color: #3c3c3c;
     font-size: 30px;
     padding-left: 9px;
     border-bottom: 1px solid #7399bf;
     padding-bottom: 36px;
 }
+.recipe_item_title:hover{
+    opacity: 0.8;
+}
 .recipe_item_desc{
+    margin-top: 20px;
     color: #000000;
     font-family: loraregular;
     font-size: 14px;
@@ -891,8 +932,9 @@ a.text-danger:hover {
 }
 .rec_item_cat_wrap{
     width: 228px;
-    height: 160px;
-    position:relative;
+    height: 257px;
+    position: absolute;
+    top: 157px;
 }
 .recipe_item_cat{
     position: absolute;
@@ -900,10 +942,9 @@ a.text-danger:hover {
     list-style: none;
 }
 .rec_detail, .rec_detail:hover{
+    color: #3c3c3c;
     text-decoration: none;
-}
-.rec_detail p:hover{
-    opacity: 0.8;
+    word-wrap: break-word;
 }
 .cat_items{
     font-family: lorabold_italic;
