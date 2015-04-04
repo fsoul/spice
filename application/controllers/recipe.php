@@ -29,6 +29,7 @@ class Recipe extends CI_Controller
 
         $data['lang'] = $this->uri->segment(1);
         $data['current_controller'] = $this->uri->segment(2);
+        $data['current_action'] = $this->uri->segment(3);
         $this->load->model('pages_model');
         $data['meta'] = $this->pages_model->current_page('recipes', $data['lang']);
         $data['pages'] = $this->pages_model->get_pages($data['lang']);
