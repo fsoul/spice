@@ -4,8 +4,9 @@ class About extends CI_Controller
 {
     function index()
     {
-        if(!isset($_COOKIE['lang']))
-            init_lang();
+        if($this->uri->segment(1) == 'about'){
+            redirect(base_url('en/about'));
+        }
 
         set_lang($this->uri->segment(1));
 

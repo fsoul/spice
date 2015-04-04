@@ -4,7 +4,7 @@ class Gallery extends CI_Controller
 {
     function index()
     {
-        $offset = null;
+        /*$offset = null;
         $limit = null;
         $this->load->model('pages_model');
         $data['title'] = 'Галерея';
@@ -15,6 +15,8 @@ class Gallery extends CI_Controller
         $data['pages'] = $this->pages_model->get_pages();
         $data['lang'] = $this->uri->segment(1);
 
-        $this->template->page_view('gallery', $data);
+        $this->template->page_view('gallery', $data);*/
+
+        $this->load->view('pages/gallery_view');
     }
 }

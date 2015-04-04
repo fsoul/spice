@@ -122,7 +122,7 @@ if ( ! function_exists('movie_release'))
     }
 }
 
-if ( ! function_exists('bold_first_word'))
+/*if ( ! function_exists('bold_first_word'))
 {
     function bold_first_word($str)
     {
@@ -133,17 +133,7 @@ if ( ! function_exists('bold_first_word'))
 
         return $bold . ' ' . $str;
     }
-}
-
-
-if ( ! function_exists('init_lang'))
-{
-    function init_lang()
-    {
-        setcookie("lang", 'de', time()+14515200, '/');
-    }
-}
-
+}*/
 
 if ( ! function_exists('set_lang'))
 {

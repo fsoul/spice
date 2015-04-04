@@ -7,8 +7,9 @@ class Main extends CI_Controller
         $offset = null;
         $limit = null;
 
-        if(!isset($_COOKIE['lang']))
-            init_lang();
+        if($this->uri->segment(1) == 'main'){
+            redirect(base_url('en/main'));
+        }
 
         set_lang($this->uri->segment(1));
         $data['lang'] = $this->uri->segment(1);

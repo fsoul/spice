@@ -4,7 +4,7 @@ class Recipe extends CI_Controller
 {
     function index()
     {
-        $offset = null;
+        /*$offset = null;
         $limit = null;
         $data['lang'] = $this->uri->segment(1);
         $this->load->model('pages_model');
@@ -22,7 +22,17 @@ class Recipe extends CI_Controller
         }
         $data['no_cat']['ru'] = 'Без категории';
         $data['no_cat']['en'] = 'Unspecified';
-        $data['no_cat']['de'] = 'Ohne Kategorie';
-        $this->template->page_view('recipes', $data);
+        $data['no_cat']['de'] = 'Ohne Kategorie';*/
+        if($this->uri->segment(1) == 'recipe'){
+            redirect(base_url('en/recipe'));
+        }
+
+        $data['lang'] = $this->uri->segment(1);
+        $data['current_controller'] = $this->uri->segment(2);
+        $this->load->model('pages_model');
+        $data['meta'] = $this->pages_model->current_page('recipes', $data['lang']);
+        $data['pages'] = $this->pages_model->get_pages($data['lang']);
+        $this->template->page_view('recipe', $data);
+
     }
 }

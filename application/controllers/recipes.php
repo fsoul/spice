@@ -6,8 +6,9 @@ class Recipes extends CI_Controller
     {
         $offset = null;
         $limit = null;
-        if(!isset($_COOKIE['lang']))
-            init_lang();
+        if($this->uri->segment(1) == 'recipes'){
+            redirect(base_url('en/recipes'));
+        }
 
         set_lang($this->uri->segment(1));
 

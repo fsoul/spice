@@ -4,7 +4,7 @@ class Contacts extends CI_Controller
 {
     function index()
     {
-        $offset = null;
+        /*$offset = null;
         $limit = null;
         $this->load->model('pages_model');
         $data['title'] = 'Контакты';
@@ -13,6 +13,7 @@ class Contacts extends CI_Controller
         $data['pages'] = $this->pages_model->get_pages();
         $data['lang'] = $this->uri->segment(1);
 
-        $this->template->page_view('contacts', $data);
+        $this->template->page_view('contacts', $data);*/
+        $this->load->view('pages/contacts_view');
     }
 }
