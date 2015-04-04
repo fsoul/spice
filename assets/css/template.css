@@ -912,8 +912,8 @@ a.text-danger:hover {
 .recipe_item_title{
     text-transform: uppercase;
     font-family: loraregular;
-    font-size: 30px;
-    padding-left: 9px;
+    font-size: 24px;
+    letter-spacing: 1px;
     border-bottom: 1px solid #7399bf;
     padding-bottom: 36px;
 }
@@ -923,12 +923,11 @@ a.text-danger:hover {
 .recipe_item_desc{
     margin-top: 20px;
     color: #000000;
-    font-family: loraregular;
-    font-size: 14px;
+    font-family: loraitalic;
+    font-size: 13px;
     text-align: justify;
     text-indent: 10px;
-    line-height: 1.5;
-    letter-spacing: 1px;
+    line-height: 2;
 }
 .rec_item_cat_wrap{
     width: 228px;

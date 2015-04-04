@@ -20,7 +20,8 @@ class About extends CI_Controller
             'Точно знаю, что любовь к кулинарии, интерес ко всему новому и неиссякаемое вдохновение дадут замечательные результаты.'
         );
         $data['text']['en'] = array(
-            'It’s essential in life to feel its taste, colour, rhythm and smell; to be able to enjoy every moment of it.  It is amazing when you do what you love! Every time cooking a new dish for me is like making new neckless, joining gems together - up until you get beautiful jewellery.  Decorating table, decorating family evening…',
+            'It’s essential in life to feel its taste, colour, rhythm and smell; to be able to enjoy every moment of it.  It is amazing when you do what you love!',
+            'Every time cooking a new dish for me is like making new neckless, joining gems together - up until you get beautiful jewellery.  Decorating table, decorating family evening…',
             'On my webpage you will see new recipes, I’ll share new ideas, new photographs.  I will be happy if you find them useful.  And I am sure that love for cooking, interest in novelty and never ending inspiration will give brilliant results.'
         );
         $data['text']['de'] = array(
