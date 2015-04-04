@@ -46,7 +46,7 @@ $route['(ru|en|de)/ideas'] = 'ideas';
 $route['(ru|en|de)/gallery'] = 'gallery';
 $route['(ru|en|de)/movies'] = 'movies';
 $route['(ru|en|de)/contacts'] = 'contacts';
-$route['(ru|en|de)/recipe'] = 'recipe';
+$route['(ru|en|de)/recipe/(:num)'] = 'recipe';
 
 $route['404_override'] = '';
 
