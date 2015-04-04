@@ -461,6 +461,9 @@ a.text-danger:hover {
 .show-xreset{
     opacity: 1;
 }
+.highlights{
+    border-bottom: 1px solid #7399bf;
+}
 .fix_menu{
     top: 69px !important;
     transition: top 0.5s !important;

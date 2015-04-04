@@ -220,11 +220,13 @@ $(document).ready(function () {
         $(this).on('keydown click', function(){
             $(this).addClass('srch_inp_focus');
             $(this).siblings('.xreset').addClass('show-xreset');
+            $(this).parents().parents().addClass('highlights');
         });
     });
     $('.srch_inp').on('blur', function(){
         $(this).removeClass('srch_inp_focus');
         $(this).siblings('.xreset').removeClass('show-xreset');
+        $(this).parents().parents().removeClass('highlights');
     });
 
     /**
