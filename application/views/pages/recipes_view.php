@@ -1,8 +1,21 @@
+<?
+    $data['placeholder']['ru'] = 'Поиск';
+    $data['placeholder']['en'] = 'Search';
+    $data['placeholder']['de'] = 'Suche';
+    $data['sort']['ru'] = 'Все';
+    $data['sort']['en'] = 'All';
+    $data['sort']['de'] = 'Aller';
+?>
 <div id="recipes_main">
     <div id="bar">
-        <div id="sort">Все</div>
+        <div id="sort"><?= $data['sort'][$lang]; ?></div>
         <div id="bordik"><div></div></div>
-        <div id="rec_search"><input placeholder="Поиск" type="text"></div>
+        <div id="rec_search">
+            <form>
+                <input class="srch_inp" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
+                <input class="xreset" type="reset" value="X"/>
+            </form>
+        </div>
     </div>
     <div id="rec_wrap">
         <? foreach($recipes as $item): ?>

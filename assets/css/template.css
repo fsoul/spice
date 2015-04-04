@@ -445,6 +445,18 @@ a.text-danger:hover {
     background-color: transparent;
     outline: none;
 }
+.xreset{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    border: none;
+    text-decoration: none;
+    color: #FF4E4E;
+    font-family: sans-serif;
+    background-color: transparent;
+    outline: none;
+}
 .fix_menu{
     top: 69px !important;
     transition: top 0.5s !important;
@@ -879,22 +891,26 @@ a.text-danger:hover {
     margin-top: 22px;
 }
 #rec_search{
+    position: relative;
     height: 34px;
     line-height: 22px;
-    width: 300px;
+    width: 1107px;
     text-align: center;
     padding-left: 22px;
     background: url("/assets/images/site/search.png") no-repeat 24px 6px;
     font-family: loraregular;
     color: #5c5c5c;
 }
-#rec_search input{
+#rec_search .srch_inp{
     border: none;
     margin-left: 22px;
     outline: none;
-    width: 300px;
+    width: 1063px;
 }
-
+.srch_inp_focus{
+    font-size: 24px;
+    text-transform: uppercase;
+}
 .recipe_item{
     padding: 16px 0;
 }

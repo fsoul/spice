@@ -40,9 +40,9 @@
             <ul class="lang_ul">
                 <?
                     $lang_arr = array(
-                        'ru'=>'<a href="/ru/'.$current_controller.'/'.$current_action.'">РУССКИЙ</a>',
-                        'en'=>'<a href="/en/'.$current_controller.'/'.$current_action.'">ENGLISH</a>',
-                        'de'=>'<a href="/de/'.$current_controller.'/'.$current_action.'">DEUTCH</a>'
+                        'ru'=>'<a href="/ru/'.$current_controller.'/'.$curr_id.'">РУССКИЙ</a>',
+                        'en'=>'<a href="/en/'.$current_controller.'/'.$curr_id.'">ENGLISH</a>',
+                        'de'=>'<a href="/de/'.$current_controller.'/'.$curr_id.'">DEUTCH</a>'
                     );
                 ?>
                 <li class="lang_li">

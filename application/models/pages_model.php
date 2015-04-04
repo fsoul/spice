@@ -41,6 +41,41 @@ class Pages_model extends CI_Model
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
+
+    function get_recipe($id){
+        $query_str = 'SELECT * FROM recipes
+                  WHERE recipes.id='.$id.'
+        ';
+        $query = $this->db->query($query_str);
+        return $query->row_array();
+    }
+
+    function get_recipe_steps($id){
+        $query_str = 'SELECT * FROM recipe_steps
+                      WHERE  recipe_steps.recipe_id='.$id;
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
+
+    function get_recipe_categories($id){
+        $query_str = 'SELECT categories . *
+                  FROM recipes, categories, recipe_categories
+                  WHERE categories.id = recipe_categories.category_id
+                  AND recipe_categories.recipe_id = recipes.id
+                  AND recipes.id ='.$id;
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
+
+    function get_random_recipes($id){
+        $query_str = 'SELECT *
+                  FROM recipes
+                  WHERE id
+                  NOT LIKE '.$id.'
+                  LIMIT 4';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
     /*function get_steps($id, $lang)
     {
         $query = $this->db->query(

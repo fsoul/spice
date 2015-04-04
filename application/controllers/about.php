@@ -12,7 +12,7 @@ class About extends CI_Controller
 
         $data['lang'] = $this->uri->segment(1);
         $data['current_controller'] = $this->uri->segment(2);
-        $data['current_action'] = $this->uri->segment(3);
+        $data['curr_id'] = $this->uri->segment(3);
         $data['text']['ru'] = array(
             'Главное в жизни – чувствовать ее вкус, цвет, ритм и запах, уметь наслаждаться и радоваться каждому дню. Замечательно иметь хобби и заниматься тем делом, которое любишь.',
             'Каждый раз, готовя новое блюдо, я словно нанизываю бусинки – аромат к аромату, цвет к цвету… Пока не получится изумительное украшение. Украшение стола, украшение семейного вечера.',
@@ -31,8 +31,8 @@ class About extends CI_Controller
             'Ich weiß ganz genau, dass die Liebe zur Kochkunst, das Interesse zu allem Neuen und die unerschöpfliche Eingebung die besten kulinarischen Ergebnisse hervorbringen.'
         );
         $data['author']['ru'] = 'Татьяна Крачко';
-        $data['author']['en'] = 'Tatiana Krachko';
-        $data['author']['de'] = 'Tatiana Krachko';
+        $data['author']['en'] = 'Tatsiana Krachko';
+        $data['author']['de'] = 'Tatsiana Krachko';
 
         $offset = null;
         $limit = null;

@@ -214,8 +214,17 @@ $(document).ready(function () {
     //
 
     /**
-     * LANGUAGE
+     * search_inp
      */
+    $('.srch_inp').on('focus', function(){
+        console.log('dsd');
+        $(this).on('keydown click', function(){
+            $(this).addClass('srch_inp_focus');
+        });
+    });
+    $('.srch_inp').on('blur', function(){
+        $(this).removeClass('srch_inp_focus');
+    });
 
     /**
      * dropzone для фоток рецепта

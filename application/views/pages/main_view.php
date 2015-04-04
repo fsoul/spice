@@ -5,7 +5,7 @@
         <div id="page_wrap">
             <? foreach($recipes as $item): ?>
             <div class="show-hint">
-                <img src="<?= thumb($item['finish_photo']); ?>"/>
+                <a href="/<?= $lang.'/recipe/'.$item['id']; ?>"><img src="<?= thumb($item['finish_photo']); ?>"/>
                 <div class="hint">
                     <p class="text-uppercase"><?= $item['title_'.$lang]; ?></p>
 
