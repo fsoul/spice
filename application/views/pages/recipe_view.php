@@ -29,7 +29,8 @@
         <div class="ingr">
             <ul class="ingr_ul">
                 <?
-                    $text = str_replace("\r","|",$recipe['ingridients_'.$lang]);
+                    $bold_text = bold_digit($recipe['ingridients_'.$lang]);
+                    $text = str_replace("\r", "|", $bold_text);
                     $ingr = explode('|', $text);
                 ?>
                 <? foreach($ingr as $item): ?>

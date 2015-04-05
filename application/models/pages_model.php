@@ -18,6 +18,12 @@ class Pages_model extends CI_Model
         return $query->row_array();
     }
 
+    function get_all_categories($lang){
+        $query_str = 'SELECT id, title_'.$lang.' FROM categories';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
+
     function get_recipes()
     {
         $this->db->where('delete', 0);

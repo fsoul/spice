@@ -122,18 +122,15 @@ if ( ! function_exists('movie_release'))
     }
 }
 
-/*if ( ! function_exists('bold_first_word'))
+if ( ! function_exists('bold_digit'))
 {
-    function bold_first_word($str)
+    function bold_digit($str)
     {
-        $arr = explode(' ', $str);
-        $bold = '<b>' . $arr[0] . '</b>';
-        array_shift($arr);
-        $str = implode(' ', $arr);
-
-        return $bold . ' ' . $str;
+        $pattern = '/(\d+)/i';
+        $replacement = '<b>$1</b>';
+        return preg_replace($pattern, $replacement, $str);
     }
-}*/
+}
 
 if ( ! function_exists('set_lang'))
 {

@@ -8,12 +8,25 @@
 ?>
 <div id="recipes_main">
     <div id="bar">
-        <div id="sort"><?= $data['sort'][$lang]; ?></div>
+        <div class="sort">
+            <?= $data['sort'][$lang]; ?>
+            <div class="fade_cat">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <? foreach($categories as $cat): ?>
+                            <div class="col-lg-2 sort-table">
+                                <a class="cat_sort" href="#"><?= $cat['title_'.$lang]?></a>
+                            </div>
+                        <? endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="bordik"><div></div></div>
         <div id="rec_search">
             <form>
                 <input class="srch_inp" maxlength="60" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
-                <input class="xreset" type="reset" value="X"/>
+                <input class="xreset" type="reset" value=""/>
             </form>
         </div>
     </div>
@@ -46,5 +59,4 @@
         </div>
         <? endforeach; ?>
     </div
-
 </div>

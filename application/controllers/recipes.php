@@ -18,6 +18,7 @@ class Recipes extends CI_Controller
         $this->load->model('pages_model');
         $data['meta'] = $this->pages_model->current_page('recipes', $data['lang']);
         $data['recipes'] = $this->pages_model->get_items('recipes', $offset, $limit);
+        $data['categories'] = $this->pages_model->get_all_categories($data['lang']);
         if (empty($data['recipes'])) {
             $data['recipes']['empty'] = 'Рецепты отсутствуют';
         }

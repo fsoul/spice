@@ -217,16 +217,28 @@ $(document).ready(function () {
      * search_inp
      */
     $('.srch_inp').on('focus', function(){
-        $(this).on('keydown click', function(){
-            $(this).addClass('srch_inp_focus');
-            $(this).siblings('.xreset').addClass('show-xreset');
-            $(this).parents().parents().addClass('highlights');
-        });
+        $(this).addClass('srch_inp_focus');
+        $(this).siblings('.xreset').addClass('show-xreset');
+        $(this).parents().parents().addClass('highlights');
     });
     $('.srch_inp').on('blur', function(){
         $(this).removeClass('srch_inp_focus');
         $(this).siblings('.xreset').removeClass('show-xreset');
         $(this).parents().parents().removeClass('highlights');
+    });
+    var open = false;
+    $('.sort').click(function(){
+        if(open == false){
+            $(this).addClass('sort_open');
+            $(this).siblings('#bordik').addClass('bordik_hide');
+            $(this).children('.fade_cat').addClass('fade_cat_show');
+            open = true;
+        }else{
+            $(this).removeClass('sort_open');
+            $(this).siblings('#bordik').removeClass('bordik_hide');
+            $(this).children('.fade_cat').removeClass('fade_cat_show');
+            open = false;
+        }
     });
 
     /**
