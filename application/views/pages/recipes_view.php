@@ -13,9 +13,9 @@
             <div class="fade_cat">
                 <div class="row">
                     <div class="col-lg-12">
-                        <? foreach($categories as $cat): ?>
+                        <? foreach($categories as $k=>$cat): ?>
                             <div class="col-lg-2 sort-table">
-                                <a class="cat_sort" href="/<?= $lang.'/recipes/'.$cat['id']?>"><?= $cat['title_'.$lang]?></a>
+                                <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $lang.'/recipes/'.$cat['id']?>"><?= $cat['title_'.$lang]?></a>
                             </div>
                         <? endforeach; ?>
                     </div>

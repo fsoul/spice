@@ -216,13 +216,20 @@ $(document).ready(function () {
     /**
      * search_inp
      */
+    $('.xreset').click(function(){
+        $('.srch_inp').removeClass('srch_inp_focus');
+    });
+    var holder = $('.srch_inp').attr('placeholder');
     $('.srch_inp').on('focus', function(){
-        $(this).addClass('srch_inp_focus');
+        $(this).addClass('srch_inp_focus').attr('placeholder', '');
         $(this).siblings('.xreset').addClass('show-xreset');
         $(this).parents().parents().addClass('highlights');
     });
     $('.srch_inp').on('blur', function(){
-        $(this).removeClass('srch_inp_focus');
+        if($(this).val().length==0){
+            $(this).removeClass('srch_inp_focus');
+        }
+        $(this).attr('placeholder', holder);
         $(this).siblings('.xreset').removeClass('show-xreset');
         $(this).parents().parents().removeClass('highlights');
     });
