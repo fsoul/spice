@@ -41,12 +41,14 @@
 $route['default_controller'] = 'plug';
 $route['(ru|en|de)/main'] = 'main';
 $route['(ru|en|de)/about'] = 'about';
+$route['(ru|en|de)/recipes/(:num)'] = 'recipes';
 $route['(ru|en|de)/recipes'] = 'recipes';
 $route['(ru|en|de)/ideas'] = 'ideas';
 $route['(ru|en|de)/gallery'] = 'gallery';
 $route['(ru|en|de)/movies'] = 'movies';
 $route['(ru|en|de)/contacts'] = 'contacts';
 $route['(ru|en|de)/recipe/(:num)'] = 'recipe';
+$route['(ru|en|de)/recipes/search'] = 'recipes/search';
 
 $route['404_override'] = '';
 

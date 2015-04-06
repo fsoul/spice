@@ -898,17 +898,21 @@ a.text-danger:hover {
     height: 58px;
     cursor: pointer;
     background: url("/assets/images/site/dd_g.png") no-repeat 70px 22px;
+    transition: 0.3s;
 }
 .sort_open{
     background: #7399bf url("/assets/images/site/dd_w.png") no-repeat 70px 22px;
     border-bottom: 1px solid #6385a6;
     color: #ffffff;
+    transition: 0.3s;
 }
 .bordik_hide{
     opacity: 0;
 }
 #rec_wrap{
-    margin-top: 22px;
+    position: relative;
+    z-index: 10;
+    padding-top: 22px;
 }
 #rec_search{
     position: relative;
@@ -931,6 +935,12 @@ a.text-danger:hover {
 .srch_inp_focus{
     font-size: 24px;
     text-transform: uppercase;
+}
+.srch_sbmt{
+    position: absolute;
+    top: 0;
+    left: 22px;
+    opacity: 0;
 }
 .recipe_item{
     width: 1102px;
@@ -1152,11 +1162,14 @@ a.text-danger:hover {
     left: 0;
     padding: 45px 29px;
     background: #7399bf;
-    display: none;
     z-index: 9;
+    opacity: 0;
+    transition: 0.3s;
 }
 .fade_cat_show{
-    display: block;
+    opacity: 1;
+    transition: 0.3s;
+    z-index: 12;
 }
 .sort-table{
     height: 50px;

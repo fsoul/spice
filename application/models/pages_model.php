@@ -26,9 +26,11 @@ class Pages_model extends CI_Model
 
     function get_recipes()
     {
-        $this->db->where('delete', 0);
-        $this->db->order_by('id', 'desc');
-        $query = $this->db->get('recipes');
+        $query_str = 'SELECT *
+                      FROM recipes
+                      WHERE "delete" = 0
+                      ORDER BY recipes.id DESC';
+        $query = $this->db->query($query_str);
         return $query->result_array();
     }
 
@@ -37,6 +39,8 @@ class Pages_model extends CI_Model
      */
     function get_items($title, $offset = null, $limit = null)
     {
+        if($limit)
+            $this->db->limit($limit);
         $this->db->where('delete', 0);
         $this->db->order_by('id', 'desc');
         $query = $this->db->get($title);
@@ -82,12 +86,26 @@ class Pages_model extends CI_Model
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
-    /*function get_steps($id, $lang)
-    {
-        $query = $this->db->query(
-            'SELECT photo, recipe_steps.description_' . $lang . ', ord FROM recipe_steps
-            WHERE recipe_id="' . $id . '"'
-        );
+
+
+    function get_ids_items($category_id, $offset = null, $limit = null){
+        $query_str = 'SELECT *
+                      FROM recipe_categories, recipes
+                      WHERE recipe_categories.category_id = '.$category_id.'
+                      AND recipe_categories.recipe_id = recipes.id
+                      ORDER BY recipes.id DESC';
+        $query = $this->db->query($query_str);
         return $query->result_array();
-    }*/
+    }
+
+    function search($like, $lang){
+        $query_str = 'SELECT *
+                      FROM recipes
+                      WHERE title_'.$lang.'
+                      LIKE "%'.$like.'%"
+                      AND "delete" = 0
+                      ORDER BY recipes.id DESC';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
 }

@@ -5,7 +5,7 @@ class Main extends CI_Controller
     function index()
     {
         $offset = null;
-        $limit = null;
+        $limit = 8;
 
         if($this->uri->segment(1) == 'main'){
             redirect(base_url('en/main'));

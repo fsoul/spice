@@ -15,7 +15,7 @@
                     <div class="col-lg-12">
                         <? foreach($categories as $cat): ?>
                             <div class="col-lg-2 sort-table">
-                                <a class="cat_sort" href="#"><?= $cat['title_'.$lang]?></a>
+                                <a class="cat_sort" href="/<?= $lang.'/recipes/'.$cat['id']?>"><?= $cat['title_'.$lang]?></a>
                             </div>
                         <? endforeach; ?>
                     </div>
@@ -24,13 +24,17 @@
         </div>
         <div id="bordik"><div></div></div>
         <div id="rec_search">
-            <form>
-                <input class="srch_inp" maxlength="60" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
+            <form method="post" action="/<?= $lang.'/recipes/search'?>">
+                <input class="srch_sbmt" type="submit" value=""/>
+                <input class="srch_inp" name="like" maxlength="60" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
                 <input class="xreset" type="reset" value=""/>
             </form>
         </div>
     </div>
     <div id="rec_wrap">
+        <? if (isset($recipes['empty'])) : ?>
+            <div style="padding: 10px 0;" class="text-center bg-warning"><?= $recipes['empty'][$lang]; ?></div>
+        <? else : ?>
         <? foreach($recipes as $item): ?>
         <div class="recipe_item">
             <a href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>">
@@ -58,5 +62,6 @@
             <div style="clear: both;"></div>
         </div>
         <? endforeach; ?>
+        <? endif; ?>
     </div
 </div>
