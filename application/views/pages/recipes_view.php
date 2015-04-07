@@ -5,6 +5,7 @@
     $data['sort']['ru'] = 'Все';
     $data['sort']['en'] = 'All';
     $data['sort']['de'] = 'Aller';
+    $undefined = 'undefined';
 ?>
 <div id="recipes_main">
     <div id="bar">
@@ -36,6 +37,13 @@
             <div style="padding: 10px 0;" class="text-center bg-warning"><?= $recipes['empty'][$lang]; ?></div>
         <? else : ?>
         <? foreach($recipes as $item): ?>
+                <?
+                foreach($item as $k=>$v){
+                    if(!is_array($item[$k]) && empty($item[$k])) {
+                        $item[$k] = $undefined;
+                    }
+                }
+                ?>
         <div class="recipe_item">
             <a href="<?= '/'.$lang.'/recipe/'.$item['id']; ?>">
                 <img class="recipe_item_img" src="<?= thumb($item['finish_photo']); ?>">

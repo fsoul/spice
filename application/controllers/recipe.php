@@ -15,8 +15,8 @@ class Recipe extends CI_Controller
         $data['recipe'] = $this->pages_model->get_recipe($data['curr_id']);
         $data['recipe']['steps'] = $this->pages_model->get_recipe_steps($data['curr_id']);
         $data['recipe']['category'] = $this->pages_model->get_recipe_categories($data['curr_id']);
-        //$data['recipe']['similar'] = $this->pages_model->get_similar_recipes($data['curr_id']);
-        $data['recipe']['similar'] = $this->pages_model->get_random_recipes($data['curr_id']);
+        $data['recipe']['similar'] = $this->pages_model->get_similar_recipes($data['curr_id']);
+        //$data['recipe']['similar'] = $this->pages_model->get_random_recipes($data['curr_id']);
         $data['meta'] = $this->pages_model->current_page('recipes', $data['lang']);
         $data['pages'] = $this->pages_model->get_pages($data['lang']);
         $this->template->page_view('recipe', $data);

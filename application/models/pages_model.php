@@ -87,6 +87,27 @@ class Pages_model extends CI_Model
         return $query->result_array();
     }
 
+    function get_similar_recipes($id){
+        $query_str = 'SELECT DISTINCT * FROM (
+                      (SELECT recipes.*
+                      FROM recipes, recipe_categories
+                      WHERE recipes.id = recipe_categories.recipe_id
+                      AND recipes.id <> '.$id.'
+                      AND recipes.delete = 0
+                      AND recipe_categories.category_id
+                      IN (SELECT category_id
+                      FROM recipe_categories
+                      WHERE recipe_id = '.$id.')
+                      GROUP BY recipes.id LIMIT 4)
+                      UNION ALL
+                      (SELECT *
+                      FROM recipes
+                      WHERE id <> '.$id.'
+                      AND recipes.delete = 0)
+                      ) AS matched LIMIT 4';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
 
     function get_ids_items($category_id, $offset = null, $limit = null){
         $query_str = 'SELECT *
