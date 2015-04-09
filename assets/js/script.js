@@ -53,7 +53,7 @@ $(document).ready(function () {
                         });
                         rec_item_cat_wrap.append(recipe_item_cat);
                         recipe_a.append(recipe_a_img);
-                        recipe_a.attr('href', lang+'recipe/'+item.id);
+                        recipe_a.attr('href', '/'+lang+'/recipe/'+item.id);
                         recipe_a_img.attr('src', src);
                         recipe_item_title.html(item['title_'+lang]);
                         recipe_item_desc.html(item['description_'+lang]);
