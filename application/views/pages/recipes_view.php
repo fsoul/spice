@@ -71,5 +71,12 @@
         </div>
         <? endforeach; ?>
         <? endif; ?>
-    </div
+    </div>
+    <div class="loader hide_loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>

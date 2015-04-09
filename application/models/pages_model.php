@@ -24,12 +24,24 @@ class Pages_model extends CI_Model
         return $query->result_array();
     }
 
-    function get_recipes()
+    function get_recipes($offset=null)
     {
         $query_str = 'SELECT *
                       FROM recipes
+                      WHERE `delete` = 0
+                      ORDER BY recipes.id DESC
+                      LIMIT '.$offset.' 2';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
+
+    function get_recipes_ajax($offset, $lang)
+    {
+        $query_str = 'SELECT id, finish_photo, title_'.$lang.', description_'.$lang.', ingridients_'.$lang.'
+                      FROM recipes
                       WHERE "delete" = 0
-                      ORDER BY recipes.id DESC';
+                      ORDER BY recipes.id DESC
+                      LIMIT '.$offset.', 2';
         $query = $this->db->query($query_str);
         return $query->result_array();
     }

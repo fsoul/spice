@@ -6,7 +6,7 @@ class Recipes extends CI_Controller
     {
         $offset = null;
         $limit = null;
-        if($this->uri->segment(1) == 'recipes'){    // если приходит recipes, значит язык
+        if ($this->uri->segment(1) == 'recipes') {    // если приходит recipes, значит язык
             redirect(base_url('en/recipes'));       // не задан, перенаправляем на англ. версию
         }
 
@@ -22,9 +22,9 @@ class Recipes extends CI_Controller
 
         $data['pages'] = $this->pages_model->get_pages($data['lang']); // передаем страницы на нужном языке
 
-        if(empty($data['curr_id'])){        // если id категории пуст
+        if (empty($data['curr_id'])) {        // если id категории пуст
             $data['recipes'] = $this->pages_model->get_recipes(); // достаем все рецепты
-        }else{
+        } else {
             $data['recipes'] = $this->pages_model->get_ids_items($data['curr_id'], $offset, $limit); //  иначе рецепты по curr_id
         }
 
@@ -32,7 +32,7 @@ class Recipes extends CI_Controller
             $data['recipes']['empty']['ru'] = 'Рецепты отсутствуют'; // формируем поле с сообщением
             $data['recipes']['empty']['en'] = 'No recipes';
             $data['recipes']['empty']['de'] = 'Es gibt keine Rezepte';
-        }else{
+        } else {
             foreach ($data['recipes'] as $key => $recipe) {     // если есть рецепты, подтягиваем к ним шаги приготовления
                 $query = "SELECT categories.* FROM recipes, categories, recipe_categories
                      WHERE categories.id = recipe_categories.category_id
@@ -71,14 +71,14 @@ class Recipes extends CI_Controller
 
         if ($like == '') {
             $data['recipes'] = $this->pages_model->get_recipes();
-            redirect(base_url().$data['lang'].'/recipes');
+            redirect(base_url() . $data['lang'] . '/recipes');
         } else {
             $data['recipes'] = $this->pages_model->search($like, $data['lang']);
             if (empty($data['recipes'])) {
                 $data['recipes']['empty']['ru'] = 'Поиск не дал результатов';
                 $data['recipes']['empty']['en'] = 'Empty search result';
                 $data['recipes']['empty']['de'] = 'Die Suche brachte keine Ergebnisse';
-            }else{
+            } else {
                 foreach ($data['recipes'] as $key => $recipe) {     // если есть рецепты, подтягиваем к ним шаги приготовления
                     $query = "SELECT categories.* FROM recipes, categories, recipe_categories
                      WHERE categories.id = recipe_categories.category_id
@@ -88,5 +88,23 @@ class Recipes extends CI_Controller
             }
             $this->template->page_view('recipes', $data);
         }
+    }
+
+    function ajax_load_content()
+    {
+        $lang = $this->uri->segment(1);
+        $startFrom = $_POST['startFrom'];
+        $this->load->model('pages_model');
+        $data['recipes'] = $this->pages_model->get_recipes_ajax($startFrom, $lang);
+        if (!empty($data['recipes'])) {
+            foreach ($data['recipes'] as $key => $recipe) {
+                $query = "SELECT categories.* FROM recipes, categories, recipe_categories
+                     WHERE categories.id = recipe_categories.category_id
+                     AND recipe_categories.recipe_id = recipes.id AND recipes.id = " . $recipe['id'];
+                $data['recipes'][$key]['categories'] = $this->admin_model->get_($query);
+            }
+        }
+
+        echo json_encode($data['recipes']);
     }
 }

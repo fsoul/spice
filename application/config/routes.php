@@ -49,6 +49,7 @@ $route['(ru|en|de)/movies'] = 'movies';
 $route['(ru|en|de)/contacts'] = 'contacts';
 $route['(ru|en|de)/recipe/(:num)'] = 'recipe';
 $route['(ru|en|de)/recipes/search'] = 'recipes/search';
+$route['(ru|en|de)/recipes/ajax_load_content'] = 'recipes/ajax_load_content';
 
 $route['404_override'] = '';
 
