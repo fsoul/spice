@@ -2,21 +2,32 @@
     $data['placeholder']['ru'] = 'Поиск';
     $data['placeholder']['en'] = 'Search';
     $data['placeholder']['de'] = 'Suche';
-    $data['sort']['ru'] = 'Все';
-    $data['sort']['en'] = 'All';
-    $data['sort']['de'] = 'Aller';
+    $data['all'] = array(
+        'id'        => 0,
+        'title_ru'  => 'Все',
+        'title_en'  => 'All',
+        'title_de'  => 'Aller'
+    );
     $undefined = 'undefined';
 ?>
 <div id="recipes_main">
     <div id="bar">
         <div class="sort">
-            <?= $data['sort'][$lang]; ?>
+            <?
+                if(empty($curr_id)){
+                    echo $data['all']['title_'.$lang];
+                }else{
+                    echo $categories[$curr_id-1]['title_'.$lang];
+                    array_unshift($categories, $data['all']);
+                }
+            ?>
             <div class="fade_cat">
                 <div class="row">
                     <div class="col-lg-12">
                         <? foreach($categories as $k=>$cat): ?>
+                            <? if($cat['id'] == $curr_id){ continue; } ?>
                             <div class="col-lg-2 sort-table">
-                                <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $lang.'/recipes/'.$cat['id']?>"><?= $cat['title_'.$lang]?></a>
+                                <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $cat['id']>0?$lang.'/recipes/'.$cat['id']:$lang.'/recipes';?>"><?= $cat['title_'.$lang]?></a>
                             </div>
                         <? endforeach; ?>
                     </div>

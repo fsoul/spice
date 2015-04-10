@@ -980,6 +980,7 @@ a.text-danger:hover {
     text-align: justify;
     text-indent: 10px;
     line-height: 2;
+    word-wrap: break-word;
 }
 .rec_item_cat_wrap{
     width: 228px;
@@ -1051,6 +1052,7 @@ a.text-danger:hover {
     font-family: loraitalic;
     color: #3e3e3e;
     text-align: justify;
+    word-wrap: break-word;
 }
 /*
 	ingridients
