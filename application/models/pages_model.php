@@ -141,4 +141,13 @@ class Pages_model extends CI_Model
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
+
+    function get_gallery_items(){
+        $query_str = 'SELECT *
+                      FROM gallery
+                      WHERE `delete` = 0
+                      ORDER BY id DESC';
+        $query = $this->db->query($query_str);
+        return $query->result_array();
+    }
 }

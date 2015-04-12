@@ -4,19 +4,25 @@ class Gallery extends CI_Controller
 {
     function index()
     {
-        /*$offset = null;
-        $limit = null;
-        $this->load->model('pages_model');
-        $data['title'] = 'Галерея';
-        $data['gallery'] = $this->pages_model->get_items('gallery', $offset, $limit);
-        if (empty($data['gallery'])) {
-            $data['gallery']['empty'] = 'Фотографии отсутствуют';
+        if ($this->uri->segment(1) == 'gallery') {
+            redirect(base_url('en/gallery'));
         }
-        $data['pages'] = $this->pages_model->get_pages();
+
+        set_lang($this->uri->segment(1));
+
         $data['lang'] = $this->uri->segment(1);
+        $data['current_controller'] = $this->uri->segment(2); // передаем текущий контроллер в вид для ссылок
+        $data['curr_id'] = $this->uri->segment(3);
+        $this->load->model('pages_model');
+        $data['meta'] = $this->pages_model->current_page('gallery', $data['lang']);
+        $data['categories'] = $this->pages_model->get_all_categories($data['lang']);
+        $data['pages'] = $this->pages_model->get_pages($data['lang']);
 
-        $this->template->page_view('gallery', $data);*/
+        $data['items'] = $this->pages_model->get_gallery_items();
+        if (empty($data['items'])) {
+            $data['items']['empty'] = 'Фотографии отсутствуют';
+        }
 
-        $this->load->view('pages/gallery_view');
+        $this->template->page_view('gallery', $data);
     }
 }

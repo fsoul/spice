@@ -13,7 +13,7 @@ class Recipes extends CI_Controller
         set_lang($this->uri->segment(1));   // устанавливаем язык в Cookie
 
         $data['lang'] = $this->uri->segment(1);  // передаем нужный язык в вид
-        $data['current_controller'] = $this->uri->segment(2); // передаем текущий коньроллер в вид для ссылок
+        $data['current_controller'] = $this->uri->segment(2); // передаем текущий контроллер в вид для ссылок
         $data['curr_id'] = $this->uri->segment(3); // передаем в вид id категории
         $this->load->model('pages_model'); // загружаем модель в контроллер
         $data['meta'] = $this->pages_model->current_page('recipes', $data['lang']); // достаем актуальне мета-данные

@@ -13,6 +13,8 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/template.css" rel="stylesheet">
+    <link href="/assets/css/component.css" rel="stylesheet">
+    <link href="/assets/css/blueimp-gallery.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="main">

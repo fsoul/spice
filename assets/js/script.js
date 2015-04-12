@@ -372,8 +372,17 @@ function handler(file, target) {
     }
 }
 
+new AnimOnScroll( document.getElementById( 'links' ), {
+    minDuration : 0.4,
+    maxDuration : 0.7,
+    viewportFactor : 0.2
+} );
 
-//window.addEventListener('popstate', AjaxContent.getContent());
-/*window.addEventListener('popstate', function(e) {
- //console.log(history.back());
- });*/
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
