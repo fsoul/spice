@@ -13,6 +13,7 @@
 <div id="recipes_main">
     <div id="bar">
         <div class="sort">
+            <span class="sort_span">
             <?
                 if(empty($curr_id)){
                     echo $data['all']['title_'.$lang];
@@ -21,26 +22,27 @@
                     array_unshift($categories, $data['all']);
                 }
             ?>
-            <div class="fade_cat">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <? foreach($categories as $k=>$cat): ?>
-                            <? if($cat['id'] == $curr_id){ continue; } ?>
-                            <div class="col-lg-2 sort-table">
-                                <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $cat['id']>0?$lang.'/recipes/'.$cat['id']:$lang.'/recipes';?>"><?= $cat['title_'.$lang]?></a>
-                            </div>
-                        <? endforeach; ?>
-                    </div>
-                </div>
-            </div>
+            </span>
+            <div class="back"></div>
         </div>
-        <div id="bordik"><div></div></div>
         <div id="rec_search">
-            <form method="post" action="/<?= $lang.'/recipes/search'?>">
+            <form class="rec_search_form" method="post" action="/<?= $lang.'/recipes/search'?>">
                 <input class="srch_sbmt" type="submit" value=""/>
                 <input class="srch_inp" name="like" maxlength="60" placeholder="<?= $data['placeholder'][$lang]; ?>" type="text"/>
                 <input class="xreset" type="reset" value=""/>
             </form>
+        </div>
+    </div>
+    <div class="fade_cat">
+        <div class="row">
+            <div class="col-lg-12">
+                <? foreach($categories as $k=>$cat): ?>
+                    <? if($cat['id'] == $curr_id){ continue; } ?>
+                    <div class="col-lg-2 sort-table">
+                        <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $cat['id']>0?$lang.'/recipes/'.$cat['id']:$lang.'/recipes';?>"><?= $cat['title_'.$lang]?></a>
+                    </div>
+                <? endforeach; ?>
+            </div>
         </div>
     </div>
     <div id="rec_wrap">

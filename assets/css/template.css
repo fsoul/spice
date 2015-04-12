@@ -445,26 +445,6 @@ a.text-danger:hover {
     background-color: transparent;
     outline: none;
 }
-.xreset{
-    position: absolute;
-    right: 10px;
-    top: 0;
-    height: 100%;
-    border: none;
-    text-decoration: none;
-    color: #FF4E4E;
-    font-family: sans-serif;
-    background-color: transparent;
-    outline: none;
-    opacity: 0;
-    background: url("/assets/images/site/close.png") no-repeat center center;
-}
-.show-xreset{
-    opacity: 1;
-}
-.highlights{
-    border-bottom: 1px solid #5e9ac1;
-}
 .fix_menu{
     top: 69px !important;
     transition: top 0.5s !important;
@@ -871,77 +851,86 @@ a.text-danger:hover {
     margin: 85px auto;
 }
 #bar{
-    width: 100%;
-    height: 46px;
-    border-bottom: 1px solid #d9d9d9;
-}
-#bar div{
-    float: left;
-}
-#bordik{
-    width: 1px;
-    height: 46px;
-    background-color: #d9d9d9;
-}
-#bordik div{
-    width: 1px;
-    height: 38px;
-    background-color: #ffffff;
+    display: table-row;
+    width: 1200px;
+    height: 34px;
+    background: url("/assets/images/site/grey_point.jpg") repeat-x bottom center;
 }
 .sort{
     position: relative;
-    padding-top: 12px;
-    text-align: center;
+    display: table-cell;
+    vertical-align: top;
+    padding: 18px 24px;
+    background: url("/assets/images/site/bordik.png") no-repeat right bottom;
+    white-space: nowrap;
     font-family: lorabold;
     color: #5c5c5c;
-    width: 92px;
-    height: 58px;
     cursor: pointer;
-    background: url("/assets/images/site/dd_g.png") no-repeat 70px 22px;
-    transition: 0.3s;
+}
+.sort_span{
+    padding-right: 12px;
+    background: url("/assets/images/site/dd_g.png") no-repeat right 9px;
 }
 .sort_open{
-    background: #5e9ac1 url("/assets/images/site/dd_w.png") no-repeat 70px 22px;
+    background: #5e9ac1;
     border-bottom: 1px solid #4f86a8;
     color: #ffffff;
-    transition: 0.3s;
 }
-.bordik_hide{
-    opacity: 0;
-}
-#rec_wrap{
-    position: relative;
-    z-index: 10;
-    padding-top: 22px;
+.span_back{
+    background: url("/assets/images/site/dd_w.png") no-repeat right 9px;
 }
 #rec_search{
-    position: relative;
+    display: table-cell;
+    vertical-align: top;
     height: 34px;
-    margin-top: 12px;
-    line-height: 22px;
-    width: 1107px;
-    text-align: center;
-    padding-left: 22px;
-    background: url("/assets/images/site/search.png") no-repeat 24px 6px;
+    width: 100%;
+    padding: 18px 24px;
+    background: url("/assets/images/site/search.png") no-repeat 24px 23px;
     font-family: loraregular;
     color: #5c5c5c;
 }
+.rec_search_form{
+    position: relative;
+}
 #rec_search .srch_inp{
-    border: none;
     margin-left: 22px;
+    width: 100%;
     outline: none;
-    width: 1063px;
+    border: none;
 }
 .srch_inp_focus{
     font-size: 20px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    line-height: 16px;
 }
 .srch_sbmt{
     position: absolute;
     top: 0;
-    left: 22px;
+    left: 0;
     opacity: 0;
+}
+.xreset{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    opacity: 0;
+    background: url("/assets/images/site/close.png") no-repeat center center;
+}
+.show-xreset{
+    opacity: 1;
+}
+.highlights{
+    border-bottom: 1px solid #5e9ac1;
+}
+
+
+#rec_wrap{
+    padding-top: 22px;
 }
 .recipe_item{
     width: 1102px;
@@ -950,7 +939,6 @@ a.text-danger:hover {
 }
 .recipe_item_img{
     float: left;
-
 }
 .recipe_item_text{
     position: relative;
@@ -1158,21 +1146,27 @@ a.text-danger:hover {
     text-align: left;
 }
 .fade_cat{
-    position: absolute;
     width: 1200px;
     height: 215px;
-    top: 58px;
-    left: 0;
     padding: 45px 29px;
     background: #5e9ac1;
-    z-index: 9;
-    opacity: 0;
-    transition: 0.3s;
+    margin-top: 10px;
+    display: none;
 }
 .fade_cat_show{
-    opacity: 1;
-    transition: 0.3s;
-    z-index: 12;
+    display: block;
+}
+.back{
+    width: 100%;
+    height: 10px;
+    background: #5e9ac1;
+    position: absolute;
+    top: 58px;
+    left: 0;
+    display: none;
+}
+.back_show{
+    display: block;
 }
 .sort-table{
     height: 50px;
