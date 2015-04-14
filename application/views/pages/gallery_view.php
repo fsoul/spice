@@ -1,14 +1,14 @@
 <div id="blueimp-gallery" class="blueimp-gallery">
     <div class="slides"></div>
     <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
+    <a class="prev"></a>
+    <a class="next"></a>
+    <a class="close"></a>
+    <!--<a class="play-pause"></a>-->
     <ol class="indicator"></ol>
 </div>
 <div class="container" style="margin-top: 20px; margin-bottom: 10px; ">
-    <ul class="grid effect-2 links" id="links">
+    <ul class="grid effect-1 links" id="links">
         <? foreach($items as $item): ?>
         <li>
             <a href="<?= $item['gallery_photo'];?>" title="" alt="">
