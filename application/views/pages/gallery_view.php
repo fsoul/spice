@@ -7,7 +7,7 @@
     <!--<a class="play-pause"></a>-->
     <ol class="indicator"></ol>
 </div>
-<div class="container" style="margin-top: 20px; margin-bottom: 10px; ">
+<div class="container" style="padding: 0; margin-top: 20px; margin-bottom: 10px; ">
     <ul class="grid effect-1 links" id="links">
         <? foreach($items as $item): ?>
         <li>
