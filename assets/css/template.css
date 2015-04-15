@@ -1210,8 +1210,8 @@ a.text-danger:hover {
 }
 .loader > div {
     content: " ";
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     background: #5e9ac1;
     border-radius: 100%;
     position: absolute;
