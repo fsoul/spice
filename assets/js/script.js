@@ -312,7 +312,6 @@ $(document).ready(function () {
             open = false;
         }
     });
-
     /**
      * dropzone для фоток рецепта
      */
@@ -371,18 +370,19 @@ function handler(file, target) {
         $.notify('файл не правильного формата');
     }
 }
-
-new AnimOnScroll( document.getElementById( 'links' ), {
-    minDuration : 0.4,
-    maxDuration : 0.7,
-    viewportFactor : 0.2
-} );
-
-document.getElementById('links').onclick = function (event) {
-    event = event || window.event;
-    var target = event.target || event.srcElement,
-        link = target.src ? target.parentNode : target,
-        options = {index: link, event: event},
-        links = this.getElementsByTagName('a');
-    blueimp.Gallery(links, options);
-};
+var cur_path = window.location.pathname;
+if(cur_path == '/ru/gallery' || cur_path == '/en/gallery' || cur_path == '/de/gallery'){
+    new AnimOnScroll( document.getElementById( 'links' ), {
+        minDuration : 0.4,
+        maxDuration : 0.7,
+        viewportFactor : 0.2
+    } );
+    document.getElementById('links').onclick = function (event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement,
+            link = target.src ? target.parentNode : target,
+            options = {index: link, event: event},
+            links = this.getElementsByTagName('a');
+        blueimp.Gallery(links, options);
+    };
+}

@@ -4,18 +4,24 @@ class Movies extends CI_Controller
 {
     function index()
     {
-       /* $offset = null;
-        $limit = null;
-        $this->load->model('pages_model');
-        $data['title'] = 'Фильмы';
-        $data['movies'] = $this->pages_model->get_items('movies', $offset, $limit);
-        if (empty($data['movies'])) {
-            $data['movies']['empty'] = 'Фильмы отсутствуют';
+        if ($this->uri->segment(1) == 'movies') {
+            redirect(base_url('en/movies'));
         }
-        $data['pages'] = $this->pages_model->get_pages();
-        $data['lang'] = $this->uri->segment(1);
 
-        $this->template->page_view('movies', $data);*/
-        $this->load->view('pages/movies_view');
+        set_lang($this->uri->segment(1));
+
+        $data['lang'] = $this->uri->segment(1);
+        $data['current_controller'] = $this->uri->segment(2); // передаем текущий контроллер в вид для ссылок
+        $data['curr_id'] = $this->uri->segment(3);
+        $this->load->model('pages_model');
+        $data['meta'] = $this->pages_model->current_page('gallery', $data['lang']);
+        $data['pages'] = $this->pages_model->get_pages($data['lang']);
+
+        $data['items'] = $this->pages_model->get_movies_items();
+        if (empty($data['movies'])) {
+            $data['movies']['empty'] = 'No data';
+        }
+
+        $this->template->page_view('movies', $data);
     }
 }

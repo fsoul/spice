@@ -509,6 +509,7 @@ class Admin extends CI_Controller
 
     function search_tmdb_movies()
     {
+        $data['page'] = null;
         $query = $_POST['query'];
         $data['title'] = 'Поиск по базе фильмов';
         $movies = $this->tmdb->search_movies($query);

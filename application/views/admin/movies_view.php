@@ -31,7 +31,7 @@
                             </td>
                             <td>
                                 <div class="parent">
-                                    <div class="child text-justify"><?= cut($movie['overview_ru'], 400); ?></div>
+                                    <div class="child text-justify"><?= character_limiter($movie['overview_ru'], 400); ?></div>
                                     <div class="helper"></div>
                                 </div>
                             </td>

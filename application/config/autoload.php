@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'template', 'tmdb', 'image
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'spice', 'form');
+$autoload['helper'] = array('url', 'spice', 'form', 'text');
 
 
 /*

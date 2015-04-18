@@ -46,7 +46,7 @@
                             $movie['overview'] = 'Описание отсутствует';
                         }
 
-                        $overview = cut($movie['overview'], 750);
+                        $overview = character_limiter($movie['overview'], 750);
                         ?>
 
                         <tr>
@@ -85,6 +85,7 @@
                 <? endif; ?>
                 </tbody>
             </table>
+            <? if($page): ?>
             <div id="pagination">
                 <nav class="text-center">
                     <ul class="pagination movie">
@@ -101,6 +102,7 @@
                     </ul>
                 </nav>
             </div>
+            <? endif; ?>
         </div>
     </div>
 </div>
