@@ -140,3 +140,12 @@ if ( ! function_exists('set_lang'))
     }
 }
 
+if ( ! function_exists('d'))
+{
+    function d($in)
+    {
+        echo '<pre>';
+        print_r($in);
+        echo '</pre>';
+    }
+}

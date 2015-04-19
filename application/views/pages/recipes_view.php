@@ -19,6 +19,7 @@
                     echo $data['all']['title_'.$lang];
                 }else{
                     echo $categories[$curr_id-1]['title_'.$lang];
+                    unset($categories[$curr_id-1]);
                     array_unshift($categories, $data['all']);
                 }
             ?>
