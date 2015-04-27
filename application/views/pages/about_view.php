@@ -9,5 +9,5 @@
     <div id="author"><?= $author[$lang]; ?></div>
     </div>
     <div id="right_bord" class="about_border"></div>
+    <div class="clearfix"></div>
 </div>
-<div style="clear: both; margin-bottom: 58px"></div>

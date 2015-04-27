@@ -1347,3 +1347,109 @@ a.text-danger:hover {
     text-indent: 15px;
     padding: 15px;
 }
+#contacts_main{
+    width: 800px;
+    margin: 100px auto;
+    height: 100%;
+}
+.contacts_left_block{
+    width: 315px;
+    height: 370px;
+    border-right: 1px solid #dadada;
+    background: url("/assets/images/site/img_bot_stamp.png") no-repeat center 20px;
+}
+.contacts_left_block>p:first-child{
+    margin-top: 108px;
+}
+.contacts_left_block>p{
+    margin-left: 77px;
+}
+.c_label{
+    font-family: lorabold;
+    font-size: 12px;
+    color: #d9d9d9;
+    margin: 0;
+}
+.c_name{
+    font-family: loraitalic;
+    font-size: 16px;
+    color: #5c5c5c;
+    margin-bottom: 15px;
+    text-indent: 2px;
+}
+.c_link{
+    font-family: lorabold;
+    font-size: 14px;
+    color: #7399bf;
+    margin-bottom: 15px;
+    text-indent: 2px;
+}
+.c_link>a{
+    font-family: lorabold;
+    font-size: 14px;
+    color: #7399bf;
+}
+.c_link>a:hover{
+    font-family: lorabold;
+    font-size: 14px;
+    color: #5b8ebf;
+}
+.c_callback_form{
+    width: 350px;
+    padding: 0 50px;
+}
+.contact_me{
+    margin-top: 20px;
+    font-family: loraitalic;
+    font-size: 24px;
+    color: #5c5c5c;
+}
+.c_input{
+    width: 350px;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 20px;
+    font-family: lorabold;
+    font-size: 12px;
+    color: #5c5c5c;
+    letter-spacing: 1px;
+    line-height: 2;
+    padding-left: 10px;
+    outline: none;
+}
+.c_msg{
+    width: 350px;
+    height: 125px;
+    border-color: #d9d9d9;
+    resize: none;
+    font-family: lorabold;
+    font-size: 12px;
+    color: #5c5c5c;
+    letter-spacing: 1px;
+    line-height: 2;
+    padding-left: 10px;
+    outline: none;
+}
+.c_submit{
+    width: 180px;
+    height: 42px;
+    color: #ffffff;
+    font-family: lorabold;
+    font-size: 14px;
+    background-color: #7399bf;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    border: none;
+    outline: none;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder   {color:#d9d9d9;}
+input::-moz-placeholder, textarea::-moz-placeholder                     {color:#d9d9d9;}
+input:-moz-placeholder, textarea:-moz-placeholder                       {color:#d9d9d9;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder             {color:#d9d9d9;}
+
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder   {color: transparent;}
+input:focus::-moz-placeholder, textarea:focus::-moz-placeholder                     {color:transparent;}
+input:focus:-moz-placeholder, textarea:focus:-moz-placeholder                       {color:transparent;}
+input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder             {color:transparent;}

@@ -34,8 +34,6 @@ class About extends CI_Controller
         $data['author']['en'] = 'Tatsiana Krachko';
         $data['author']['de'] = 'Tatsiana Krachko';
 
-        $offset = null;
-        $limit = null;
         $this->load->model('pages_model');
         $data['meta'] = $this->pages_model->current_page('about', $data['lang']);
         $data['pages'] = $this->pages_model->get_pages($data['lang']);
