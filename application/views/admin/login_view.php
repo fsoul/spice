@@ -9,6 +9,9 @@
     <link href="<?=base_url('assets/css/style.css')?>" rel="stylesheet">
 
     <style>
+        html{
+            min-height: 100%;
+        }
         body{
             font-family: loraregular;
             font-size: 14px;
@@ -55,8 +58,8 @@
             color: #fff;
         }
         .login_view{
-            margin: 300px auto 0 auto;
-            width: 410px;
+            margin: 425px auto 0 auto;
+            width: 427px;
         }
     </style>
 </head>

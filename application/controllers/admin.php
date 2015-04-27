@@ -144,9 +144,50 @@ class Admin extends CI_Controller
         $this->template->admin_view($title, $data);
     }
 
-    function add_watermark($dir)
+    function crop($file_input, $file_output, $crop = 'square', $percent = false) {
+        list($w_i, $h_i, $type) = getimagesize($file_input);
+        if (!$w_i || !$h_i) {
+            echo 'Невозможно получить длину и ширину изображения';
+            return;
+        }
+        $types = array('','gif','jpeg','png');
+        $ext = $types[$type];
+        if ($ext) {
+            $func = 'imagecreatefrom'.$ext;
+            $img = $func($file_input);
+        } else {
+            echo 'Некорректный формат файла';
+            return;
+        }
+        if ($crop == 'square') {
+            $min = $w_i;
+            if ($w_i > $h_i) $min = $h_i;
+            $w_o = $h_o = $min;
+        } else {
+            list($x_o, $y_o, $w_o, $h_o) = $crop;
+            if ($percent) {
+                $w_o *= $w_i / 100;
+                $h_o *= $h_i / 100;
+                $x_o *= $w_i / 100;
+                $y_o *= $h_i / 100;
+            }
+            if ($w_o <= 0) $w_o += $w_i;
+            $w_o -= $x_o;
+            if ($h_o < 0) $h_o += $h_i;
+            $h_o -= $y_o;
+        }
+        $img_o = imagecreatetruecolor($w_o, $h_o);
+        imagecopy($img_o, $img, 0, 0, $x_o, $y_o, $w_o, $h_o);
+        if ($type == 2) {
+            return imagejpeg($img_o,$file_output,100);
+        } else {
+            $func = 'image'.$ext;
+            return $func($img_o,$file_output);
+        }
+    }
+
+    function add_photo($dir)
     {
-        $this->image_lib->clear();
         $src = '.' . $dir;
         $size_arr = getimagesize(base_url().$dir);
         $width = $size_arr[0];
@@ -154,42 +195,10 @@ class Admin extends CI_Controller
         $ratio = 16/9;
 
         if($width > $height && $width/$height != $ratio){
+            $new_height = round($width/$ratio);
+            $diff = round(($height - $new_height)/2);
 
-            $new_height = $width/$ratio;
-            $diff = ($height - $new_height)/2;
-
-            $step1 = $height-$diff;
-            $step2 = $step1-$diff;
-
-            $config['source_image'] = $src;
-            $config['maintain_ratio'] = FALSE;
-            $config['width'] = $width;
-            $config['height'] = $step1;
-            $config['y_axis'] = $diff;
-            $this->image_lib->initialize($config);
-            $this->image_lib->crop();
-            $this->image_lib->clear();
-
-            $config['source_image'] = $src;
-            $config['rotation_angle'] = '180';
-            $this->image_lib->initialize($config);
-            $this->image_lib->rotate();
-            $this->image_lib->clear();
-
-            $config['source_image'] = $src;
-            $config['maintain_ratio'] = FALSE;
-            $config['width'] = $width;
-            $config['height'] = $step2;
-            $config['y_axis'] = $diff;
-            $this->image_lib->initialize($config);
-            $this->image_lib->crop();
-            $this->image_lib->clear();
-
-            $config['source_image'] = $src;
-            $config['rotation_angle'] = '180';
-            $this->image_lib->initialize($config);
-            $this->image_lib->rotate();
-            $this->image_lib->clear();
+            $this->crop($src, $src, array(0, $diff, 0, -$diff));
         }
 
         if($width > $height && $width > 1920){
@@ -202,30 +211,30 @@ class Admin extends CI_Controller
         }
 
         $config['source_image'] = $src;
-        $config['wm_overlay_path'] = './assets/images/site/watermark.png';
-        $config['opacity'] = '1';
-        $config['wm_type'] = 'overlay';
-        $config['quality'] = '100';
-        $config['wm_vrt_alignment'] = 'bottom';
-        $config['wm_vrt_offset'] = '0';
-        $config['wm_hor_offset'] = '0';
-        $config['wm_hor_alignment'] = 'right';
-        $this->image_lib->initialize($config);
-        $this->image_lib->watermark();
-        $this->image_lib->clear();
-    }
-
-    function make_thumb($dir)
-    {
-        $this->image_lib->clear();
-        $config['source_image'] = '.' . $dir;
-        $config['create_thumb'] = TRUE; // ставим флаг создания эскиза
+        $config['create_thumb'] = TRUE;
         $config['thumb_marker'] = '_thumb';
         $config['width'] = 800;
         $config['height'] = 450;
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         $this->image_lib->clear();
+
+        $this->add_watermark($dir);
+        $this->add_watermark(thumb($dir));
+    }
+
+    function add_watermark($dir)
+    {
+        $src = '.'.$dir;
+        $stamp = imagecreatefrompng('./assets/images/site/watermark.png');
+        $im = imagecreatefromjpeg($src);
+
+        $sx = imagesx($stamp);
+        $sy = imagesy($stamp);
+
+        imagecopy($im, $stamp, imagesx($im) - $sx, imagesy($im) - $sy, 0, 0, imagesx($stamp), imagesy($stamp));
+
+        imagejpeg($im, $src, 100);
     }
 
     function gogo()
@@ -237,8 +246,7 @@ class Admin extends CI_Controller
 
         move_uploaded_file($tmp_name[0], '.' . $dir);
 
-        $this->add_watermark($dir);
-        $this->make_thumb($dir);
+        $this->add_photo($dir);
         $photo_thumb = thumb($dir);
 
         $this->admin_model->set_image($dir);
@@ -250,16 +258,6 @@ class Admin extends CI_Controller
 
     function add_action($title)
     {
-
-        /*
-        echo '<pre>';
-        print_r($category);
-        echo '</pre>';
-
-
-        exit;
-        */
-
         $recipe_upload_dir = '/assets/images/recipes/';
         $idea_upload_dir = '/assets/images/ideas/';
         $steps_upload_dir = '/assets/images/steps/';
@@ -283,14 +281,9 @@ class Admin extends CI_Controller
                         }
                         move_uploaded_file($tmp_name, '.' . $dir);
 
-                        $this->add_watermark($dir);
-                        //$thumbs[] = $dir;   // превьюхи для фото-шагов
+                        $this->add_photo($dir);
                     }
                 }
-                $this->make_thumb($this->finish_photo);
-                /*foreach($thumbs as $item){
-                    $this->make_thumb($item); // превьюхи для фото-шагов
-                }*/
 
                 if (isset($_POST['is_gallery'])) {
                     $this->is_gallery = 1;
@@ -361,8 +354,7 @@ class Admin extends CI_Controller
                 $arr['idea_photo'] = $idea_upload_dir . $name;
                 if ($_FILES['photos']['error'][0] == 0) {
                     move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $idea_upload_dir . $name);
-                    $this->add_watermark($idea_upload_dir . $name);
-                    $this->make_thumb($idea_upload_dir . $name);
+                    $this->add_photo($idea_upload_dir . $name);
                 }
             } else {
                 $arr['idea_photo'] = '/assets/images/site/empty_pic.png';
@@ -380,24 +372,19 @@ class Admin extends CI_Controller
 
     function update_recipe($id)
     {
-        /*
-              echo '<pre>';
-              print_r($_FILES);
-              echo '</pre>';
-      */
         // пересобираем $_POST если есть новые фотки
         foreach ($_FILES['photos']['name'] as $k => $photo) {
             if (!empty($_FILES['photos']['name'][$k])) {
                 if ($k == 0) {
                     $dir = '/assets/images/recipes/' . rand_name($_FILES['photos']['name'][0], 11);
                     move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $dir);
-                    $this->add_watermark($dir);
+                    $this->add_photo($dir);
                     $_POST['finish_photo'] = $dir;
                     continue;
                 }
                 $dir = '/assets/images/steps/' . rand_name($_FILES['photos']['name'][$k], 11);
                 move_uploaded_file($_FILES['photos']['tmp_name'][$k], '.' . $dir);
-                $this->add_watermark($dir);
+                $this->add_photo($dir);
                 $new_step_photo['photo'][$k - 1] = $dir;
             }
         }
@@ -410,7 +397,6 @@ class Admin extends CI_Controller
         $arr = array();
 
         $arr['finish_photo'] = $_POST['finish_photo'];
-        $this->make_thumb($arr['finish_photo']);
         if (isset($_POST['is_gallery'])) {
             $arr['is_gallery'] = 1;
             $this->admin_model->add('gallery', array('gallery_photo' => $arr['finish_photo']));
@@ -441,44 +427,38 @@ class Admin extends CI_Controller
             $this->admin_model->exec_query($cat_query_str);
         }
 
-        for ($i = 0; $i < count($_POST['step_photo']); $i++) {
-            $step_arr[$i] = array($id, "'" . $_POST['step_photo'][$i] . "'", "'" . $_POST['step_ru'][$i] . "'", "'" . $_POST['step_en'][$i] . "'", "'" . $_POST['step_de'][$i] . "'", $i);
-        }
+        if (isset($_POST['step_photo'])) {
+            for ($i = 0; $i < count($_POST['step_photo']); $i++) {
+                $step_arr[$i] = array($id, "'" . $_POST['step_photo'][$i] . "'", "'" . $_POST['step_ru'][$i] . "'", "'" . $_POST['step_en'][$i] . "'", "'" . $_POST['step_de'][$i] . "'", $i);
+            }
 
-        foreach ($step_arr as $value) {
-            $values[] = '(' . implode(',', $value) . ')';
-        }
-        $val_str = implode(',', $values);
+            foreach ($step_arr as $value) {
+                $values[] = '(' . implode(',', $value) . ')';
+            }
+            $val_str = implode(',', $values);
 
-        $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $val_str";
-        $this->admin_model->delete_rows($id, 'recipe_steps');
-        $this->admin_model->exec_query($query_str);
+            $query_str = "INSERT INTO recipe_steps(recipe_id, photo, description_ru, description_en, description_de, ord) VALUES $val_str";
+            $this->admin_model->delete_rows($id, 'recipe_steps');
+            $this->admin_model->exec_query($query_str);
+        }
 
         redirect(base_url('admin/view/recipes/0'));
     }
 
     function update_idea($id)
     {
-        /*
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-        */
-
         $arr = array();
         if (!empty($_FILES['photos']['name'][0])) {
             if ($_FILES['photos']['error'][0] == 0) {
                 $name = rand_name($_FILES['photos']['name'][0], 11);
                 $dir = '/assets/images/ideas/' . $name;
                 move_uploaded_file($_FILES['photos']['tmp_name'][0], '.' . $dir);
-                $this->add_watermark($dir);
+                $this->add_photo($dir);
                 $_POST['idea_photo'] = $dir;
             }
         }
 
         $arr['idea_photo'] = $_POST['idea_photo'];
-        $this->make_thumb($arr['idea_photo']);
-
         $arr['title_ru'] = $_POST['title_ru'];
         $arr['title_en'] = $_POST['title_en'];
         $arr['title_de'] = $_POST['title_de'];
