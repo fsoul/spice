@@ -78,7 +78,7 @@ class Contacts extends CI_Controller
         if (!$mail->send()) {
             return "Mailer Error: " . $mail->ErrorInfo;
         } else {
-            return "Message sent!";
+            redirect(base_url().$_POST['c_lang'].'/contacts');
         }
 
     }

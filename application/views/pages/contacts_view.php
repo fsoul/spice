@@ -25,6 +25,7 @@
                     <textarea class="c_msg" placeholder="<?= $msg[$lang]; ?>" name="c_msg" required></textarea>
                 </p>
                 <input class="c_submit" type="submit" value="<?= $send[$lang]; ?>"/>
+                <input type="hidden" name="c_lang" value="<?= $lang; ?>"/>
             </form>
     </div>
     <div id="right_bord" class="about_border"></div>
