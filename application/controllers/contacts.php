@@ -67,8 +67,6 @@ class Contacts extends CI_Controller
 
         $mail->isSMTP();
 
-        var_dump($mail->isSMTP()); die;
-
         $mail->setFrom($c_mail, $c_name);
 
         $mail->addAddress($sent_to, 'Tatsiana Krachko');
