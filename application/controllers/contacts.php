@@ -65,9 +65,9 @@ class Contacts extends CI_Controller
 
         $mail = new PHPMailer;
 
-        $mail->isSendmail();
+        $mail->isSMTP();
 
-        var_dump($mail->isSendmail()); die;
+        var_dump($mail->isSMTP()); die;
 
         $mail->setFrom($c_mail, $c_name);
 
