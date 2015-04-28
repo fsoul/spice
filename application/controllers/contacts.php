@@ -75,11 +75,11 @@ class Contacts extends CI_Controller
 
         $mail->msgHTML($c_msg);
 
-       /* if (!$mail->send()) {
+        if (!$mail->send()) {
             return "Mailer Error: " . $mail->ErrorInfo;
         } else {
             return "Message sent!";
-        }*/
+        }
 
     }
 }

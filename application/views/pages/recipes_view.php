@@ -29,7 +29,7 @@
                 $cat_sort_arr = array_chunk($categories, 3);
             ?>
             </span>
-            <div class="back"></div>
+            <div class="back" id="<?= $curr_id; ?>"></div>
         </div>
         <div id="rec_search">
             <form class="rec_search_form" method="post" action="/<?= $lang.'/recipes/search'?>">

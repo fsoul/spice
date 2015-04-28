@@ -93,9 +93,10 @@ class Recipes extends CI_Controller
     function ajax_load_content()
     {
         $lang = $this->uri->segment(1);
+        $category_id = $_POST['cat_id'];
         $startFrom = $_POST['startFrom'];
         $this->load->model('pages_model');
-        $data['recipes'] = $this->pages_model->get_recipes_ajax($startFrom, $lang);
+        $data['recipes'] = $this->pages_model->get_recipes_ajax($startFrom, $lang, $category_id);
         if (!empty($data['recipes'])) {
             foreach ($data['recipes'] as $key => $recipe) {
                 $query = "SELECT categories.* FROM recipes, categories, recipe_categories

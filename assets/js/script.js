@@ -17,13 +17,15 @@ $(document).ready(function () {
     var inProgress = false;
     var lang = getCookie('lang');
     var startFrom = 2;
+    var cat_id = $('.back').attr('id');
+
     $(window).scroll(function() {
-        if(window.location.pathname == '/'+lang+'/recipes' && $(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
+        if($(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
 
             $.ajax({
                 url: '/'+lang+'/recipes/ajax_load_content',
                 method: 'POST',
-                data: {"startFrom" : startFrom},
+                data: {"startFrom" : startFrom, "cat_id" : cat_id},
                 beforeSend: function() {
                     $('.loader').removeClass('hide_loader');
                     inProgress = true;

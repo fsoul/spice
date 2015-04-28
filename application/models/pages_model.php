@@ -35,13 +35,23 @@ class Pages_model extends CI_Model
         return $query->result_array();
     }
 
-    function get_recipes_ajax($offset, $lang)
+    function get_recipes_ajax($offset, $lang, $category_id=null)
     {
-        $query_str = 'SELECT id, finish_photo, title_'.$lang.', description_'.$lang.', ingridients_'.$lang.'
+        if($category_id){
+            $query_str = 'SELECT recipes.id, finish_photo, title_'.$lang.', description_'.$lang.', ingridients_'.$lang.'
+                      FROM recipes, recipe_categories
+                      WHERE `delete` = 0
+                      AND recipe_categories.recipe_id = recipes.id
+                      AND recipe_categories.category_id = '.$category_id.'
+                      ORDER BY recipes.id DESC
+                      LIMIT '.$offset.', 2';
+        }else{
+            $query_str = 'SELECT id, finish_photo, title_'.$lang.', description_'.$lang.', ingridients_'.$lang.'
                       FROM recipes
                       WHERE `delete` = 0
                       ORDER BY recipes.id DESC
                       LIMIT '.$offset.', 2';
+        }
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
@@ -126,7 +136,8 @@ class Pages_model extends CI_Model
                       FROM recipe_categories, recipes
                       WHERE recipe_categories.category_id = '.$category_id.'
                       AND recipe_categories.recipe_id = recipes.id
-                      ORDER BY recipes.id DESC';
+                      ORDER BY recipes.id DESC
+                      LIMIT 2';
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
