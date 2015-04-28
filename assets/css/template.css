@@ -920,9 +920,11 @@ a.text-danger:hover {
     outline: none;
     opacity: 0;
     background: url("/assets/images/site/close.png") no-repeat center center;
+    display: none;
 }
 .show-xreset{
     opacity: 1;
+    display: block;
 }
 .highlights{
     border-bottom: 1px solid #5e9ac1;
@@ -936,6 +938,7 @@ a.text-danger:hover {
     width: 1102px;
     margin: 0 auto;
     padding: 16px 0;
+    height: 482px;
 }
 .recipe_item_img{
     float: left;

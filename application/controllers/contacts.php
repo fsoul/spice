@@ -62,11 +62,10 @@ class Contacts extends CI_Controller
         $c_msg = strip_tags($_POST['c_msg']);
 
         $this->load->library('phpmailer');
-        $this->load->library('smtp');
 
         $mail = new PHPMailer;
 
-        $mail->isSMTP();
+        $mail->isSendmail();
 
         $mail->setFrom($c_mail, $c_name);
 
@@ -76,10 +75,11 @@ class Contacts extends CI_Controller
 
         $mail->msgHTML($c_msg);
 
-        if (!$mail->send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
+       /* if (!$mail->send()) {
+            return "Mailer Error: " . $mail->ErrorInfo;
         } else {
-            echo "Message sent!";
-        }
+            return "Message sent!";
+        }*/
+
     }
 }
