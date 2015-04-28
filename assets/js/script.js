@@ -17,9 +17,8 @@ $(document).ready(function () {
     var inProgress = false;
     var lang = getCookie('lang');
     var startFrom = 2;
-
     $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
+        if(window.location.pathname == '/'+lang+'/recipes' && $(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
 
             $.ajax({
                 url: '/'+lang+'/recipes/ajax_load_content',

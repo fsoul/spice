@@ -18,10 +18,15 @@
                 if(empty($curr_id)){
                     echo $data['all']['title_'.$lang];
                 }else{
-                    echo $categories[$curr_id-1]['title_'.$lang];
-                    unset($categories[$curr_id-1]);
+                    foreach($categories as $key => $value){
+                        if($curr_id == $value['id']){
+                            echo $value['title_'.$lang];
+                            unset($categories[$key]);
+                        }
+                    }
                     array_unshift($categories, $data['all']);
                 }
+                $cat_sort_arr = array_chunk($categories, 3);
             ?>
             </span>
             <div class="back"></div>
@@ -37,10 +42,13 @@
     <div class="fade_cat">
         <div class="row">
             <div class="col-lg-12">
-                <? foreach($categories as $k=>$cat): ?>
-                    <? if($cat['id'] == $curr_id){ continue; } ?>
-                    <div class="col-lg-2 sort-table">
-                        <a class="cat_sort <?=$k<12?"no_bro":""?>" href="/<?= $cat['id']>0?$lang.'/recipes/'.$cat['id']:$lang.'/recipes';?>"><?= $cat['title_'.$lang]?></a>
+                <? foreach($cat_sort_arr as $triple_cat): ?>
+                    <div class="col-lg-2">
+                        <? foreach($triple_cat as $k=>$cat): ?>
+                            <div class="cat_sort_wrap <?=$k<2?"no_bro":""?>">
+                                <a class="cat_sort" href="/<?= $cat['id']>0?$lang.'/recipes/'.$cat['id']:$lang.'/recipes';?>"><?= $cat['title_'.$lang]?></a>
+                            </div>
+                        <? endforeach; ?>
                     </div>
                 <? endforeach; ?>
             </div>

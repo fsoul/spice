@@ -19,7 +19,7 @@ class Pages_model extends CI_Model
     }
 
     function get_all_categories($lang){
-        $query_str = 'SELECT id, title_'.$lang.' FROM categories';
+        $query_str = 'SELECT id, title_'.$lang.' FROM categories ORDER BY title_'.$lang;
         $query = $this->db->query($query_str);
         return $query->result_array();
     }

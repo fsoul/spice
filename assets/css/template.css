@@ -1151,7 +1151,7 @@ a.text-danger:hover {
 .fade_cat{
     width: 1140px;
     height: 216px;
-    padding: 48px 24px;
+    padding: 30px 24px;
     background: #5e9ac1;
     margin-top: 10px;
     display: none;
@@ -1175,17 +1175,14 @@ a.text-danger:hover {
 .back_show{
     display: block;
 }
-.sort-table{
-    height: 50px;
-    text-align: left;
-
-}
-.sort-table a{
-    text-decoration: none;
-    color: #ffffff;
-}
 .no_bro{
     border-bottom: 1px solid #4f86a8;
+}
+.cat_sort_wrap{
+    height: 50px;
+}
+.cat_sort_wrap:hover{
+    background-color: #63a2cb;
 }
 .cat_sort{
     display: block;
@@ -1196,6 +1193,12 @@ a.text-danger:hover {
     font-size: 16px;
     height: 37px;
     text-decoration: none;
+    margin-top: 12px;
+    text-indent: 5px;
+}
+.cat_sort:hover{
+    text-decoration: none;
+    color: #ffffff;
 }
 /*
     ajax load
