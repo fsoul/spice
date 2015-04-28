@@ -62,6 +62,7 @@ class Contacts extends CI_Controller
         $c_msg = strip_tags($_POST['c_msg']);
 
         $this->load->library('phpmailer');
+        $this->load->library('smtp');
 
         $mail = new PHPMailer;
 
