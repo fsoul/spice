@@ -14,6 +14,10 @@
     <script src="/assets/js/classie.js"></script>
     <script src="/assets/js/AnimOnScroll.js"></script>
     <script src="/assets/js/notify.min.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <? if($lang != 'en'):?>
+    <script src="/assets/js/messages_<?= $lang; ?>.min.js"></script>
+    <? endif; ?>
     <script src="/assets/js/ajax.js"></script>
     <script src="/assets/js/script.js"></script>
 </body>

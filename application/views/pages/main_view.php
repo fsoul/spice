@@ -13,7 +13,7 @@ $undefined = 'undefined';
                     }
                 }?>
             <div class="show-hint">
-                <a href="/<?= $lang.'/recipe/'.$item['id']; ?>"><img src="<?= thumb($item['finish_photo']); ?>"/>
+                <a href="/<?= $lang.'/recipe/'.$item['id']; ?>"><img src="<?= thumb($item['finish_photo']); ?>"/></a>
                 <div class="hint">
                     <p class="text-uppercase"><?= $item['title_'.$lang]; ?></p>
 
@@ -23,5 +23,6 @@ $undefined = 'undefined';
             <? endforeach; ?>
         </div>
     </div>
+    <div class="clearfix"></div>
 </div>
-<div style="clear: both"></div>
+

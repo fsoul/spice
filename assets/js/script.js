@@ -6,6 +6,8 @@ function del(cnt) {
 var cnt = 2;
 
 $(document).ready(function () {
+    $(".c_form").validate();
+
     function getCookie(name) {
         var matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"

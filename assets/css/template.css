@@ -1398,6 +1398,9 @@ a.text-danger:hover {
     width: 350px;
     padding: 0 50px;
 }
+.c_form{
+    width: 350px;
+}
 .contact_me{
     margin-top: 20px;
     font-family: loraitalic;
@@ -1439,9 +1442,13 @@ a.text-danger:hover {
     background-color: #7399bf;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 15px;
     border: none;
     outline: none;
+}
+.error{
+    color: #A20100;
+    font-family: loraitalic;
+    font-size: 12px;
 }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder   {color:#d9d9d9;}

@@ -37,8 +37,8 @@ class Contacts extends CI_Controller
         $data['ok']['de'] = 'Odnoklassniki';
         $data['link'] = 'tatsiana.krachko';
         $data['contact_me']['ru'] = 'Свяжитесь со мной';
-        $data['contact_me']['en'] = 'Свяжитесь со мной';
-        $data['contact_me']['de'] = 'Свяжитесь со мной';
+        $data['contact_me']['en'] = 'Contact me';
+        $data['contact_me']['de'] = 'Kontaktiere mich';
         $data['msg']['ru'] = 'Сообщение';
         $data['msg']['en'] = 'Message';
         $data['msg']['de'] = 'Nachricht';
@@ -55,20 +55,30 @@ class Contacts extends CI_Controller
 
     function send()
     {
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-        /*$this->load->library('phpmailer');
+        $sent_to = 'bilinskyivitalii@gmail.com';
 
-        $this->phpmailer->ClearAllRecipients() // очищает адреса для нового письма
+        $c_name = strip_tags($_POST['c_name']);
+        $c_mail = strip_tags($_POST['c_mail']);
+        $c_msg = strip_tags($_POST['c_msg']);
 
-        $this->phpmailer->AddAddress('test@localhost.com', 'User');// кому отпралять - адресс почты, имя пользователя (необязательный параметр) - добавляет адресс получателя - если эта функция будет вызвана дважды - то будет происходить добавление нового адреса
+        $this->load->library('phpmailer');
 
-        $this->phpmailer->From = 'user@mail.ru';// от кого - имя email
-        $this->phpmailer->FromName = 'Пользователь'; // от кого - имя
-        $this->phpmailer->Subject = 'Тема сообщения';// тема сообщения
-        $this->phpmailer->ContentType = 'text/plain';// тип контента - необязательный параметр - для писем в формате HTML - text/html
-        $this->phpmailer->Body = 'Текст сообщения';
-        $this->phpmailer->send(); // кому отправлять*/
+        $mail = new PHPMailer;
+
+        $mail->isSendmail();
+
+        $mail->setFrom($c_mail, $c_name);
+
+        $mail->addAddress($sent_to, 'Tatsiana Krachko');
+
+        $mail->Subject = 'spiceandpassion.me';
+
+        $mail->msgHTML($c_msg);
+
+        if (!$mail->send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            echo "Message sent!";
+        }
     }
 }
