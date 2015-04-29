@@ -86,7 +86,8 @@ class Recipes extends CI_Controller
                     $data['recipes'][$key]['categories'] = $this->admin_model->get_($query);
                 }
             }
-            $this->template->page_view('recipes', $data);
+           // $this->template->page_view('recipes', $data);
+            echo json_encode($data);
         }
     }
 

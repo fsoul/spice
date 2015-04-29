@@ -143,12 +143,13 @@ class Pages_model extends CI_Model
     }
 
     function search($like, $lang){
-        $query_str = 'SELECT *
-                      FROM recipes
-                      WHERE title_'.$lang.'
-                      LIKE "%'.$like.'%"
-                      AND "delete" = 0
-                      ORDER BY recipes.id DESC';
+        $query_str = 'SELECT recipes.id, finish_photo, title_'.$lang.', description_'.$lang.', ingridients_'.$lang.'
+                  FROM recipes
+                  WHERE title_'.$lang.'
+                  LIKE "%'.$like.'%"
+                  AND `delete` = 0
+                  ORDER BY recipes.id DESC
+                  LIMIT 0, 2';
         $query = $this->db->query($query_str);
         return $query->result_array();
     }
