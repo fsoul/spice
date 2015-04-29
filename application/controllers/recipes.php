@@ -96,8 +96,10 @@ class Recipes extends CI_Controller
         $lang = $this->uri->segment(1);
         $category_id = $_POST['cat_id'];
         $startFrom = $_POST['startFrom'];
+        $like = $_POST['like'];
+
         $this->load->model('pages_model');
-        $data['recipes'] = $this->pages_model->get_recipes_ajax($startFrom, $lang, $category_id);
+        $data['recipes'] = $this->pages_model->get_recipes_ajax($startFrom, $lang, $category_id, $like);
         if (!empty($data['recipes'])) {
             foreach ($data['recipes'] as $key => $recipe) {
                 $query = "SELECT categories.* FROM recipes, categories, recipe_categories

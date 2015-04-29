@@ -12,8 +12,7 @@ $(document).ready(function () {
 
     var searching = false;
     $('.srch_inp').on('keyup', function(e){
-        var like = e.currentTarget.value;
-
+        var like = $(this).val();
         if(like.length > 0) {
 
             $.ajax({
@@ -86,11 +85,12 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
+            var like = $('.srch_inp').val();
 
             $.ajax({
                 url: '/' + lang + '/recipes/ajax_load_content',
                 method: 'POST',
-                data: {"startFrom": startFrom, "cat_id": cat_id},
+                data: {"startFrom": startFrom, "cat_id": cat_id, "like" : like},
                 beforeSend: function () {
                     $('.loader').removeClass('hide_loader');
                     inProgress = true;
