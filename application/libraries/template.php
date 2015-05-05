@@ -10,6 +10,7 @@ class Template
         $CI->load->view('pages_template/top_view', $data);
         $CI->load->view('pages_template/menu_view', $data);
         $CI->load->view('pages/' . $name . '_view', $data);
+        if($name != 'contacts')
         $CI->load->view('pages_template/bottom_view');
         $CI->load->view('template/footer');
     }
