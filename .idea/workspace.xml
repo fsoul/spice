@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f7f9a8e-72a9-47e0-9649-a187a94e6e11" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/contacts.php" afterPath="$PROJECT_DIR$/application/controllers/contacts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/template.css" afterPath="$PROJECT_DIR$/assets/css/template.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="spice.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +38,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contacts.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="contacts.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/contacts.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.85" vertical-offset="357" max-vertical-offset="1530">
+            <state vertical-scroll-proportion="-18.307692" vertical-offset="357" max-vertical-offset="1530">
               <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.058020476" vertical-offset="0" max-vertical-offset="586">
+              <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -68,6 +78,7 @@
       <list>
         <option value="$PROJECT_DIR$/assets/css/template.css" />
         <option value="$PROJECT_DIR$/application/controllers/contacts.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -259,8 +270,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/contacts.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85" vertical-offset="357" max-vertical-offset="1530">
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="357" max-vertical-offset="1530">
           <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.058020476" vertical-offset="0" max-vertical-offset="586">
+          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
           <folding />
         </state>
       </provider>

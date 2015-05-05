@@ -1,5 +1,6 @@
 .DS_Store
 .swp
+.idea
 application/cache
 application/logs
 application/config/database.php
