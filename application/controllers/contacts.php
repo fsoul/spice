@@ -47,7 +47,7 @@ class Contacts extends CI_Controller
         $data['send']['de'] = 'Senden';
 
         $this->load->model('pages_model');
-        $data['meta'] = $this->pages_model->current_page('about', $data['lang']);
+        $data['meta'] = $this->pages_model->current_page('contacts', $data['lang']);
         $data['pages'] = $this->pages_model->get_pages($data['lang']);
 
         $this->template->page_view('contacts', $data);

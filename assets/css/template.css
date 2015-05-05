@@ -1383,14 +1383,14 @@ a.text-danger:hover {
 .c_link{
     font-family: lorabold;
     font-size: 14px;
-    color: #7399bf;
+    color: #5e9ac1;
     margin-bottom: 15px;
     text-indent: 2px;
 }
 .c_link>a{
     font-family: lorabold;
     font-size: 14px;
-    color: #7399bf;
+    color: #5e9ac1;
 }
 .c_link>a:hover{
     font-family: lorabold;
@@ -1442,7 +1442,7 @@ a.text-danger:hover {
     color: #ffffff;
     font-family: lorabold;
     font-size: 14px;
-    background-color: #7399bf;
+    background-color: #5e9ac1;
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
